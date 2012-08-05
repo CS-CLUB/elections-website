@@ -54,7 +54,7 @@
           <ul class="nav pull-right">
 	          <li class="dropdown">
 	              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-	              	<i class="icon-user icon-white"></i> Jonathan Gillett<b class="caret"></b>
+	              	<i class="icon-user icon-white"></i> Bob Cajun<b class="caret"></b>
               	</a>
 	              <ul class="dropdown-menu">
 	                <li><a href="#">Edit Profile</a></li>
