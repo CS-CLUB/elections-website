@@ -1,0 +1,7 @@
+# Ignore eclipse project files
+*.buildpath
+*.project
+.settings/
+
+# Ignore the election website authentication file
+election_auth.php
