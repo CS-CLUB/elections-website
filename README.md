@@ -47,5 +47,5 @@ actual "open source" code for the website is not provided.
 
 Under the AGPLV3 that this software is licensed under you must ensure that the source 
 code that you are using is made publicly available and accessible to everyone. In the
-case of the UOIT/DC Computer Science Club Elections Website a URL to this Github page 
+case of the UOIT/DC Computer Science Club Elections Website a URL to this GitHub page 
 where the source code can be obtained is provided in the footer of the website.
