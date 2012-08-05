@@ -16,7 +16,7 @@ the potential for security vulnerabilities, voting miscounts, and electoral frau
 the elections website that the Computer Science Club uses is Open Source. This 
 provides election transparency as the source code for the elections website you see 
 here is the same used each year for club elections, this makes it possible for anyone
-to contribute and audit the source code for security vulnerabilities or other issuesW
+to contribute and audit the source code for security vulnerabilities or other issues
 such as bugs or vote biasing.
 
 How You Can Contribute
