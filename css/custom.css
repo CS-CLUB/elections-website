@@ -1,0 +1,75 @@
+/**
+ *  UOIT/DC Computer Science Club Elections Website
+ *  Copyright (C) 2012 UOIT/DC Computer Science Club
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Affero General Public License as
+ *  published by the Free Software Foundation, either version 3 of the
+ *  License, or (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Affero General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Affero General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * CSS file for the UOIT/DC Computer Science Club election website which
+ */
+
+/* Custom styling for the page pading */
+body {
+	padding-top: 60px;
+    padding-bottom: 20px;
+ }
+
+ /* Add sytling for the navbar drop down login menu as bootstrap does not
+  * provide any native styling for a login menu from the navbar
+  */
+div.login-dropdown {
+	padding: 15px;
+	padding-bottom: 0px;
+	color: #000;
+}
+
+input.login-form {
+	margin-bottom: 15px;
+}
+
+input.login-checkbox {
+	float: left;
+	margin-right: 10px;
+}
+
+input#login_button, .login-button {
+	clear: left;
+	width: 100%;
+	height: 32px;
+	font-size: 13px;
+}
+
+input#signout_button {
+  clear: left;
+  width: 93%;
+  height: 32px;
+  font-size: 13px;
+}
+
+form.logout-form {
+  margin-bottom: 5px;
+}
+
+/* Some additional styling for the footer */
+.footer {
+    border-top: 1px solid #E5E5E5;
+    margin-top: 65px;
+    padding: 24px 0 26px;
+}
+
+.footer p {
+    color: #555555;
+    margin-bottom: 0;
+}
