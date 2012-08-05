@@ -74,7 +74,7 @@
 <form action="index.php" method="post" accept-charset="UTF-8">
 		<label class="checkbox" for="accept_rules">
 			<input type="checkbox" value="1" id="accept_rules" name="accept_rules" />
-			 <p>I have read and agree to the rules and conditions</p>
+			 <p><strong>I have read and agree to the rules and conditions</strong></p>
 	  </label>
 		<input id="rules_confirm" class="btn btn-primary btn-large" type="submit" name="rules_confirm" value="Submit" />
   </form>
