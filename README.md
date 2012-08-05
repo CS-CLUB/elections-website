@@ -45,7 +45,7 @@ that the source code for the website is also provided. This prevents a loop-hole
 that exists in the GPL where a website can be based off open source code but the
 actual "open source" code for the website is not provided. 
 
-Under the AGPLV3 that this software is licensed under you must make the source 
-code that you are using available and accessible to everyone. In the case of the
-UOIT/DC Computer Science Club Elections Website a URL to this Github page where
-the source code can be obtained is provided in the footer of the website.
+Under the AGPLV3 that this software is licensed under you must ensure that the source 
+code that you are using is made publicly available and accessible to everyone. In the
+case of the UOIT/DC Computer Science Club Elections Website a URL to this Github page 
+where the source code can be obtained is provided in the footer of the website.
