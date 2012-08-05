@@ -1,8 +1,6 @@
 Elections Website
 =================
 
-The official UOIT/DC Computer Science Club elections website
-
 Description
 -----------
 
