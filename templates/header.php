@@ -59,7 +59,7 @@
                   <b class="caret"></b>
                 </a>
                 <div class="dropdown-menu login-dropdown">
-                    <form class="form-horizontal" action="election.php" method="post" accept-charset="UTF-8">
+                    <form class="form-horizontal" action="index.php" method="post" accept-charset="UTF-8">
                     <input id="login_username" class="input-large login-form" required type="text" maxlength="31" pattern="^[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)*$" name="login_username" placeholder="Username" />
                     <input id="login_password" class="input-large login-form" required type="password" maxlength="31" pattern="^[a-zA-Z0-9\!\$\%\^\&amp;\*\(\)\_\?]{6,31}$" name="login_password" placeholder="Password"/>
                     <input id="login_remember" class="login-checkbox" type="checkbox" name="login_remember" checked="checked" value="1" />

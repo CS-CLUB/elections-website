@@ -20,7 +20,7 @@
 
 /*
  * Default content to display when the nomination period is closed, some years this page may
- * not apply as the election period will open within 1 minute of the nomination period closeing!
+ * not apply as the election period will open within 1 minute of the nomination period closing!
  * Provides information about the Computer Science Club and links to register/website
  */
 ?>

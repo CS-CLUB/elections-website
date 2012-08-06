@@ -62,7 +62,7 @@
 	                <li><a href="#">View Election Results</a></li>
 	                <li class="divider"></li>
 	                <li>
-	                	<form action="election.php" class="form-horizontal logout-form" method="post" accept-charset="UTF-8">
+	                	<form action="index.php" class="form-horizontal logout-form" method="post" accept-charset="UTF-8">
 	                		<input id="signout_button" class="btn btn-primary" class="signout_button" type="submit" name="signout" value="Sign Out" />
                 		</form>
                 	</li>
