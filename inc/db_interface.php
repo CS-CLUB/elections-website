@@ -122,10 +122,10 @@ function election_tables_exist($mysqli_elections)
 	$election_year = date('Y');
 	
 	/* Get the election tables for the current year */
-	if ($stmt = $mysqli_elections->prepare("SHOW TABLES LIKE '%_?'"))
+	if ($stmt = $mysqli_elections->prepare("SHOW TABLES LIKE '%".$election_year."'"))
 	{
 		/* bind parameters for markers */
-		$stmt->bind_param('s', $election_year);
+		//$stmt->bind_param('s', "%".$election_year);
 	
 		/* execute query */
 		$stmt->execute();
@@ -153,11 +153,11 @@ function election_tables_exist($mysqli_elections)
 			&& in_array('winners_nom_' . $election_year, $tables_cur_year)
 			&& in_array('winners_elect_' . $election_year, $tables_cur_year))
 		{
-			return true;
+			return TRUE;
 		}
 	}
 	
-	return false;
+	return FALSE;
 }
 
 

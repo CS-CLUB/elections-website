@@ -132,7 +132,6 @@ else {
 //	exit();
 }
 
-
 $username = 'gnu_user';
 
 
@@ -183,6 +182,14 @@ var_dump($nominees);
 echo '<p>Candidates and incumbents:</p>';
 var_dump($candidates);
 var_dump($incumbents);
+
+/* Test for elections_tables_exist */
+$temp = FALSE;
+$temp = election_tables_exist($mysqli_elections);
+if ($temp == TRUE)
+{
+	echo '<p style="font-size:150%;">Is the DB there?!: '. $temp.'<br/></p>';
+}
 
 /* close connection */
 $mysqli_accounts->close();
