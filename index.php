@@ -103,7 +103,7 @@ if (validate_login_cookie($mysqli_accounts) === false
 		include 'templates/nomination-open.php';
 	}
 	/* "Nomination closed" template if its after the nomination period and before election opens */
-	elseif (is_nomination_closed)
+	elseif (is_nomination_closed($mysqli_elections))
 	{
 		include 'templates/nomination-closed.php';
 	}
