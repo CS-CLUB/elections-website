@@ -17,13 +17,15 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 require_once 'inc/db_interface.php';
 require_once 'inc/election_auth.php';
 require_once 'inc/election.php';
 require_once 'inc/utility.php';
 require_once 'inc/validate.php';
 require_once 'inc/verify.php';
+
+
+session_start();
 
 $error_msg = array();
 $passphrase = "";
@@ -66,17 +68,30 @@ if (mysqli_connect_errno()) {
  * Handle which page to display based on the current events and whether or not the
  * user has a login cookie set, there are the following conditions.
  * 
+ * TODO I DO NOT LIKE THIS IMPLEMENTATION, PERHAPS CLEANUP THE MULTILINE IF STATEMENTS INTO A CLEANER SET OF METHODS
+ * 
  * 1. User is not logged in, display one of the templates if the nomination/election
  * 	  period is open/closed with info about the Computer Science Club
  * 
- * 2. User has submitted login information
+ * 2. User is not logged in and has submitted their login information
  * 		
- * 	  	a) If the login information is valid and it is the first time they have logged in
- * 		   display the first time login page with election information and terms and conditions
+ * 	  	a) If the login information is valid 
+ * 
+ * 			i)	If they are already a member and have logged in for the election website
+ * 				before then sign them in
+ *
+ * 			ii) If it is the first time they have logged in display the first time login
+ * 				page with election information and terms and conditions
  * 
  * 		b) If the login information is invalid dislpay the invalid login page
  * 
- * 3. User has a valid login cookie set / has logged into the site with valid account
+ * 3. User has logged in for the first time and submitted the terms and conditions form
+ * 		
+ * 		a) If the user accepted the terms and conditions they are allowed to login and vote
+ * 
+ * 		b) If the user did not accept the terms and conditions they are redirected to default site
+ * 
+ * 4. User has a valid login cookie set / has logged into the site with valid account
  * 
  * 		a) If the user has not already voted display the template for nomination/election 
  * 			 period voting 
@@ -84,16 +99,19 @@ if (mysqli_connect_errno()) {
  * 		b) If the user has already voted then dislplay the thank you for voting page with
  * 			 election results/information if applicable
  * 
- * 4. Display the footer template at the bottom of the page regardless
+ * 5. Display the footer template at the bottom of the page regardless
  */
 
 /* 
  * 1. User is not logged in, display one of the templates if the nomination/election
  * 	  period is open/closed with info about the Computer Science Club
  */
-if (validate_login_cookie($mysqli_accounts) === false
-	&& !isset($_POST['login_username']) 
-	&& !isset($_POST['login_password']))
+if (verify_login_cookie($mysqli_accounts, $SESSION_KEY) === false
+	&& (!isset($_SESSION['login'])
+	|| verify_login_session($mysqli_accounts, $_SESSION['login'], $SESSION_KEY) === false)
+	&& !isset($_POST['login_username'])
+	&& !isset($_POST['login_password'])
+	&& !isset($_POST['accept_rules']))
 {
 	include 'templates/header.php';
 	
@@ -107,23 +125,91 @@ if (validate_login_cookie($mysqli_accounts) === false
 	{
 		include 'templates/nomination-closed.php';
 	}
-	
 }
-else
+/* 2. User is not logged in and has submitted their login information */
+elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY) === false
+		&& (!isset($_SESSION['login'])
+		|| verify_login_session($mysqli_accounts, $_SESSION['login'], $SESSION_KEY) === false)
+		&& isset($_POST['login_username'])
+		&& isset($_POST['login_password']))
+{
+	/* a) If the login information is valid and they entered the correct username/password  */
+	if (validate_username($_POST['login_username']) && validate_password($_POST['login_password'])
+		&& verify_login($mysqli_accounts, $_POST['login_username'] , $_POST['login_password'], $AES_KEY))
+	{
+		/* i)	If they are already a member and have logged in to the election website
+		 * 		before then sign them in
+		 */
+		if (is_member($mysqli_accounts, $mysqli_elections, $_POST['login_username']))
+		{
+			set_session_data($mysqli_accounts, $_POST['login_username'], $SESSION_KEY);
+			
+			if ($_POST['login_remember'] == 1)
+			{
+				set_login_cookie();
+			}
+		}
+		/* ii) If it is the first time they have logged in display the first time login
+		 * 	   page with election information and terms and conditions
+		 */
+		else
+		{
+			/* Store the login username and password they posted in the session, so they can
+			 * be allowed to vote in the election if they accept the terms and conditions
+			 */
+			$_SESSION['login_username'] = $_POST['login_username'];
+			$_SESSION['login_password'] = $_POST['login_password'];
+			$_SESSION['login_remember'] = $_POST['login_remember'];
+			
+			include 'templates/header.php';
+			include 'templates/first-login.php';
+		}
+	}
+	/* b) The login information is invalid dislpay the invalid login page */
+	else
+	{
+		include 'templates/header.php';
+		include 'templates/invalid-login.php';
+	}
+	
+	/* Refresh the page */
+	header('Location: '.$_SERVER['REQUEST_URI']);
+}
+/* 3. User has logged in for the first time and submitted the terms and conditions form */
+elseif (isset($_SESSION['login_username']) && isset($_SESSION['login_password'])
+		&& isset($_POST['accept_rules']))
+{
+	$login_remember = $_SESSION['login_remember'];
+	session_unset();
+	
+	/* a) If the user accepted the terms and conditions they are allowed to login and vote */
+	if ($_POST['accept_rules'] == 1)
+	{
+		add_member($mysqli_accounts, $mysqli_elections, $_SESSION['login_username']);
+		set_session_data($mysqli_accounts, $_SESSION['login_username'], $SESSION_KEY);
+			
+		if ($login_remember == 1)
+		{
+			set_login_cookie();
+		}
+	}
+	
+	/* Refresh the page */
+	header('Location: '.$_SERVER['REQUEST_URI']);
+}
+/* 4. User has a valid login cookie set / has logged into the site with valid account */
+elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY)
+	|| verify_login_session($mysqli_accounts, $_SESSION['login'], $SESSION_KEY))
 {
 	include 'templates/header-member.php';
 }
 
-
-
-include 'templates/invalid-login.php';
 //include 'templates/election-open.php';
 //include 'templates/election-closed.php';
 
 
 //include 'templates/first-login.php';
 
-session_start();
 if(isset($_SESSION['username']))
 {
     $username = $_SESSION['username'];
