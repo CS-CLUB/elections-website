@@ -18,9 +18,6 @@
  */
 
 
-require_once 'election_auth.php';
-
-
 /**
  * A function which returns a login session string which is the
  * session username encrypted with AES256 and then encoded with base64
@@ -49,7 +46,7 @@ function generate_session($username, $SESSION_KEY)
  * username stored in the database
  *
  */
-function validate_login_session($mysqli_accounts, $ses_validate, $SESSION_KEY)
+function verify_login_session($mysqli_accounts, $ses_validate, $SESSION_KEY)
 {
     /* Decrypted validate session variable */ 
     $validate = trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $SESSION_KEY, base64_decode($ses_validate), 
@@ -88,7 +85,7 @@ function validate_login_session($mysqli_accounts, $ses_validate, $SESSION_KEY)
 
 
 /** 
- * A function which validates the login information provided by the user
+ * A function which verifies the login information provided by the user
  * returns true if the login username and password provided are valid
  * 
  * @param mysqli $mysqli_accounts The mysqli connection object for the ucsc accounts DB
@@ -97,7 +94,7 @@ function validate_login_session($mysqli_accounts, $ses_validate, $SESSION_KEY)
  * @param string $AES_KEY The AES encrypt/decrypt key for the password
  * @return boolean True if the login information provided is valid
  */
-function validate_login($mysqli_accounts, $username, $password, $AES_KEY)
+function verify_login($mysqli_accounts, $username, $password, $AES_KEY)
 {
     $user_match = '';
     $pass_match = '';
@@ -161,11 +158,10 @@ function validate_login($mysqli_accounts, $username, $password, $AES_KEY)
  *
  * @param mysqli $mysqli_accounts The mysqli connection object for the ucsc accounts DB
  * @param string $username The username of the valid user who is logged in
+ * @param string $SESSION_KEY The session encrypt/decrypt key
  */
-function set_session_data($mysqli_accounts, $username)
-{
-	session_start();
-	
+function set_session_data($mysqli_accounts, $username, $SESSION_KEY)
+{	
 	/* Set session info validate is a unique session based on their username */
 	$_SESSION['login'] = generate_session($username, $SESSION_KEY);
 	
@@ -174,7 +170,7 @@ function set_session_data($mysqli_accounts, $username)
 	$_SESSION['username'] = $username;
 	$_SESSION['access_account'] = $member['access_account'];
 	$_SESSION['first_name'] = $member['first_name'];
-	$_SESSION['last_name'] = $membert['last_name'];
+	$_SESSION['last_name'] = $member['last_name'];
 }
 
 
@@ -208,9 +204,10 @@ function set_login_cookie()
  * is then the user is logged in.
  *
  * @param mysqli $mysqli_accounts The mysqli connection object for the ucsc accounts DB
+ * @param string $SESSION_KEY The session encrypt/decrypt key
  * @return TRUE If the cookie is a valid login cookie
  */
-function validate_login_cookie($mysqli_accounts)
+function verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 {
 	/* Verify the login cookie is set and that the login is valid */
 	if (isset($_COOKIE['login']))
@@ -219,7 +216,7 @@ function validate_login_cookie($mysqli_accounts)
 		$login_cookie = htmlspecialchars($_COOKIE['login']);
 		
 		/* Validate the login cookie data, which contains the same data as session */
-		if (validate_login_session($mysqli_accounts, $login_cookie, $SESSION_KEY))
+		if (verify_login_session($mysqli_accounts, $login_cookie, $SESSION_KEY))
 		{
 			return true;
 		}

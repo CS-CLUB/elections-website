@@ -21,6 +21,17 @@
 /*
  * The template for the elections website header when a member has logged into the 
  * website, this displays the main user menu and logout option
+ * 
+ * 
+ * DEPENDENCIES
+ * ------------
+ * 
+ * The header-member template depends on the $_SESSION varialbe being set for
+ * the first and last name.
+ * 
+ * $_SESSION['first_name']
+ * $_SESSION['last_name']
+ * 
  */
 ?>
 <!DOCTYPE html>
@@ -53,8 +64,10 @@
           <div class="nav-collapse">
           <ul class="nav pull-right">
 	          <li class="dropdown">
-	              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-	              	<i class="icon-user icon-white"></i> Bob Cajun<b class="caret"></b>
+              	<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+	              <i class="icon-user icon-white"></i>
+              	  <?php echo $_SESSION['first_name'] . ' ' . $_SESSION['last_name']?>
+                  <b class="caret"></b>
               	</a>
 	              <ul class="dropdown-menu">
 	                <li><a href="#">Edit Profile</a></li>
