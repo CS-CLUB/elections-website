@@ -41,7 +41,7 @@ function new_election_tables($mysqli_elections)
 	$members_tbl = 'members_';
 
 	/* The positions tables for the nominations and elections */
-	$positions_tbls = array('positions_nom _', 'positions_elect_');
+	$positions_tbls = array('positions_nom_', 'positions_elect_');
 
 	/* The voters table to record voters and winners table to record winners */
 	$voters_winners_tbls = array('voters_nom_', 'voters_elect_', 'winners_nom_', 'winners_elect_');
@@ -101,6 +101,63 @@ function new_election_tables($mysqli_elections)
 			$stmt->close();
 		}
 	}
+}
+
+
+/**
+ * A function which determines if the election tables for the current year already exist
+ * the purpose of this function is to determine if the daemon has already created the tables
+ * for the current election year.
+ * 
+ * TODO CLEAN THIS METHOD UP, I DON'T LIKE THE IMPLEMENTATION OF ALL THE "IF STATEMENTS"
+ * 
+ * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB 
+ */
+function election_tables_exist($mysqli_elections)
+{
+	/* Election tables that exist for the current year */
+	$tables_cur_year = array();
+	
+	/* The current election year */
+	$election_year = date('Y');
+	
+	/* Get the election tables for the current year */
+	if ($stmt = $mysqli_elections->prepare("SHOW TABLES LIKE '%_?'"))
+	{
+		/* bind parameters for markers */
+		$stmt->bind_param('s', $election_year);
+	
+		/* execute query */
+		$stmt->execute();
+	
+		/* bind result variables */
+		$stmt->bind_result($table);
+	
+		while ($stmt->fetch())
+		{
+			$tables_cur_year[] = $table;
+		}
+		
+		/* close statement */
+		$stmt->close();
+	}
+	
+	/* Verify that all of the tables for the current election year exist */
+	if (count($tables_cur_year) === 7)
+	{
+		if (in_array('members_' . $election_year, $tables_cur_year)
+			&& in_array('positions_nom_' . $election_year, $tables_cur_year)
+			&& in_array('positions_elect_' . $election_year, $tables_cur_year)
+			&& in_array('voters_nom_' . $election_year, $tables_cur_year)
+			&& in_array('voters_elect_' . $election_year, $tables_cur_year)
+			&& in_array('winners_nom_' . $election_year, $tables_cur_year)
+			&& in_array('winners_elect_' . $election_year, $tables_cur_year))
+		{
+			return true;
+		}
+	}
+	
+	return false;
 }
 
 
