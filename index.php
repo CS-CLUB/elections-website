@@ -20,7 +20,10 @@
 
 require_once 'inc/db_interface.php';
 require_once 'inc/election_auth.php';
+require_once 'inc/election.php';
 require_once 'inc/utility.php';
+require_once 'inc/validate.php';
+require_once 'inc/verify.php';
 
 $error_msg = array();
 $passphrase = "";
@@ -43,9 +46,9 @@ $positions = array( 'President' => 'Bob Cajun',
 
 /* The positions that I am voting for in the election */
 $election_vote = array( 'President' => 'Bob Cajun',
-	                    	'Vice President' => 'Bob Cajun',
-	                    	'Coordinator' => 'Bob Cajun',
-	                    	'Treasurer' => 'Bob Cajun');
+                    	'Vice President' => 'Bob Cajun',
+                    	'Coordinator' => 'Bob Cajun',
+                    	'Treasurer' => 'Bob Cajun');
 
 $nominate_myself = array('President', 'Coordinator');
 
@@ -59,12 +62,66 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-include 'templates/header.php';
+/**
+ * Handle which page to display based on the current events and whether or not the
+ * user has a login cookie set, there are the following conditions.
+ * 
+ * 1. User is not logged in, display one of the templates if the nomination/election
+ * 	  period is open/closed with info about the Computer Science Club
+ * 
+ * 2. User has submitted login information
+ * 		
+ * 	  	a) If the login information is valid and it is the first time they have logged in
+ * 		   display the first time login page with election information and terms and conditions
+ * 
+ * 		b) If the login information is invalid dislpay the invalid login page
+ * 
+ * 3. User has a valid login cookie set / has logged into the site with valid account
+ * 
+ * 		a) If the user has not already voted display the template for nomination/election 
+ * 			 period voting 
+ * 
+ * 		b) If the user has already voted then dislplay the thank you for voting page with
+ * 			 election results/information if applicable
+ * 
+ * 4. Display the footer template at the bottom of the page regardless
+ */
+
+/* 
+ * 1. User is not logged in, display one of the templates if the nomination/election
+ * 	  period is open/closed with info about the Computer Science Club
+ */
+if (validate_login_cookie($mysqli_accounts) === false
+	&& !isset($_POST['login_username']) 
+	&& !isset($_POST['login_password']))
+{
+	include 'templates/header.php';
+	
+	/* "Nomination open" template if its between Sept. 1, 12am to Sept 14th 11:59pm */
+	if (is_nomination($mysqli_elections))
+	{
+		include 'templates/nomination-open.php';
+	}
+	/* "Nomination closed" template if its after the nomination period and before election opens */
+	elseif (is_nomination_closed)
+	{
+		include 'templates/nomination-closed.php';
+	}
+	
+}
+else
+{
+	include 'templates/header-member.php';
+}
+
+
+
+include 'templates/invalid-login.php';
 //include 'templates/election-open.php';
 //include 'templates/election-closed.php';
-//include 'templates/nomination-open.php';
-//include 'templates/nomination-closed.php';
-include 'templates/first-login.php';
+
+
+//include 'templates/first-login.php';
 
 session_start();
 if(isset($_SESSION['username']))

@@ -138,14 +138,14 @@ while (true)
 				"and recorded the candidates in the database for the " . date('Y') . " election");
 		
 		/* Determine the next week day after September 14th to host the election */
-		$next_weekday = get_next_weekday();
+		$next_weekday = get_next_weekday(DateTime::createFromFormat('Y-m-d-H-i', date('Y-m-d-H-i')));
 		
 		System_Daemon::iterate(60);
 	}
 	
 	
 	/* First weekday after September 14 start election period for 24-hours (12:00am - 11:59pm) */
-	if (strcmp(date('m-d-H-i'), $next_weekday . '-00-00') === 0)
+	if (strcmp(date('Y-m-d-H-i'), $next_weekday . '-00-00') === 0)
 	{
 		/* Initiate the final election, populate the table with the candidates and incumbents */
 		pop_election_table($mysqli_elections);
@@ -159,7 +159,7 @@ while (true)
 	}
 	
 	/* End of the 24 hour election period on the first week day after September 14 */
-	if (strcmp(date('m-d-H-i'), $next_weekday . '-23-59') === 0)
+	if (strcmp(date('Y-m-d-H-i'), $next_weekday . '-23-59') === 0)
 	{
 		/* Close the election period and tally the votes to determine the winners
 		 * of the election and then store the results in the DB

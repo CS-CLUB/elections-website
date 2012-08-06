@@ -56,27 +56,28 @@ function tie_breaker($nominees)
  *
  * TODO Fix this to handle scenarios where the next day of the week occurs on the next month
  *
- * @return string The next available date that falls on a weekday in the format of month-day
- * (ie. 09-15) for September 15.
+ * @param DateTime $date The date you want to determine the next weekday for, formatted as 'Y-m-d-H-i'
+ * @return string The next available date that falls on a weekday in the format of year-month-day
+ * (ie. 2012-09-15) for September 15, 2012.
  */
-function get_next_weekday()
+function get_next_weekday($date)
 {
-	$cur_day_of_week = date('l');
-	$next_day_of_week = date('m') . '-';
+	$cur_day_of_week = $date->format('l');
+	$next_day_of_week = $date;
 
 	if (strcasecmp($cur_day_of_week, 'Friday') === 0)
 	{
-		$next_day_of_week .= (date('d') + 3);
+		$next_day_of_week->add(new DateInterval('P3D'));
 	}
 	elseif (strcasecmp($cur_day_of_week, 'Saturday') === 0)
 	{
-		$next_day_of_week .= (date('d') + 2);
+		$next_day_of_week->add(new DateInterval('P2D'));
 	}
 	else
 	{
-		$next_day_of_week .= (date('d') + 1);
+		$next_day_of_week->add(new DateInterval('P1D'));
 	}
 
-	return $next_day_of_week;
+	return $next_day_of_week->format('Y-m-d');
 }
 ?>
