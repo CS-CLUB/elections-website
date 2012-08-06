@@ -42,14 +42,14 @@ function generate_session($username, $SESSION_KEY)
  * A function which validates the session by decrypting the validate session
  * variable and comparing it to the username session variable
  * 
- * @param mysqli $mysqli A mysqli connection object
+ * @param mysqli $mysqli_accounts The mysqli connection object for the ucsc accounts DB
  * @param string $ses_validate The session data to validate
  * @param string $SESSION_KEY The session encrypt/decrypt key
  * @return boolean true if the decrypted validate session variable matches the
  * username stored in the database
  *
  */
-function validate_login_session($mysqli, $ses_validate, $SESSION_KEY)
+function validate_login_session($mysqli_accounts, $ses_validate, $SESSION_KEY)
 {
     /* Decrypted validate session variable */ 
     $validate = trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $SESSION_KEY, base64_decode($ses_validate), 
@@ -58,7 +58,7 @@ function validate_login_session($mysqli, $ses_validate, $SESSION_KEY)
     $user_match = '';
     
     /* Get the username from the database if it exists */
-    if ($stmt = $mysqli->prepare("SELECT username FROM ucsc_members WHERE username LIKE ?"))
+    if ($stmt = $mysqli_accounts->prepare("SELECT username FROM ucsc_members WHERE username LIKE ?"))
     {
         /* bind parameters for markers */
         $stmt->bind_param('s', $validate);
@@ -91,19 +91,19 @@ function validate_login_session($mysqli, $ses_validate, $SESSION_KEY)
  * A function which validates the login information provided by the user
  * returns true if the login username and password provided are valid
  * 
- * @param mysqli $mysqli A mysqli connection object
+ * @param mysqli $mysqli_accounts The mysqli connection object for the ucsc accounts DB
  * @param string $username The username of the person logging in
  * @param string $password The password of the person logging in
  * @param string $AES_KEY The AES encrypt/decrypt key for the password
  * @return boolean True if the login information provided is valid
  */
-function validate_login($mysqli, $username, $password, $AES_KEY)
+function validate_login($mysqli_accounts, $username, $password, $AES_KEY)
 {
     $user_match = '';
     $pass_match = '';
     
     /* Get the username from the database if it exists */
-	if ($stmt = $mysqli->prepare("SELECT username FROM ucsc_members WHERE username LIKE ?"))
+	if ($stmt = $mysqli_accounts->prepare("SELECT username FROM ucsc_members WHERE username LIKE ?"))
 	{
 		/* bind parameters for markers */
 		$stmt->bind_param('s', $username);
@@ -124,7 +124,7 @@ function validate_login($mysqli, $username, $password, $AES_KEY)
 	/* If username found, verify the password provided for that username */
 	if (strcasecmp($username, $user_match) === 0)
 	{
-	    if ($stmt = $mysqli->prepare("SELECT AES_DECRYPT(password, ?) FROM ucsc_members WHERE username LIKE ?"))
+	    if ($stmt = $mysqli_accounts->prepare("SELECT AES_DECRYPT(password, ?) FROM ucsc_members WHERE username LIKE ?"))
         {
             /* bind parameters for markers */
             $stmt->bind_param('ss', $AES_KEY, $username);
@@ -147,7 +147,8 @@ function validate_login($mysqli, $username, $password, $AES_KEY)
            return true;
        }
 	}
-    /* Invalid username or password or both */
+  
+  /* Invalid username or password or both */
 	return false;
 }
 
@@ -161,7 +162,7 @@ function validate_login($mysqli, $username, $password, $AES_KEY)
  * @param mysqli $mysqli_accounts The mysqli connection object for the ucsc accounts DB
  * @param string $username The username of the valid user who is logged in
  */
-function set_session_data($mysqli, $username)
+function set_session_data($mysqli_accounts, $username)
 {
 	session_start();
 	
@@ -169,7 +170,7 @@ function set_session_data($mysqli, $username)
 	$_SESSION['login'] = generate_session($username, $SESSION_KEY);
 	
 	/* Set the members session information */
-	$member = get_member($mysqli, $username);
+	$member = get_member($mysqli_accounts, $username);
 	$_SESSION['username'] = $username;
 	$_SESSION['access_account'] = $member['access_account'];
 	$_SESSION['first_name'] = $member['first_name'];
@@ -180,7 +181,7 @@ function set_session_data($mysqli, $username)
 /**
  * A function which sets sets a login cookie in the users browser so that
  * they do not have to login each time they access the website. The login
- * cookie by default is set for one week.
+ * cookie by default is set for one day.
  * 
  * NOTE: This method requires that the user has already logged into the
  * website with a valid account and that a login session has been created.
@@ -192,8 +193,8 @@ function set_login_cookie()
 	/* Verify the login session created and the cookie set successfully */
 	if (isset($_SESSION['login']))
 	{
-		/*  Set a cookie for 1 week, content of cookie is their login session */
-		if (setcookie('login', $_SESSION['login'], time()+60*60*24*7))
+		/*  Set a cookie for 1 day, content of cookie is their login session */
+		if (setcookie('login', $_SESSION['login'], time()+60*60*24))
 		{
 			return true;
 		}
@@ -206,10 +207,10 @@ function set_login_cookie()
  * login information set in the cookie is valid for the user, if it
  * is then the user is logged in.
  *
- * @param mysqli $mysqli The mysqli connection object
+ * @param mysqli $mysqli_accounts The mysqli connection object for the ucsc accounts DB
  * @return TRUE If the cookie is a valid login cookie
  */
-function validate_login_cookie($mysqli)
+function validate_login_cookie($mysqli_accounts)
 {
 	/* Verify the login cookie is set and that the login is valid */
 	if (isset($_COOKIE['login']))
@@ -218,7 +219,7 @@ function validate_login_cookie($mysqli)
 		$login_cookie = htmlspecialchars($_COOKIE['login']);
 		
 		/* Validate the login cookie data, which contains the same data as session */
-		if (validate_login_session($mysqli, $login_cookie, $SESSION_KEY))
+		if (validate_login_session($mysqli_accounts, $login_cookie, $SESSION_KEY))
 		{
 			return true;
 		}
