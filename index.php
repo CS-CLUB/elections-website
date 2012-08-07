@@ -84,14 +84,16 @@ if (mysqli_connect_errno()) {
  * 				page with election information and terms and conditions
  * 
  * 		b) If the login information is invalid dislpay the invalid login page
- * 
- * 3. User has logged in for the first time and submitted the terms and conditions form
+ *
+ * 3. User is logged in and has clicked the Sign Out button
+ *
+ * 4. User has logged in for the first time and submitted the terms and conditions form
  * 		
  * 		a) If the user accepted the terms and conditions they are allowed to login and vote
  * 
  * 		b) If the user did not accept the terms and conditions they are redirected to default site
  * 
- * 4. User has a valid login cookie set / has logged into the site with valid account
+ * 5. User has a valid login cookie set / has logged into the site with valid account
  * 
  * 		a) If the user has not already voted display the template for nomination/election 
  * 			 period voting 
@@ -99,7 +101,7 @@ if (mysqli_connect_errno()) {
  * 		b) If the user has already voted then dislplay the thank you for voting page with
  * 			 election results/information if applicable
  * 
- * 5. Display the footer template at the bottom of the page regardless
+ * 6. Display the footer template at the bottom of the page regardless
  */
 
 /* 
@@ -125,6 +127,15 @@ if (verify_login_cookie($mysqli_accounts, $SESSION_KEY) === false
 	{
 		include 'templates/nomination-closed.php';
 	}
+	/* "Election open" template, it is the next weekday after Sept. 14th */
+	elseif (is_election($mysqli_elections))
+	{
+		include 'templates/election-open.php';
+	}
+	else
+	{
+		include 'templates/election-closed.php';
+	}
 }
 /* 2. User is not logged in and has submitted their login information */
 elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY) === false
@@ -148,6 +159,9 @@ elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY) === false
 			{
 				set_login_cookie();
 			}
+			
+			/* Refresh the page */
+			header('Location: '.$_SERVER['REQUEST_URI']);
 		}
 		/* ii) If it is the first time they have logged in display the first time login
 		 * 	   page with election information and terms and conditions
@@ -171,11 +185,24 @@ elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY) === false
 		include 'templates/header.php';
 		include 'templates/invalid-login.php';
 	}
+}
+/* 3. User is logged in and has clicked the Sign Out button */
+elseif ((verify_login_cookie($mysqli_accounts, $SESSION_KEY)
+		|| verify_login_session($mysqli_accounts, $_SESSION['login'], $SESSION_KEY))
+		&& isset($_POST['signout']))
+{
+	session_unset();
+	
+	/* Overwrite the login cookie as NULL if it exists */
+	if (isset($_COOKIE['login']))
+	{
+		setcookie('login', NULL, time()+1);
+	}
 	
 	/* Refresh the page */
 	header('Location: '.$_SERVER['REQUEST_URI']);
 }
-/* 3. User has logged in for the first time and submitted the terms and conditions form */
+/* 4. User has logged in for the first time and submitted the terms and conditions form */
 elseif (isset($_SESSION['login_username']) && isset($_SESSION['login_password'])
 		&& isset($_POST['accept_rules']))
 {
@@ -197,7 +224,7 @@ elseif (isset($_SESSION['login_username']) && isset($_SESSION['login_password'])
 	/* Refresh the page */
 	header('Location: '.$_SERVER['REQUEST_URI']);
 }
-/* 4. User has a valid login cookie set / has logged into the site with valid account */
+/* 5. User has a valid login cookie set / has logged into the site with valid account */
 elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 	|| verify_login_session($mysqli_accounts, $_SESSION['login'], $SESSION_KEY))
 {

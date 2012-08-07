@@ -88,4 +88,35 @@ function is_nomination_closed($mysqli_elections)
 }
 
 
+/**
+ * A function which determines if the election is open for voting
+ *
+ * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
+ * @return boolean True if the election is open for voting
+ */
+function is_election($mysqli_elections)
+{
+	$cur_date = DateTime::createFromFormat('Y-m-d-H-i', date('Y-m-d-H-i'));
+
+	/* Determine the next week day after September 14th (11:59pm) to host the election */
+	$nomination_end = DateTime::createFromFormat('Y-m-d-H-i', date('Y') . '-09-14-23-59');
+	
+	/* Election start day, first weekday after September 14 at 11:59pm */
+	$election_start = DateTime::createFromFormat('Y-m-d-H-i', get_next_weekday($nomination_end) . '-00-00');
+
+	/* End of the first week day (11:59pm) after September 14th */
+	$election_end = DateTime::createFromFormat('Y-m-d-H-i', $election_start->format('Y-m-d') . '-23-59');
+
+	/*
+	 * If the current date is within the nomination period, and the election tables exist
+	* then it is the nomination period
+	*/
+	if ($cur_date > $election_start && $cur_date < $election_end
+			&& election_tables_exist($mysqli_elections))
+	{
+		return true;
+	}
+
+	return false;
+}
 ?>
