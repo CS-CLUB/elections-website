@@ -229,6 +229,10 @@ elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 	|| verify_login_session($mysqli_accounts, $_SESSION['login'], $SESSION_KEY))
 {
 	include 'templates/header-member.php';
+	
+	/* Get the nominees needed to populate the nomination voting form */
+	$nominees = get_nominees($mysqli_elections);
+	include 'templates/nomination-form.php';
 }
 
 //include 'templates/election-open.php';
