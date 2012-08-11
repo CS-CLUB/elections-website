@@ -73,3 +73,10 @@ form.logout-form {
     color: #555555;
     margin-bottom: 0;
 }
+
+/* Cleanup the nomination/election voting forms */
+.form-horizontal div.form-actions {
+	padding-bottom: 5px; 
+	margin-bottom: 0px;
+}
+

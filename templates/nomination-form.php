@@ -43,63 +43,67 @@
 	</div>
 	<?php include 'templates/nomination-notice.php'; ?>
 	<br />
-	<form class="form-horizontal" action="index.php" method="post" accept-charset="UTF-8">
-		<fieldset>
-			<div class="control-group">
-	      		<label for="president_nom" class="control-label">President</label>
-		      	<div class="controls">
-		      		<select id="president_nom" class="input-xlarge">
-		      			<?php 
-		      				foreach ($nominees['President'] as $nominee)
-		      				{
-		      					echo '<option>' . $nominee . '</option>';
-		      				}
-		      			?>
-		      		</select>
-		      	</div>
-      		</div>
-      		<div class="control-group">
-	      		<label for="vicepresident_nom" class="control-label">Vice President</label>
-		      	<div class="controls">
-		      		<select id="vicepresident_nom" class="input-xlarge">
-		      			<?php 
-		      				foreach ($nominees['Vice President'] as $nominee)
-		      				{
-		      					echo '<option>' . $nominee . '</option>';
-		      				}
-		      			?>
-		      		</select>
-		      	</div>
-      		</div>
-      		<div class="control-group">
-	      		<label for="coordinator_nom" class="control-label">Coordinator</label>
-		      	<div class="controls">
-		      		<select id="coordinator_nom" class="input-xlarge">
-		      			<?php 
-		      				foreach ($nominees['Coordinator'] as $nominee)
-		      				{
-		      					echo '<option>' . $nominee . '</option>';
-		      				}
-		      			?>
-		      		</select>
-		      	</div>
-      		</div>
-      					<div class="control-group">
-	      		<label for="treasurer_nom" class="control-label">Treasurer</label>
-		      	<div class="controls">
-		      		<select id="treasurer_nom" class="input-xlarge">
-		      			<?php 
-		      				foreach ($nominees['Treasurer'] as $nominee)
-		      				{
-		      					echo '<option>' . $nominee . '</option>';
-		      				}
-		      			?>
-		      		</select>
-		      	</div>
-      		</div>
-      		<div class="form-actions">
-            	<button class="btn btn-primary" type="submit" name="nomination_vote" value="Submit Vote">Submit Vote</button>
-          </div>
-		</fieldset>
-	</form>
+	<div class="row">
+		<div class="span8">
+			<form class="well form-horizontal" action="index.php" method="post" accept-charset="UTF-8">
+				<fieldset>
+					<div class="control-group">
+			      		<label for="president_nom" class="control-label">President</label>
+				      	<div class="controls">
+				      		<select id="president_nom" class="input-xlarge">
+				      			<?php 
+				      				foreach ($nominees['President'] as $nominee)
+				      				{
+				      					echo '<option>' . $nominee . '</option>';
+				      				}
+				      			?>
+				      		</select>
+				      	</div>
+		      		</div>
+		      		<div class="control-group">
+			      		<label for="vicepresident_nom" class="control-label">Vice President</label>
+				      	<div class="controls">
+				      		<select id="vicepresident_nom" class="input-xlarge">
+				      			<?php 
+				      				foreach ($nominees['Vice President'] as $nominee)
+				      				{
+				      					echo '<option>' . $nominee . '</option>';
+				      				}
+				      			?>
+				      		</select>
+				      	</div>
+		      		</div>
+		      		<div class="control-group">
+			      		<label for="coordinator_nom" class="control-label">Coordinator</label>
+				      	<div class="controls">
+				      		<select id="coordinator_nom" class="input-xlarge">
+				      			<?php 
+				      				foreach ($nominees['Coordinator'] as $nominee)
+				      				{
+				      					echo '<option>' . $nominee . '</option>';
+				      				}
+				      			?>
+				      		</select>
+				      	</div>
+		      		</div>
+		      					<div class="control-group">
+			      		<label for="treasurer_nom" class="control-label">Treasurer</label>
+				      	<div class="controls">
+				      		<select id="treasurer_nom" class="input-xlarge">
+				      			<?php 
+				      				foreach ($nominees['Treasurer'] as $nominee)
+				      				{
+				      					echo '<option>' . $nominee . '</option>';
+				      				}
+				      			?>
+				      		</select>
+				      	</div>
+		      		</div>
+		      		<div class="form-actions">
+		            	<button class="btn btn-primary" type="submit" name="nomination_vote" value="Submit Vote">Submit Vote</button>
+		          </div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
 </section>

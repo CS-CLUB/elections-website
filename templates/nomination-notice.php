@@ -36,5 +36,5 @@
   <p>
   		Another thing to remember, <strong>nominating yourself does not use up your vote</strong>, 
   		so feel free to nominate yourself and then vote for whomever you please. 
-  </p> 
+  </p>
 </div>
