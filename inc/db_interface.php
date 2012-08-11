@@ -187,16 +187,25 @@ function pop_election_table($mysqli_elections)
 						'Treasurer'         => 0
 	);
 	
-	/* The name of the table containing the previous years winnners */
-	$incumbents_table = 'winners_elect_' . (date('Y') - 1);
+	$previous_year = (date('Y') - 1);
+	$current_year = date('Y');
+	
+	/* The name of the table containing the current years nominees */
+	$candidates_table = 'winners_nom_' . $current_year ;
+	
+	/* The name of the table containing the previous years winners */
+	$incumbents_table = 'winners_elect_' . $previous_year ;
+	
+	/* The name of the table containing the current participates in the elections */
+	$positions_elect_table = 'positions_elect_' . $current_year ;
 	
 	/* Get the candidate for each position */
 	foreach ($candidates as $position => $access_account)
 	{
 		/* Get the candidate for the current position from the database */
 		if ($stmt = $mysqli_elections->prepare("SELECT reference 
-                                                    FROM winners_nom
-                                                            WHERE position LIKE ?"))
+                                                    FROM " . $candidates_table .
+                                                            " WHERE position LIKE ?"))
 		{
 			/* bind parameters for markers */
 			$stmt->bind_param('s', $position);
@@ -246,8 +255,8 @@ function pop_election_table($mysqli_elections)
 	/* Populate the election positions table with the candidates and incumbents */
 	foreach (array_merge($candidates, $incumbents) as $position => $access_account)
 	{
-		if ($stmt = $mysqli_elections->prepare("INSERT INTO positions_elect
-														VALUES (?, 0, ?)"))
+		if ($stmt = $mysqli_elections->prepare("INSERT INTO " . $positions_elect_table .
+														" VALUES (?, 0, ?)"))
 		{
 			/* bind parameters for markers */
 			$stmt->bind_param('is', $access_account, $position);
@@ -273,6 +282,8 @@ function is_member($mysqli_accounts, $mysqli_elections, $username)
 {
 	$access_account = 0;
 	$is_member = FALSE;
+	
+	$current_year = date('Y');
 
 	/* Get the unique access account for the user if the user exists */
 	if ($stmt = $mysqli_accounts->prepare("SELECT access_account 
@@ -296,8 +307,8 @@ function is_member($mysqli_accounts, $mysqli_elections, $username)
 	}	
 	 
 	if ($stmt = $mysqli_elections->prepare("SELECT EXISTS(SELECT 1
-                                                FROM members
-                                                    WHERE access_account=?)"))
+                                                FROM members_" . $current_year . 
+                                                    " WHERE access_account=?)"))
 	{
 		/* bind parameters for markers */
 		$stmt->bind_param('i', $access_account);
@@ -338,6 +349,8 @@ function add_member($mysqli_accounts, $mysqli_elections, $username)
 					'last_name' => '');
 	$user_match = '';
 
+	$current_year = date('Y');
+	
 	/* Get the users information from the database if it exists */
 	if ($stmt = $mysqli_accounts->prepare("SELECT username
                                                 FROM ucsc_members
@@ -385,7 +398,7 @@ function add_member($mysqli_accounts, $mysqli_elections, $username)
 		/* Add the user to the members table of the elections database if they do not exist */
 		if (! is_member($mysqli_accounts, $mysqli_elections, $username))
 		{
-			if ($stmt = $mysqli_elections->prepare("INSERT INTO members VALUES (?, ?, ?)"))
+			if ($stmt = $mysqli_elections->prepare("INSERT INTO members_" .$current_year. " VALUES (?, ?, ?)"))
 			{
 				/* bind parameters for markers */
 				$stmt->bind_param('iss', $member['access_account'], $member['first_name'], $member['last_name']);
@@ -485,14 +498,19 @@ function get_nominees($mysqli_elections)
 						'Coordinator'       => array(),
 						'Treasurer'         => array()
 	);
+	
+	$current_year = date('Y');
+	
+	$members_table = "members_" . $current_year;
+	$position_nom_table = "position_nom_".$current_year;
 
 	/* Get the nominees for each position */
 	foreach ($nominees as $position => $nominee)
 	{
 		/* Get the nominees for the current position from the database */
 		if ($stmt = $mysqli_elections->prepare("SELECT first_name, last_name
-                                                    FROM members m INNER JOIN positions_nom p
-                                                        ON p.reference = m.access_account
+                                                    FROM ".$members_table." m INNER JOIN " . $position_nom_table.
+                                                         " p ON p.reference = m.access_account
                                                             WHERE p.position LIKE ?"))
 		{
 			/* bind parameters for markers */
@@ -537,13 +555,18 @@ function get_candidates($mysqli_elections)
 						'Treasurer'         => ''
 	);
 
+	$current_year = date('Y');
+	
+	$members_table = "members_" . $current_year;
+	$winners_nom_table = "winners_nom_" . $current_year;
+	
 	/* Get the candidate for each position */
 	foreach ($candidates as $position => $candidate)
 	{
 		/* Get the candidate for the current position from the database */
 		if ($stmt = $mysqli_elections->prepare("SELECT first_name, last_name
-                                                    FROM members m INNER JOIN winners_nom w
-                                                        ON w.reference = m.access_account
+                                                    FROM ".$members_table." m INNER JOIN ".$winners_nom_table.
+                                                        " w ON w.reference = m.access_account
                                                             WHERE w.position LIKE ?"))
 		{
 			/* bind parameters for markers */
@@ -585,15 +608,20 @@ function get_incumbents($mysqli_elections)
 						'Treasurer'         => ''
 	);
 
+	$previous_year = (date('Y')-1);
+	$current_year = date('Y');
+	
+	$members_table = "members_" . $current_year;
+	
 	/* The name of the table containing the previous years winnners */
-	$incumbents_table = 'winners_elect_' . (date('Y') - 1);
+	$incumbents_table = 'winners_elect_' . $previous_year;
 
 	/* Get the incumbent for each position */
 	foreach ($incumbents as $position => $incumbent)
 	{
 		/* Get the incumbent for the current position from the database */
 		if ($stmt = $mysqli_elections->prepare("SELECT first_name, last_name
-                                                    FROM members m INNER JOIN " . $incumbents_table . " w " .
+                                                    FROM ". $members_table." m INNER JOIN " . $incumbents_table . " w " .
 														"ON w.reference = m.access_account
                                                             WHERE w.position LIKE ?"))
 		{
@@ -634,10 +662,15 @@ function get_incumbents($mysqli_elections)
 function is_a_candidate($mysqli_elections, $first_name, $last_name, $user_name, $position)
 {
 	$is_a_candidate = FALSE;
+
+	$current_year = date('Y');
+	
+	$members_table = "members_" . $current_year;
+	$position_elect_table = "position_elect_".$current_year;
 	
 	if ($stmt = $mysqli_elections->prepare("SELECT EXISTS(
-                                                    FROM members m INNER JOIN positions_elect p 
-														ON p.reference = m.access_account WHERE 
+                                                    FROM ".$members_table." m INNER JOIN ".$position_elect_table.
+														" p ON p.reference = m.access_account WHERE 
 															p.position LIKE ? AND m.first_name 
 																LIKE ? AND m.last_name LIKE ?)"))
 	{
@@ -674,10 +707,15 @@ function is_a_candidate($mysqli_elections, $first_name, $last_name, $user_name, 
 function is_a_nominee($mysqli_elections, $first_name, $last_name, $user_name, $position)
 {
 	$is_a_nominee = FALSE;
+	
+	$current_year = date('Y');
+	
+	$members_table = "members_" . $current_year;
+	$position_nom_table = "position_nom_".$current_year;
 
 	if ($stmt = $mysqli_elections->prepare("SELECT EXISTS(
-												FROM members m INNER JOIN positions_nom p
-													ON p.reference = m.access_account WHERE
+												FROM ".$members_table." m INNER JOIN ".$position_nom_table.
+													" p ON p.reference = m.access_account WHERE
 														p.position LIKE ? AND m.first_name
 															LIKE ? AND m.last_name LIKE ?)"))
 	{
@@ -711,10 +749,14 @@ function is_nominated($mysqli_elections, $access_account, $position)
 {
 	$is_nominated = TRUE;
 
+	$current_year = date('Y');
+	
+	$position_nom_table = "position_nom_".$current_year;
+	
 	/* Verify that the user has not already been nominated for that position */
 	if ($stmt = $mysqli_elections->prepare("SELECT EXISTS(
-                                                    SELECT 1 FROM positions_nom
-														WHERE reference=? AND position LIKE ?)"))
+                                                    SELECT 1 FROM ". $position_nom_table.
+														"WHERE reference=? AND position LIKE ?)"))
 	{
 		/* bind parameters for markers */
 		$stmt->bind_param('is', $access_account, $position);
@@ -842,13 +884,17 @@ function record_user_vote($mysqli_elections, $access_account, $position, $vote_t
  */
 function nominate_self($mysqli_elections, $access_account, $positions)
 {
+	$current_year = date('Y');
+	
+	$position_nom_table = "position_nom_".$current_year;
+	
 	foreach ($positions as $position)
 	{
 		/* Determine that the user has not already been nominated for the position */
 		if (! is_nominated($mysqli_elections, $access_account, $position))
 		{
-			if ($stmt = $mysqli_elections->prepare("INSERT INTO positions_nom
-														VALUES (?, 0, ?)"))
+			if ($stmt = $mysqli_elections->prepare("INSERT INTO ".$position_nom_table.
+														"VALUES (?, 0, ?)"))
 			{
 				/* bind parameters for markers */
 				$stmt->bind_param('is', $access_account, $position);
@@ -883,6 +929,12 @@ function nominate_self($mysqli_elections, $access_account, $positions)
  */
 function nomination_vote($mysqli_elections, $access_account, $positions)
 {
+	
+	$current_year = date('Y');
+	
+	$members_table = "members_" . $current_year;
+	$position_nom_table = "position_nom_".$current_year;
+	
 	/* Get the nominee they voted for, for each position */
 	foreach ($positions as $position => $nominee)
 	{
@@ -890,8 +942,8 @@ function nomination_vote($mysqli_elections, $access_account, $positions)
 		if (! has_voted($mysqli_elections, $access_account, $position, 'nomination'))
 		{
 			/* Increment by 1 the votes for the nominee of the position they voted for */
-			if ($stmt = $mysqli_elections->prepare("UPDATE positions_nom p INNER JOIN members m
-                                                        ON p.reference = m.access_account
+			if ($stmt = $mysqli_elections->prepare("UPDATE ".$position_nom_table." p INNER JOIN ".$members_table.
+                                                        " m ON p.reference = m.access_account
                                                             SET p.votes = p.votes + 1
                                                                 WHERE p.position LIKE ? AND
                                                                 CONCAT
@@ -945,6 +997,11 @@ function nomination_vote($mysqli_elections, $access_account, $positions)
  */
 function election_vote($mysqli_elections, $access_account, $positions)
 {
+	$current_year = date('Y');
+	
+	$members_table = "members_" . $current_year;
+	$position_elect_table = "position_elect_".$current_year;
+	
 	/* Get the nominee they voted for, for each position */
 	foreach ($positions as $position => $nominee)
 	{
@@ -952,8 +1009,8 @@ function election_vote($mysqli_elections, $access_account, $positions)
 		if (! has_voted($mysqli_elections, $access_account, $position, 'election'))
 		{
 			/* Increment by 1 the votes for the nominee of the position they voted for */
-			if ($stmt = $mysqli_elections->prepare("UPDATE positions_elect p INNER JOIN members m
-                                                        ON p.reference = m.access_account
+			if ($stmt = $mysqli_elections->prepare("UPDATE ".$position_elect_table." p INNER JOIN "
+                                                        .$members_table." m ON p.reference = m.access_account
                                                             SET p.votes = p.votes + 1
                                                                 WHERE p.position LIKE ? AND
                                                                 CONCAT
@@ -1047,7 +1104,11 @@ function determine_winners($mysqli_elections, $election_type)
 						'Treasurer' );
 
 	$positions_tbl = '';
-
+	
+	$current_year = date('Y');
+	
+	$members_table = "members_" . $current_year;
+	
 	/* Set the table to tally the votes from to determine the winner */
 	if (strcasecmp($election_type, 'nomination') === 0)
 	{
@@ -1074,12 +1135,12 @@ function determine_winners($mysqli_elections, $election_type)
 		$nominees = array();
 
 		if ($stmt = $mysqli_elections->prepare("SELECT access_account
-        											FROM members m INNER JOIN " . $positions_tbl . " p
-        												ON p.reference = m.access_account
+        											FROM ".$members_table." m INNER JOIN " . $positions_tbl . 
+        												" p ON p.reference = m.access_account
         													WHERE p.position LIKE ?
         														AND p.votes = (
-        																		SELECT MAX(votes) FROM " . $positions_tbl . "
-        																			WHERE position LIKE ?
+        																		SELECT MAX(votes) FROM " . $positions_tbl . 
+        																			" WHERE position LIKE ?
         																		)"))
 		{
 			/* bind parameters for markers */
