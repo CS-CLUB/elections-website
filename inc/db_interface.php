@@ -1163,11 +1163,11 @@ function determine_winners($mysqli_elections, $election_type)
 			*/
 			if (count($nominees) > 1)
 			{
-				$candidates[$position] = tie_breaker($nominees);
+				$winners[$position] = tie_breaker($nominees);
 			}
 			else
 			{
-				$candidates[$position] = $access_account;
+				$winners[$position] = $access_account;
 			}
 
 			/* close statement */
@@ -1176,7 +1176,7 @@ function determine_winners($mysqli_elections, $election_type)
 	}
 
 	/* Finally, record the winners in election DB */
-	record_winners($mysqli_elections, $candidates, $election_type);
+	record_winners($mysqli_elections, $winners, $election_type);
 }
 
 
