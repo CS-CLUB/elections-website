@@ -502,7 +502,7 @@ function get_nominees($mysqli_elections)
 	$current_year = date('Y');
 	
 	$members_table = "members_" . $current_year;
-	$position_nom_table = "position_nom_".$current_year;
+	$position_nom_table = "position_nom_" . $current_year;
 
 	/* Get the nominees for each position */
 	foreach ($nominees as $position => $nominee)
@@ -666,7 +666,7 @@ function is_candidate($mysqli_elections, $first_name, $last_name, $user_name, $p
 	$current_year = date('Y');
 	
 	$members_table = "members_" . $current_year;
-	$position_elect_table = "position_elect_".$current_year;
+	$position_elect_table = "position_elect_" . $current_year;
 	
 	if ($stmt = $mysqli_elections->prepare("SELECT EXISTS(
                                                     FROM ".$members_table." m INNER JOIN ".$position_elect_table.
@@ -710,7 +710,7 @@ function is_nominee($mysqli_elections, $nominee, $position)
 	$current_year = date('Y');
 	
 	$members_table = "members_" . $current_year;
-	$position_nom_table = "position_nom_".$current_year;
+	$position_nom_table = "position_nom_" . $current_year;
 
 	if ($stmt = $mysqli_elections->prepare("SELECT EXISTS(
 												FROM ".$members_table." m INNER JOIN ".$position_nom_table.
@@ -797,15 +797,16 @@ function has_voted($mysqli_elections, $access_account, $position, $vote_type)
 {
 	$has_voted = TRUE;
 	$voting_record_tbl = '';
-
+	$current_year = date('Y');
+	
 	/* Set the table to check their voting record based on the type of vote being cast */
 	if (strcasecmp($vote_type, 'nomination') === 0)
 	{
-		$voting_record_tbl = 'voters_nom';
+		$voting_record_tbl = 'voters_nom_' . $current_year;
 	}
 	elseif (strcasecmp($vote_type, 'election') === 0)
 	{
-		$voting_record_tbl = 'voters_elect';
+		$voting_record_tbl = 'voters_elect_' . $current_year;
 	}
 
 	 
@@ -849,15 +850,16 @@ function has_voted($mysqli_elections, $access_account, $position, $vote_type)
 function record_user_vote($mysqli_elections, $access_account, $position, $vote_type)
 {
 	$record_vote_tbl = '';
+	$current_year = date('Y');
 
 	/* Set the table to check their voting record based on the type of vote being cast */
 	if (strcasecmp($vote_type, 'nomination') === 0)
 	{
-		$record_vote_tbl = 'voters_nom';
+		$record_vote_tbl = 'voters_nom_' . $current_year;
 	}
 	elseif (strcasecmp($vote_type, 'election') === 0)
 	{
-		$record_vote_tbl = 'voters_elect';
+		$record_vote_tbl = 'voters_elect_' . $current_year;
 	}
 
 	if ($stmt = $mysqli_elections->prepare("INSERT INTO " . $record_vote_tbl .
@@ -889,8 +891,7 @@ function record_user_vote($mysqli_elections, $access_account, $position, $vote_t
 function nominate_self($mysqli_elections, $access_account, $positions)
 {
 	$current_year = date('Y');
-	
-	$position_nom_table = "position_nom_".$current_year;
+	$position_nom_table = "position_nom_" . $current_year;
 	
 	foreach ($positions as $position)
 	{
@@ -933,11 +934,9 @@ function nominate_self($mysqli_elections, $access_account, $positions)
  */
 function nomination_vote($mysqli_elections, $access_account, $positions)
 {
-	
 	$current_year = date('Y');
-	
 	$members_table = "members_" . $current_year;
-	$position_nom_table = "position_nom_".$current_year;
+	$position_nom_table = "position_nom_" . $current_year;
 	
 	/* Get the nominee they voted for, for each position */
 	foreach ($positions as $position => $nominee)
@@ -1002,9 +1001,8 @@ function nomination_vote($mysqli_elections, $access_account, $positions)
 function election_vote($mysqli_elections, $access_account, $positions)
 {
 	$current_year = date('Y');
-	
 	$members_table = "members_" . $current_year;
-	$position_elect_table = "position_elect_".$current_year;
+	$position_elect_table = "position_elect_" . $current_year;
 	
 	/* Get the nominee they voted for, for each position */
 	foreach ($positions as $position => $nominee)
@@ -1054,15 +1052,16 @@ function election_vote($mysqli_elections, $access_account, $positions)
 function record_winners($mysqli_elections, $positions, $vote_type)
 {
 	$winners_tbl = '';
-
+	$current_year = date('Y');
+	
 	/* Set the table to check their voting record based on the type of vote being cast */
 	if (strcasecmp($vote_type, 'nomination') === 0)
 	{
-		$winners_tbl = 'winners_nom';
+		$winners_tbl = 'winners_nom_' . $current_year;
 	}
 	elseif (strcasecmp($vote_type, 'election') === 0)
 	{
-		$winners_tbl = 'winners_elect';
+		$winners_tbl = 'winners_elect_' . $current_year;
 	}
 
 	foreach($positions as $position => $access_account)
@@ -1107,20 +1106,18 @@ function determine_winners($mysqli_elections, $election_type)
 						'Coordinator',
 						'Treasurer' );
 
-	$positions_tbl = '';
-	
+	$positions_tbl = '';	
 	$current_year = date('Y');
-	
 	$members_table = "members_" . $current_year;
 	
 	/* Set the table to tally the votes from to determine the winner */
 	if (strcasecmp($election_type, 'nomination') === 0)
 	{
-		$positions_tbl = 'positions_nom';
+		$positions_tbl = 'positions_nom_' . $current_year;
 	}
 	elseif (strcasecmp($election_type, 'election') === 0)
 	{
-		$positions_tbl = 'positions_elect';
+		$positions_tbl = 'positions_elect_' . $current_year;
 	}
 
 	/* Array of winning nominees by access_account and # of votes, re-initialized for each position,
@@ -1139,11 +1136,11 @@ function determine_winners($mysqli_elections, $election_type)
 		$nominees = array();
 
 		if ($stmt = $mysqli_elections->prepare("SELECT access_account
-        											FROM ".$members_table." m INNER JOIN " . $positions_tbl . 
+        											FROM ".$members_table." m INNER JOIN " .$positions_tbl. 
         												" p ON p.reference = m.access_account
         													WHERE p.position LIKE ?
         														AND p.votes = (
-        																		SELECT MAX(votes) FROM " . $positions_tbl . 
+        																		SELECT MAX(votes) FROM " .$positions_tbl. 
         																			" WHERE position LIKE ?
         																		)"))
 		{
@@ -1170,11 +1167,11 @@ function determine_winners($mysqli_elections, $election_type)
 			*/
 			if (count($nominees) > 1)
 			{
-				$candidates[$position] = tie_breaker($nominees);
+				$winners[$position] = tie_breaker($nominees);
 			}
 			else
 			{
-				$candidates[$position] = $access_account;
+				$winners[$position] = $access_account;
 			}
 
 			/* close statement */
@@ -1183,7 +1180,7 @@ function determine_winners($mysqli_elections, $election_type)
 	}
 
 	/* Finally, record the winners in election DB */
-	record_winners($mysqli_elections, $candidates, $election_type);
+	record_winners($mysqli_elections, $winners, $election_type);
 }
 
 

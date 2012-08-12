@@ -86,7 +86,7 @@
 				      		</select>
 				      	</div>
 		      		</div>
-		      					<div class="control-group">
+      				<div class="control-group">
 			      		<label for="treasurer_nom" class="control-label">Treasurer</label>
 				      	<div class="controls">
 				      		<select id="treasurer_nom" class="input-xlarge">
