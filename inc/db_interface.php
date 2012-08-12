@@ -657,11 +657,11 @@ function get_incumbents($mysqli_elections)
  * @param string $last_name the last name of a potential candidate
  * @param string $user_name the user name of a potential candidate
  * @param string $position the position that the candidate might hold
- * @return boolean $is_a_candidate TRUE if the candidate is found in the database with the given position
+ * @return boolean $is_candidate TRUE if the candidate is found in the database with the given position
  */
-function is_a_candidate($mysqli_elections, $first_name, $last_name, $user_name, $position)
+function is_candidate($mysqli_elections, $first_name, $last_name, $user_name, $position)
 {
-	$is_a_candidate = FALSE;
+	$is_candidate = FALSE;
 
 	$current_year = date('Y');
 	
@@ -681,7 +681,7 @@ function is_a_candidate($mysqli_elections, $first_name, $last_name, $user_name, 
 		$stmt->execute();
 
 		/* bind result variables */
-		$stmt->bind_result($is_a_candidate);
+		$stmt->bind_result($is_candidate);
 
 		/* fetch value */
 		$stmt->fetch();
@@ -689,7 +689,7 @@ function is_a_candidate($mysqli_elections, $first_name, $last_name, $user_name, 
 		/* close statement */
 		$stmt->close();
 	}
-	return $is_a_candidate;
+	return $is_candidate;
 }
 
 /**
@@ -698,15 +698,14 @@ function is_a_candidate($mysqli_elections, $first_name, $last_name, $user_name, 
  * capable to be elected for the given position.
  *
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
- * @param string $first_name the first name of a potential nominee
- * @param string $last_name the last name of a potential nominee
+ * @param string $nominee the full name of the nominee
  * @param string $user_name the user name of a potential nominee
  * @param string $position the position that the nominee might hold
- * @return boolean $is_a_nominee TRUE if the nominee is found in the database with the given position
+ * @return boolean $is_nominee TRUE if the nominee is found in the database with the given position
  */
-function is_a_nominee($mysqli_elections, $first_name, $last_name, $user_name, $position)
+function is_nominee($mysqli_elections, $nominee, $position)
 {
-	$is_a_nominee = FALSE;
+	$is_nominee = FALSE;
 	
 	$current_year = date('Y');
 	
@@ -716,17 +715,22 @@ function is_a_nominee($mysqli_elections, $first_name, $last_name, $user_name, $p
 	if ($stmt = $mysqli_elections->prepare("SELECT EXISTS(
 												FROM ".$members_table." m INNER JOIN ".$position_nom_table.
 													" p ON p.reference = m.access_account WHERE
-														p.position LIKE ? AND m.first_name
-															LIKE ? AND m.last_name LIKE ?)"))
+														p.position LIKE ? AND CONCAT
+                                                                (
+                                                                    m.first_name,
+                                                                    ' ',
+                                                                    m.last_name
+                                                                )
+                                                                LIKE ?"))
 	{
 		/* bind parameters for markers */
-		$stmt->bind_param('sss', $first_name, $last_name, $position);
+		$stmt->bind_param('sss', $position, $nominee);
 
 		/* execute query */
 		$stmt->execute();
 
 		/* bind result variables */
-		$stmt->bind_result($is_a_nominee);
+		$stmt->bind_result($is_nominee);
 
 		/* fetch value */
 		$stmt->fetch();
@@ -734,7 +738,7 @@ function is_a_nominee($mysqli_elections, $first_name, $last_name, $user_name, $p
 		/* close statement */
 		$stmt->close();
 	}
-	return $is_a_nominee;
+	return $is_nominee;
 }
 
 /**

@@ -87,7 +87,7 @@ function validate_nom_entry($name)
  * @param string $last_name the last name of a potential candidate  
  * @param string $user_name the user name of a potential candidate
  * @param string $position the position that the candidate might hold
- * @return boolean $is_a_candidate TRUE if the candidate is found in the database with the given position
+ * @return boolean $is_candidate TRUE if the candidate is found in the database with the given position
  */
 function validate_candidate($mysqli_elections, $first_name, $last_name, $user_name, $position)
 {
@@ -95,7 +95,7 @@ function validate_candidate($mysqli_elections, $first_name, $last_name, $user_na
 			&& validate_username($username))
 	{
 		/* Check if there is a candidate for the given position */
-		return is_a_candidate($mysqli_elections, $first_name, $last_name, $user_name, $position);
+		return is_candidate($mysqli_elections, $first_name, $last_name, $user_name, $position);
 	}
 	return FALSE;
 }
@@ -110,7 +110,7 @@ function validate_candidate($mysqli_elections, $first_name, $last_name, $user_na
  * @param string $last_name the last name of a potential nominee
  * @param string $user_name the user name of a potential nominee
  * @param string $position the position that the nominee might hold
- * @return boolean $is_a_candidate TRUE if the nominee is found in the database with the given position
+ * @return boolean $is_candidate TRUE if the nominee is found in the database with the given position
  */
 function validate_nominee($mysqli_elections, $first_name, $last_name, $user_name, $position)
 {
@@ -118,7 +118,66 @@ function validate_nominee($mysqli_elections, $first_name, $last_name, $user_name
 			&& validate_username($username))
 	{
 		//Check if there is a nominee for the given position
-		return is_a_nominee($mysqli_elections, $first_name, $last_name, $user_name, $position);
+		return is_nominee($mysqli_elections, $first_name, $last_name, $user_name, $position);
 	}
 	return FALSE;
+}
+
+/**
+ * TODO test and make sure it actually works
+ * Used to check if a given nominee (with their first, last and user name) is a nominee
+ * capable to be elected for the given position. First checks if the given information is valid.
+ *
+ * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
+ * @param $positions An array of the positions and the full name of the nominee they voted for
+ * @return 
+ */
+function validate_nomination_vote($mysqli_elections, $positions)
+{
+	//$has_voded = TRUE;
+	foreach ($positions as $position => $nominee)
+	{
+		if (validate_nom_entry($nominee))
+				//&& validate_username($username))
+		{
+			if (has_voted($mysqli_elections, $_SESSION['access_account'], $position, "nomination")
+					|| !is_nominee($mysqli_elections, $nominee, $position))
+			{
+				return FALSE;
+			}
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+	return TRUE;
+}
+
+/**
+ * TODO test and make sure it actually works
+ *
+ * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
+ * @param $positions An array of the positions and the full name of the nominee they voted for
+ * @return
+ */
+function validate_election_vote($mysqli_elections, $positions)
+{
+	foreach ($positions as $position => $nominee)
+	{
+		if (validate_nom_entry($nominee))
+			//&& validate_username($username))
+		{
+			if (has_voted($mysqli_elections, $_SESSION['access_account'], $position, "election")
+					|| !is_candidate($mysqli_elections, $nominee, $position))
+			{
+				return FALSE;
+			}
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+	return TRUE;
 }
