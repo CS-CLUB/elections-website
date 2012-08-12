@@ -84,6 +84,56 @@ function verify_login_session($mysqli_accounts, $ses_validate, $SESSION_KEY)
 }
 
 
+/**
+ * As the session login/cookie contain the username encrypted with AES256 and then encoded
+ * with base64, get the username from the session login/cookie by decrypting the data.
+ * 
+ * NOTE: This method is primarily used to get the username from a valid login cookie
+ *
+ * @param mysqli $mysqli_accounts The mysqli connection object for the ucsc accounts DB
+ * @param string $ses_validate The session data to validate
+ * @param string $SESSION_KEY The session encrypt/decrypt key
+ * @return string The username stored in the session login/cookie
+ */
+function username_from_session($mysqli_accounts, $ses_validate, $SESSION_KEY)
+{
+	/* Decrypted validate session variable */
+	$validate = trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $SESSION_KEY, base64_decode($ses_validate),
+			MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256,
+					MCRYPT_MODE_ECB), MCRYPT_RAND)));
+	
+	$username = '';
+	
+	/* Get the username from the database if it exists */
+	if ($stmt = $mysqli_accounts->prepare("SELECT username FROM ucsc_members WHERE username LIKE ?"))
+	{
+		/* bind parameters for markers */
+		$stmt->bind_param('s', $validate);
+
+		/* execute query */
+		$stmt->execute();
+
+		/* bind result variables */
+		$stmt->bind_result($username);
+
+		/* fetch value */
+		$stmt->fetch();
+
+		/* close statement */
+		$stmt->close();
+	}
+
+	/* If username found, session is valid */
+	if (strcasecmp($validate, $username) === 0)
+	{
+		return $username;
+	}
+
+	/* Session invalid! */
+	return '';
+}
+
+
 /** 
  * A function which verifies the login information provided by the user
  * returns true if the login username and password provided are valid
