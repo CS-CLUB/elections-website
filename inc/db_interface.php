@@ -781,6 +781,52 @@ function is_nominated($mysqli_elections, $access_account, $position)
 	return $is_nominated;
 }
 
+function has_voted($mysqli_elections, $access_account, $vote_type)
+{
+	/* Array of the positions */
+	$positions = array( 'President',
+						'Vice President',
+						'Coordinator',
+						'Treasurer' );
+	
+	$has_voted = TRUE;
+	$voting_record_tbl = '';
+	$current_year = date('Y');
+	
+	/* Set the table to check their voting record based on the type of vote being cast */
+	if (strcasecmp($vote_type, 'nomination') === 0)
+	{
+		$voting_record_tbl = 'voters_nom_' . $current_year;
+	}
+	elseif (strcasecmp($vote_type, 'election') === 0)
+	{
+		$voting_record_tbl = 'voters_elect_' . $current_year;
+	}
+	
+	/* Verify that the user has not already voted for that position */
+	if ($stmt = $mysqli_elections->prepare("SELECT EXISTS(
+			SELECT 1 FROM " . $voting_record_tbl .
+			" WHERE reference=?)"))
+	{
+		/* bind parameters for markers */
+		$stmt->bind_param('i', $access_account);
+	
+		/* execute query */
+		$stmt->execute();
+	
+		/* bind result variables */
+		$stmt->bind_result($has_voted);
+	
+		/* fetch value */
+		$stmt->fetch();
+	
+		/* close statement */
+		$stmt->close();
+	}
+	
+	return $has_voted;
+}
+
 
 /**
  * A function which verifies if a user has already voted for a position
@@ -793,9 +839,9 @@ function is_nominated($mysqli_elections, $access_account, $position)
  * "election" vote
  * @return boolean True if the user has already voted for the position
  */
-function has_voted($mysqli_elections, $access_account, $position, $vote_type)
+function has_voted_position($mysqli_elections, $access_account, $position, $vote_type)
 {
-	$has_voted = TRUE;
+	$has_voted_position = TRUE;
 	$voting_record_tbl = '';
 	$current_year = date('Y');
 	
@@ -822,7 +868,7 @@ function has_voted($mysqli_elections, $access_account, $position, $vote_type)
 		$stmt->execute();
 
 		/* bind result variables */
-		$stmt->bind_result($has_voted);
+		$stmt->bind_result($has_voted_position);
 
 		/* fetch value */
 		$stmt->fetch();
@@ -831,7 +877,7 @@ function has_voted($mysqli_elections, $access_account, $position, $vote_type)
 		$stmt->close();
 	}
 
-	return $has_voted;
+	return $has_voted_position;
 }
 
 
@@ -942,7 +988,7 @@ function nomination_vote($mysqli_elections, $access_account, $positions)
 	foreach ($positions as $position => $nominee)
 	{
 		/* Verify that the user has not already voted for that position */
-		if (! has_voted($mysqli_elections, $access_account, $position, 'nomination'))
+		if (! has_voted_position($mysqli_elections, $access_account, $position, 'nomination'))
 		{
 			/* Increment by 1 the votes for the nominee of the position they voted for */
 			if ($stmt = $mysqli_elections->prepare("UPDATE ".$position_nom_table." p INNER JOIN ".$members_table.
@@ -1008,7 +1054,7 @@ function election_vote($mysqli_elections, $access_account, $positions)
 	foreach ($positions as $position => $nominee)
 	{
 		/* Verify that the user has not already voted for that position */
-		if (! has_voted($mysqli_elections, $access_account, $position, 'election'))
+		if (! has_voted_position($mysqli_elections, $access_account, $position, 'election'))
 		{
 			/* Increment by 1 the votes for the nominee of the position they voted for */
 			if ($stmt = $mysqli_elections->prepare("UPDATE ".$position_elect_table." p INNER JOIN "

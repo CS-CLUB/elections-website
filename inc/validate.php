@@ -140,7 +140,7 @@ function validate_nomination_vote($mysqli_elections, $positions)
 		if (validate_nom_entry($nominee))
 				//&& validate_username($username))
 		{
-			if (has_voted($mysqli_elections, $_SESSION['access_account'], $position, "nomination")
+			if (has_voted_position($mysqli_elections, $_SESSION['access_account'], $position, "nomination")
 					|| !is_nominee($mysqli_elections, $nominee, $position))
 			{
 				return FALSE;
@@ -168,7 +168,7 @@ function validate_election_vote($mysqli_elections, $positions)
 		if (validate_nom_entry($nominee))
 			//&& validate_username($username))
 		{
-			if (has_voted($mysqli_elections, $_SESSION['access_account'], $position, "election")
+			if (has_voted_position($mysqli_elections, $_SESSION['access_account'], $position, "election")
 					|| !is_candidate($mysqli_elections, $nominee, $position))
 			{
 				return FALSE;
