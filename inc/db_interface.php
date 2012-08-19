@@ -502,14 +502,14 @@ function get_nominees($mysqli_elections)
 	$current_year = date('Y');
 	
 	$members_table = "members_" . $current_year;
-	$position_nom_table = "position_nom_" . $current_year;
+	$positions_nom_table = "positions_nom_" . $current_year;
 
 	/* Get the nominees for each position */
 	foreach ($nominees as $position => $nominee)
 	{
 		/* Get the nominees for the current position from the database */
 		if ($stmt = $mysqli_elections->prepare("SELECT first_name, last_name
-                                                    FROM ".$members_table." m INNER JOIN " . $position_nom_table.
+                                                    FROM ".$members_table." m INNER JOIN " . $positions_nom_table.
                                                          " p ON p.reference = m.access_account
                                                             WHERE p.position LIKE ?"))
 		{
@@ -666,10 +666,10 @@ function is_candidate($mysqli_elections, $first_name, $last_name, $user_name, $p
 	$current_year = date('Y');
 	
 	$members_table = "members_" . $current_year;
-	$position_elect_table = "position_elect_" . $current_year;
+	$positions_elect_table = "positions_elect_" . $current_year;
 	
 	if ($stmt = $mysqli_elections->prepare("SELECT EXISTS(
-                                                    FROM ".$members_table." m INNER JOIN ".$position_elect_table.
+                                                    FROM ".$members_table." m INNER JOIN ".$positions_elect_table.
 														" p ON p.reference = m.access_account WHERE 
 															p.position LIKE ? AND m.first_name 
 																LIKE ? AND m.last_name LIKE ?)"))
@@ -710,10 +710,10 @@ function is_nominee($mysqli_elections, $nominee, $position)
 	$current_year = date('Y');
 	
 	$members_table = "members_" . $current_year;
-	$position_nom_table = "position_nom_" . $current_year;
+	$positions_nom_table = "positions_nom_" . $current_year;
 
 	if ($stmt = $mysqli_elections->prepare("SELECT EXISTS(
-												FROM ".$members_table." m INNER JOIN ".$position_nom_table.
+												FROM ".$members_table." m INNER JOIN ".$positions_nom_table.
 													" p ON p.reference = m.access_account WHERE
 														p.position LIKE ? AND CONCAT
                                                                 (
@@ -755,11 +755,11 @@ function is_nominated($mysqli_elections, $access_account, $position)
 
 	$current_year = date('Y');
 	
-	$position_nom_table = "position_nom_".$current_year;
+	$positions_nom_table = "positions_nom_" . $current_year;
 	
 	/* Verify that the user has not already been nominated for that position */
 	if ($stmt = $mysqli_elections->prepare("SELECT EXISTS(
-                                                    SELECT 1 FROM ". $position_nom_table.
+                                                    SELECT 1 FROM ". $positions_nom_table.
 														"WHERE reference=? AND position LIKE ?)"))
 	{
 		/* bind parameters for markers */
@@ -937,14 +937,14 @@ function record_user_vote($mysqli_elections, $access_account, $position, $vote_t
 function nominate_self($mysqli_elections, $access_account, $positions)
 {
 	$current_year = date('Y');
-	$position_nom_table = "position_nom_" . $current_year;
+	$positions_nom_table = "positions_nom_" . $current_year;
 	
 	foreach ($positions as $position)
 	{
 		/* Determine that the user has not already been nominated for the position */
-		if (! is_nominated($mysqli_elections, $access_account, $position))
+		if (!is_nominated($mysqli_elections, $access_account, $position))
 		{
-			if ($stmt = $mysqli_elections->prepare("INSERT INTO ".$position_nom_table.
+			if ($stmt = $mysqli_elections->prepare("INSERT INTO ".$positions_nom_table.
 														"VALUES (?, 0, ?)"))
 			{
 				/* bind parameters for markers */
@@ -982,7 +982,7 @@ function nomination_vote($mysqli_elections, $access_account, $positions)
 {
 	$current_year = date('Y');
 	$members_table = "members_" . $current_year;
-	$position_nom_table = "position_nom_" . $current_year;
+	$positions_nom_table = "positions_nom_" . $current_year;
 	
 	/* Get the nominee they voted for, for each position */
 	foreach ($positions as $position => $nominee)
@@ -991,7 +991,7 @@ function nomination_vote($mysqli_elections, $access_account, $positions)
 		if (! has_voted_position($mysqli_elections, $access_account, $position, 'nomination'))
 		{
 			/* Increment by 1 the votes for the nominee of the position they voted for */
-			if ($stmt = $mysqli_elections->prepare("UPDATE ".$position_nom_table." p INNER JOIN ".$members_table.
+			if ($stmt = $mysqli_elections->prepare("UPDATE ".$positions_nom_table." p INNER JOIN ".$members_table.
                                                         " m ON p.reference = m.access_account
                                                             SET p.votes = p.votes + 1
                                                                 WHERE p.position LIKE ? AND
@@ -1048,7 +1048,7 @@ function election_vote($mysqli_elections, $access_account, $positions)
 {
 	$current_year = date('Y');
 	$members_table = "members_" . $current_year;
-	$position_elect_table = "position_elect_" . $current_year;
+	$positions_elect_table = "positions_elect_" . $current_year;
 	
 	/* Get the nominee they voted for, for each position */
 	foreach ($positions as $position => $nominee)
@@ -1057,7 +1057,7 @@ function election_vote($mysqli_elections, $access_account, $positions)
 		if (! has_voted_position($mysqli_elections, $access_account, $position, 'election'))
 		{
 			/* Increment by 1 the votes for the nominee of the position they voted for */
-			if ($stmt = $mysqli_elections->prepare("UPDATE ".$position_elect_table." p INNER JOIN "
+			if ($stmt = $mysqli_elections->prepare("UPDATE ".$positions_elect_table." p INNER JOIN "
                                                         .$members_table." m ON p.reference = m.access_account
                                                             SET p.votes = p.votes + 1
                                                                 WHERE p.position LIKE ? AND
