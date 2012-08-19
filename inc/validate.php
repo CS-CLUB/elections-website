@@ -125,6 +125,24 @@ function validate_nominee($mysqli_elections, $first_name, $last_name, $user_name
 
 /**
  * TODO test and make sure it actually works
+ * Used to check if a given nominee (with their first, last and user name) is a
+ * user nominating themselves for a position during the nomination period.
+ * 
+ * @param string $nominee the full name of the nominee
+ * @return boolean TRUE if the user is nominating themselves
+ */
+function validate_nominate_self($nominee)
+{
+	if (strcmp($nominee, $_SESSION['first_name'].' '.$_SESSION['last_name']) === 0)
+	{
+		return TRUE;
+	}
+	
+	return FALSE;
+}
+
+/**
+ * TODO test and make sure it actually works
  * Used to check if a given nominee (with their first, last and user name) is a nominee
  * capable to be elected for the given position. First checks if the given information is valid.
  *
@@ -141,7 +159,8 @@ function validate_nomination_vote($mysqli_elections, $positions)
 				//&& validate_username($username))
 		{
 			if (has_voted_position($mysqli_elections, $_SESSION['access_account'], $position, "nomination")
-					|| !is_nominee($mysqli_elections, $nominee, $position))
+					|| (!is_nominee($mysqli_elections, $nominee, $position)
+						&& !validate_nominate_self($nominee)))
 			{
 				return FALSE;
 			}

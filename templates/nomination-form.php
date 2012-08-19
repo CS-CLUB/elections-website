@@ -26,6 +26,13 @@
  * DEPENDENCIES
  * ------------
  * 
+ * Depends on the $_SESSION varialbe being set for the first and last name to set
+ * the default nominee as the current user so they can nominate themselves
+ * 
+ * $_SESSION['first_name']
+ * $_SESSION['last_name']
+ * 
+ * 
  * This template depends on a multi-dimensional array $nominees containing the positions
  * and an array of the nominees for each position
  * 
@@ -34,7 +41,6 @@
  *						'Coordinator'       => array(),
  *						'Treasurer'         => array()
  *					)
- * 
  */
 ?>
 <section id="nomination-form">
@@ -51,7 +57,8 @@
 			      		<label for="president_nom" class="control-label">President</label>
 				      	<div class="controls">
 				      		<select id="president_nom" class="input-xlarge">
-				      			<?php 
+				      			<?php
+				      				echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
 				      				foreach ($nominees['President'] as $nominee)
 				      				{
 				      					echo '<option>' . $nominee . '</option>';
@@ -64,7 +71,8 @@
 			      		<label for="vicepresident_nom" class="control-label">Vice President</label>
 				      	<div class="controls">
 				      		<select id="vicepresident_nom" class="input-xlarge">
-				      			<?php 
+				      			<?php
+				      				echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
 				      				foreach ($nominees['Vice President'] as $nominee)
 				      				{
 				      					echo '<option>' . $nominee . '</option>';
@@ -77,7 +85,8 @@
 			      		<label for="coordinator_nom" class="control-label">Coordinator</label>
 				      	<div class="controls">
 				      		<select id="coordinator_nom" class="input-xlarge">
-				      			<?php 
+				      			<?php
+				      				echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
 				      				foreach ($nominees['Coordinator'] as $nominee)
 				      				{
 				      					echo '<option>' . $nominee . '</option>';
@@ -90,7 +99,8 @@
 			      		<label for="treasurer_nom" class="control-label">Treasurer</label>
 				      	<div class="controls">
 				      		<select id="treasurer_nom" class="input-xlarge">
-				      			<?php 
+				      			<?php
+				      				echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
 				      				foreach ($nominees['Treasurer'] as $nominee)
 				      				{
 				      					echo '<option>' . $nominee . '</option>';

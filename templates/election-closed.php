@@ -26,7 +26,8 @@
 <div class="hero-unit">
 	<h1>Election Period Closed</h1>
 	<br/>
-  <p> Thank you for visiting the Computer Science Club election website, but the election
+  <p> 	
+  		Thank you for visiting the Computer Science Club election website, but the election
   		period for the year is currently closed. The election nomination period for candidates
   		starts at the beginning of each fall semester on <strong>September 1</strong>, with the 
   		final election period for the executive positions taking place on the first day after 

@@ -34,7 +34,7 @@
   		(which is you) for each of the position you would like to run for.
   </p>
   <p>
-  		Another thing to remember, <strong>nominating yourself does not use up your vote</strong>, 
-  		so feel free to nominate yourself and then vote for whomever you please. 
+  		Another thing to remember, <strong>nominating yourself for a positions uses up your vote</strong>, 
+  		so please only nominate yourself for positions you are interested in running for.
   </p>
 </div>
