@@ -35,6 +35,7 @@ require_once 'System/Daemon.php';
 require_once 'db_interface.php';
 require_once 'election_auth.php';
 require_once 'utility.php';
+require 'election_date.php';
 
 
 /* Arguments supported by Daemon, currently only option is to create init scripts */
@@ -109,12 +110,12 @@ if (mysqli_connect_errno()) {
  *	4. At the end of the 24 hour election period (11:59pm) close the election 
  *	   and determine the winners of the election	 	
  */
-$next_weekday = '';
+//$next_weekday = '';
 
 while (true)
 {
 	/* September 1, 12:00 am */
-	if (strcmp(date('m-d-H-i'), '09-01-00-00') === 0)
+	if (strcmp(date('m-d-H-i'), $nomination_start_date) === 0)
 	{
 		/* Create the tables for the start of a new election year */
 		new_election_tables($mysqli_elections);
@@ -127,7 +128,7 @@ while (true)
 	}
 	
 	/* September 14th (11:59pm) */
-	if (strcmp(date('m-d-H-i'), '09-14-23-59') === 0)
+	if (strcmp(date('m-d-H-i'), $nomination_end_date) === 0)
 	{
 		/* Close the nomination period and tally the votes to determine the candidates 
 		 * and then store the results in the DB 
@@ -138,14 +139,14 @@ while (true)
 				"and recorded the candidates in the database for the " . date('Y') . " election");
 		
 		/* Determine the next week day after September 14th to host the election */
-		$next_weekday = get_next_weekday(DateTime::createFromFormat('Y-m-d-H-i', date('Y-m-d-H-i')));
+		//$next_weekday = get_next_weekday(DateTime::createFromFormat('Y-m-d-H-i', date('Y-m-d-H-i')));
 		
 		System_Daemon::iterate(60);
 	}
 	
 	
 	/* First weekday after September 14 start election period for 24-hours (12:00am - 11:59pm) */
-	if (strcmp(date('Y-m-d-H-i'), $next_weekday . '-00-00') === 0)
+	if (strcmp(date('Y-m-d-H-i'), $election_start_date) === 0)
 	{
 		/* Initiate the final election, populate the table with the candidates and incumbents */
 		pop_election_table($mysqli_elections);
@@ -159,7 +160,7 @@ while (true)
 	}
 	
 	/* End of the 24 hour election period on the first week day after September 14 */
-	if (strcmp(date('Y-m-d-H-i'), $next_weekday . '-23-59') === 0)
+	if (strcmp(date('Y-m-d-H-i'), $election_end_date) === 0)
 	{
 		/* Close the election period and tally the votes to determine the winners
 		 * of the election and then store the results in the DB
