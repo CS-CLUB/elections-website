@@ -23,6 +23,7 @@
  * such as determining the current election event status, handling election voting,
  * and generating the statistics/results of the election.
  */
+
 require_once 'utility.php';
 require 'election_date.php';
 
@@ -35,6 +36,8 @@ require 'election_date.php';
  */
 function is_nomination($mysqli_elections)
 {
+	global $nomination_start_date, $nomination_end_date;
+	
 	$cur_date = DateTime::createFromFormat('m-d-H-i', date('m-d-H-i'));
 	
 	/* September 1, 12:00 am */
@@ -67,13 +70,15 @@ function is_nomination($mysqli_elections)
 */
 function is_nomination_closed($mysqli_elections)
 {
+	global $nomination_end_date, $election_start_date;
+	
 	$cur_date = DateTime::createFromFormat('Y-m-d-H-i', date('Y-m-d-H-i'));
 	
 	/* September 14th (11:59pm) */
 	$nomination_end = DateTime::createFromFormat('m-d-H-i', $nomination_end_date); 
 	
 	/* Election start day, first weekday after September 14 at 11:59pm */
-	$election_start = DateTime::createFromFormat('Y-m-d-H-i', $election_start_date);
+	$election_start = DateTime::createFromFormat('Y-m-d-H-i', $election_start_date . '-00-00');
 
 	/*
 	 * If the current date is after the nomination period, before the election period,
@@ -97,13 +102,15 @@ function is_nomination_closed($mysqli_elections)
  */
 function is_election($mysqli_elections)
 {
+	global $nomination_end_date, $election_start_date, $election_end_date;
+	
 	$cur_date = DateTime::createFromFormat('Y-m-d-H-i', date('Y-m-d-H-i'));
 
 	/* Determine the next week day after September 14th (11:59pm) to host the election */
 	$nomination_end = DateTime::createFromFormat('m-d-H-i', $nomination_end_date);
 	
 	/* Election start day, first weekday after September 14 at 11:59pm */
-	$election_start = DateTime::createFromFormat('Y-m-d-H-i', $election_start_date);
+	$election_start = DateTime::createFromFormat('Y-m-d-H-i', $election_start_date . '-00-00');
 
 	/* End of the first week day (11:59pm) after September 14th */
 	$election_end = DateTime::createFromFormat('Y-m-d-H-i', $election_end_date);

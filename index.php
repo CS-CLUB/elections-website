@@ -18,7 +18,8 @@
  */
 
 require_once 'inc/db_interface.php';
-require_once 'inc/election_auth.php';
+require 'inc/election_auth.php';
+include 'inc/election_date.php';
 require_once 'inc/election.php';
 require_once 'inc/utility.php';
 require_once 'inc/validate.php';
@@ -382,7 +383,6 @@ elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 		}
 	}
 }
-
 
 
 //include 'templates/election-open.php';

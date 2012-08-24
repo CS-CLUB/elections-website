@@ -39,8 +39,8 @@ function tie_breaker($nominees)
 	$rounds = rand(0, 100);
 	for ($i = 0; $i < $rounds; $i++)
 	{
-	mt_srand(rand());
-	mt_rand();
+		mt_srand(rand());
+		mt_rand();
 	}
 
 	$idx_winner = mt_rand() % count($nominees);

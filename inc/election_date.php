@@ -26,7 +26,9 @@ $nomination_start_date = '09-01-00-00';
 $nomination_end_date = '09-14-23-59';
 
 /* Election start day, first weekday after September 14, at 12:00am */
-$election_start_date =  get_next_weekday($nomination_end_date) . '-00-00';
+$election_start_date =  get_next_weekday(DateTime::createFromFormat('Y-m-d-H-i', date('Y').'-'.$nomination_end_date));
 
 /* End of the first week day (11:59pm) after September 14th */
-$election_end_date = $election_start_date->format('Y-m-d') . '-23-59';
+$election_end_date = DateTime::createFromFormat('Y-m-d-H-i', $election_start_date . '-00-00')->format('Y-m-d') . '-23-59';
+
+?>
