@@ -32,10 +32,10 @@
  */
 error_reporting(E_ALL);
 require_once 'System/Daemon.php';
-require_once 'db_interface.php';
-require_once 'election_auth.php';
-require_once 'utility.php';
-require 'election_date.php';
+require_once '../inc/db_interface.php';
+require_once '../inc/utility.php';
+require '../inc/election_auth.php';
+require '../inc/election_date.php';
 
 
 /* Arguments supported by Daemon, currently only option is to create init scripts */

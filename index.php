@@ -19,7 +19,7 @@
 
 require_once 'inc/db_interface.php';
 require 'inc/election_auth.php';
-include 'inc/election_date.php';
+require 'inc/election_date.php';
 require_once 'inc/election.php';
 require_once 'inc/utility.php';
 require_once 'inc/validate.php';
@@ -227,13 +227,14 @@ elseif (isset($_SESSION['login_username']) && isset($_SESSION['login_password'])
 		&& isset($_POST['accept_rules']))
 {
 	$login_remember = $_SESSION['login_remember'];
+	$login_username = $_SESSION['login_username'];
 	session_unset();
 	
 	/* a) If the user accepted the terms and conditions they are allowed to login and vote */
 	if ($_POST['accept_rules'] == 1)
 	{
-		add_member($mysqli_accounts, $mysqli_elections, $_SESSION['login_username']);
-		set_session_data($mysqli_accounts, $_SESSION['login_username'], $SESSION_KEY);
+		add_member($mysqli_accounts, $mysqli_elections, $login_username);
+		set_session_data($mysqli_accounts, $login_username, $SESSION_KEY);
 			
 		if ($login_remember == 1)
 		{
@@ -391,7 +392,7 @@ elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 
 //include 'templates/first-login.php';
 
-if(isset($_SESSION['username']))
+/*if(isset($_SESSION['username']))
 {
     $username = $_SESSION['username'];
 }
@@ -400,17 +401,17 @@ else {
 }
 
 $username = 'gnu_user';
-
+*/
 
 /* Get the member information for the user logged in */
-$member = add_member($mysqli_accounts, $mysqli_elections, $username);
+//$member = add_member($mysqli_accounts, $mysqli_elections, $username);
 
-$member_info = get_member($mysqli_accounts, $username);
+//$member_info = get_member($mysqli_accounts, $username);
 
 /* Nominate myself for president */
 //nominate_self($mysqli_elections, $member['access_account'], $nominate_myself);
 
-$nominees = get_nominees($mysqli_elections);
+//$nominees = get_nominees($mysqli_elections);
 
 /* Vote for the candidates in the nomination period */
 //nomination_vote($mysqli_elections, $member['access_account'], $positions);
@@ -419,8 +420,8 @@ $nominees = get_nominees($mysqli_elections);
 //determine_winners($mysqli_elections, "nomination");
 
 /* Get the candidates and incumbents */
-$candidates = get_candidates($mysqli_elections);
-$incumbents = get_incumbents($mysqli_elections);
+//$candidates = get_candidates($mysqli_elections);
+//$incumbents = get_incumbents($mysqli_elections);
 
 /* Vote for the individuals in the final election */
 //election_vote($mysqli_elections, $member['access_account'], $election_vote);
@@ -429,6 +430,7 @@ $incumbents = get_incumbents($mysqli_elections);
 //determine_winners($mysqli_elections, "election");
 
 /* Display the member's info */
+/*
 if (! empty($member_info))
 {
     echo '<p style="font-size:150%;">The following is the member info for: '. $username . '<br/></p>';
@@ -441,23 +443,24 @@ if (! empty($member_info))
     echo "</p>";
 
 }
+*/
 
 /* Display the nominees */
-echo '<p>nominees:</p>';
-var_dump($nominees);
+//echo '<p>nominees:</p>';
+//var_dump($nominees);
 
 /* Display the candidates and incumbents */
-echo '<p>Candidates and incumbents:</p>';
-var_dump($candidates);
-var_dump($incumbents);
+//echo '<p>Candidates and incumbents:</p>';
+//var_dump($candidates);
+//var_dump($incumbents);
 
 /* Test for elections_tables_exist */
-$temp = FALSE;
+/*$temp = FALSE;
 $temp = election_tables_exist($mysqli_elections);
 if ($temp == TRUE)
 {
 	echo '<p style="font-size:150%;">Is the DB there?!: '. $temp.'<br/></p>';
-}
+}*/
 
 /* close connection */
 $mysqli_accounts->close();
