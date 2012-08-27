@@ -365,6 +365,7 @@ function add_member($mysqli_accounts, $mysqli_elections, $username)
 	$user_match = '';
 
 	$current_year = date('Y');
+	$members_table = "members_" . $current_year;
 	
 	/* Get the users information from the database if it exists */
 	if ($stmt = $mysqli_accounts->prepare("SELECT username
@@ -413,7 +414,7 @@ function add_member($mysqli_accounts, $mysqli_elections, $username)
 		/* Add the user to the members table of the elections database if they do not exist */
 		if (! is_member($mysqli_accounts, $mysqli_elections, $username))
 		{
-			if ($stmt = $mysqli_elections->prepare("INSERT INTO members_" .$current_year. " VALUES (?, ?, ?)"))
+			if ($stmt = $mysqli_elections->prepare("INSERT INTO ".$members_table." VALUES (?, ?, ?)"))
 			{
 				/* bind parameters for markers */
 				$stmt->bind_param('iss', $member['access_account'], $member['first_name'], $member['last_name']);
@@ -446,11 +447,12 @@ function get_member($mysqli_accounts, $username)
 					'last_name' => '');
 	
 	$user_match = '';
+	$ucsc_members_table = 'ucsc_members';
 
 	/* Get the users information from the database if it exists */
 	if ($stmt = $mysqli_accounts->prepare("SELECT username
-                                                FROM ucsc_members
-                                                    WHERE username LIKE ?"))
+                                                FROM ".$ucsc_members_table.
+                                                   " WHERE username LIKE ?"))
 	{
 		/* bind parameters for markers */
 		$stmt->bind_param('s', $username);
@@ -472,8 +474,8 @@ function get_member($mysqli_accounts, $username)
 	if (strcasecmp($username, $user_match) === 0)
 	{
 		if ($stmt = $mysqli_accounts->prepare("SELECT access_account, first_name, last_name
-                                                    FROM ucsc_members
-                                                        WHERE username LIKE ?"))
+                                                    FROM ".$ucsc_members_table.
+                                                       " WHERE username LIKE ?"))
 		{
 			/* bind parameters for markers */
 			$stmt->bind_param('s', $username);
@@ -524,7 +526,7 @@ function get_nominees($mysqli_elections)
 	{
 		/* Get the nominees for the current position from the database */
 		if ($stmt = $mysqli_elections->prepare("SELECT first_name, last_name
-                                                    FROM ".$members_table." m INNER JOIN " . $positions_nom_table.
+                                                    FROM ".$members_table." m INNER JOIN ".$positions_nom_table.
                                                          " p ON p.reference = m.access_account
                                                             WHERE p.position LIKE ?"))
 		{
@@ -568,7 +570,7 @@ function get_candidates($mysqli_elections)
 						'Vice President'    => '',
 						'Coordinator'       => '',
 						'Treasurer'         => ''
-	);
+					   );
 
 	$current_year = date('Y');
 	
@@ -636,7 +638,7 @@ function get_incumbents($mysqli_elections)
 	{
 		/* Get the incumbent for the current position from the database */
 		if ($stmt = $mysqli_elections->prepare("SELECT first_name, last_name
-                                                    FROM ". $members_table." m INNER JOIN " . $incumbents_table . " w " .
+                                                    FROM ".$members_table." m INNER JOIN ".$incumbents_table." w " .
 														"ON w.reference = m.access_account
                                                             WHERE w.position LIKE ?"))
 		{
@@ -736,12 +738,12 @@ function is_nominee($mysqli_elections, $nominee, $position)
 													SELECT 1 FROM ".$members_table." m INNER JOIN ".$positions_nom_table.
 														" p ON p.reference = m.access_account WHERE
 															p.position LIKE ? AND CONCAT
-	                                                                (
-	                                                                    m.first_name,
-	                                                                    ' ',
-	                                                                    m.last_name
-	                                                                )
-	                                                                LIKE ?
+                                                                (
+                                                                    m.first_name,
+                                                                    ' ',
+                                                                    m.last_name
+                                                                )
+                                                                LIKE ?
 															 )"))
 	{
 		/* bind parameters for markers */
@@ -780,8 +782,8 @@ function is_nominated($mysqli_elections, $access_account, $position)
 	
 	/* Verify that the user has not already been nominated for that position */
 	if ($stmt = $mysqli_elections->prepare("SELECT EXISTS(
-                                                    SELECT 1 FROM ". $positions_nom_table.
-														"WHERE reference=? AND position LIKE ?)"))
+                                                    	SELECT 1 FROM ".$positions_nom_table.
+														" WHERE reference=? AND position LIKE ?)"))
 	{
 		/* bind parameters for markers */
 		$stmt->bind_param('is', $access_account, $position);
@@ -808,7 +810,8 @@ function has_voted($mysqli_elections, $access_account, $vote_type)
 	$positions = array( 'President',
 						'Vice President',
 						'Coordinator',
-						'Treasurer' );
+						'Treasurer'
+					  );
 	
 	$has_voted = TRUE;
 	$voting_record_tbl = '';
@@ -826,7 +829,7 @@ function has_voted($mysqli_elections, $access_account, $vote_type)
 	
 	/* Verify that the user has not already voted for that position */
 	if ($stmt = $mysqli_elections->prepare("SELECT EXISTS(
-														SELECT 1 FROM " . $voting_record_tbl .
+														SELECT 1 FROM ".$voting_record_tbl.
 														" WHERE reference=?)"))
 	{
 		/* bind parameters for markers */
@@ -879,7 +882,7 @@ function has_voted_position($mysqli_elections, $access_account, $position, $vote
 	 
 	/* Verify that the user has not already voted for that position */
 	if ($stmt = $mysqli_elections->prepare("SELECT EXISTS(
-                                                    SELECT 1 FROM " . $voting_record_tbl .
+                                                    SELECT 1 FROM ".$voting_record_tbl.
 														" WHERE reference=? AND position LIKE ?)"))
 	{
 		/* bind parameters for markers */
@@ -929,8 +932,8 @@ function record_user_vote($mysqli_elections, $access_account, $position, $vote_t
 		$record_vote_tbl = 'voters_elect_' . $current_year;
 	}
 
-	if ($stmt = $mysqli_elections->prepare("INSERT INTO " . $record_vote_tbl .
-			" VALUES (?, ?)"))
+	if ($stmt = $mysqli_elections->prepare("INSERT INTO ".$record_vote_tbl.
+												" VALUES (?, ?)"))
 	{
 		/* bind parameters for markers */
 		$stmt->bind_param('is', $access_account, $position);
@@ -966,7 +969,7 @@ function nominate_self($mysqli_elections, $access_account, $positions)
 		if (!is_nominated($mysqli_elections, $access_account, $position))
 		{
 			if ($stmt = $mysqli_elections->prepare("INSERT INTO ".$positions_nom_table.
-														"VALUES (?, 0, ?)"))
+														" VALUES (?, 0, ?)"))
 			{
 				/* bind parameters for markers */
 				$stmt->bind_param('is', $access_account, $position);
@@ -1133,8 +1136,7 @@ function record_winners($mysqli_elections, $positions, $vote_type)
 
 	foreach($positions as $position => $access_account)
 	{
-		if ($stmt = $mysqli_elections->prepare("INSERT INTO "
-													. $winners_tbl .
+		if ($stmt = $mysqli_elections->prepare("INSERT INTO ".$winners_tbl.
 													" VALUES (?, ?)"))
 		{
 			/* bind parameters for markers */
@@ -1203,13 +1205,13 @@ function determine_winners($mysqli_elections, $election_type)
 		$nominees = array();
 
 		if ($stmt = $mysqli_elections->prepare("SELECT access_account
-        											FROM ".$members_table." m INNER JOIN " .$positions_tbl. 
+        											FROM ".$members_table." m INNER JOIN ".$positions_tbl. 
         												" p ON p.reference = m.access_account
         													WHERE p.position LIKE ?
         														AND p.votes = (
-        																		SELECT MAX(votes) FROM " .$positions_tbl. 
+        																		SELECT MAX(votes) FROM ".$positions_tbl. 
         																			" WHERE position LIKE ?
-        																		)"))
+        																	  )"))
 		{
 			/* bind parameters for markers */
 			$stmt->bind_param('ss', $position, $position);
