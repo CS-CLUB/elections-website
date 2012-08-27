@@ -278,7 +278,7 @@ elseif ((verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 		/* Nominate user for each position the user nominated themselves for, now others can vote for them */
 		if (count($positions_self) > 0)
 		{
-			nominate_self($mysqli_elections, $access_account, $positions_self);
+			nominate_self($mysqli_elections, $_SESSION['access_account'], $positions_self);
 		}
 		
 		/* Record the nominees and the position they are in that the user voted for */ 
@@ -405,12 +405,6 @@ elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 }
 
 
-//include 'templates/election-open.php';
-//include 'templates/election-closed.php';
-
-
-//include 'templates/first-login.php';
-
 /*if(isset($_SESSION['username']))
 {
     $username = $_SESSION['username'];
@@ -484,6 +478,7 @@ if ($temp == TRUE)
 /* close connection */
 $mysqli_accounts->close();
 $mysqli_elections->close();
+
 
 include 'templates/footer.php';
 exit();
