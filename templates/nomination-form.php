@@ -56,7 +56,7 @@
 					<div class="control-group">
 			      		<label for="president_nom" class="control-label">President</label>
 				      	<div class="controls">
-				      		<select id="president_nom" class="input-xlarge">
+				      		<select id="president_nom" name="president_nom" class="input-xlarge">
 				      			<?php
 				      				echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
 				      				foreach ($nominees['President'] as $nominee)
@@ -70,7 +70,7 @@
 		      		<div class="control-group">
 			      		<label for="vicepresident_nom" class="control-label">Vice President</label>
 				      	<div class="controls">
-				      		<select id="vicepresident_nom" class="input-xlarge">
+				      		<select id="vicepresident_nom" name="vicepresident_nom" class="input-xlarge">
 				      			<?php
 				      				echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
 				      				foreach ($nominees['Vice President'] as $nominee)
@@ -84,7 +84,7 @@
 		      		<div class="control-group">
 			      		<label for="coordinator_nom" class="control-label">Coordinator</label>
 				      	<div class="controls">
-				      		<select id="coordinator_nom" class="input-xlarge">
+				      		<select id="coordinator_nom" name="coordinator_nom" class="input-xlarge">
 				      			<?php
 				      				echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
 				      				foreach ($nominees['Coordinator'] as $nominee)
@@ -98,7 +98,7 @@
       				<div class="control-group">
 			      		<label for="treasurer_nom" class="control-label">Treasurer</label>
 				      	<div class="controls">
-				      		<select id="treasurer_nom" class="input-xlarge">
+				      		<select id="treasurer_nom" name="treasurer_nom" class="input-xlarge">
 				      			<?php
 				      				echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
 				      				foreach ($nominees['Treasurer'] as $nominee)

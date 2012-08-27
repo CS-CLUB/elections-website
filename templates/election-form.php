@@ -55,7 +55,7 @@
 					<div class="control-group">
 			      		<label for="president_elect" class="control-label">President</label>
 				      	<div class="controls">
-				      		<select id="president_elect" class="input-xlarge">
+				      		<select id="president_elect" name="president_elect" class="input-xlarge">
 				      			<option></option>
 				      			<?php 
 		      						echo '<option>' . $candidates['President'][0] . ' (Candidate)' . '</option>';
@@ -67,7 +67,7 @@
 		      		<div class="control-group">
 			      		<label for="vicepresident_elect" class="control-label">Vice President</label>
 				      	<div class="controls">
-				      		<select id="vicepresident_elect" class="input-xlarge">
+				      		<select id="vicepresident_elect" name="vicepresident_elect" class="input-xlarge">
 				      			<option></option>
 				      			<?php 
 		      						echo '<option>' . $candidates['Vice President'][0] . ' (Candidate)' . '</option>';
@@ -79,7 +79,7 @@
 		      		<div class="control-group">
 			      		<label for="coordinator_elect" class="control-label">Coordinator</label>
 				      	<div class="controls">
-				      		<select id="coordinator_elect" class="input-xlarge">
+				      		<select id="coordinator_elect" name="coordinator_elect" class="input-xlarge">
 				      			<option></option>
 				      			<?php 
 		      						echo '<option>' . $candidates['Coordinator'][0] . ' (Candidate)' . '</option>';
@@ -91,7 +91,7 @@
 		      					<div class="control-group">
 			      		<label for="treasurer_elect" class="control-label">Treasurer</label>
 				      	<div class="controls">
-				      		<select id="treasurer_elect" class="input-xlarge">
+				      		<select id="treasurer_elect" name="treasurer_elect" class="input-xlarge">
 				      			<option></option>
 				      			<?php 
 		      						echo '<option>' . $candidates['Treasurer'][0] . ' (Candidate)' . '</option>';
