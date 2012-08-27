@@ -303,11 +303,30 @@ elseif ((verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 		&& isset($_POST['election_vote']))
 {
 	/* An array mapping the positions to the election nominee */
-	$positions = array(	'President'         => $_POST['president_elect'],
-						'Vice President'    => $_POST['vicepresident_elect'],
-						'Coordinator'       => $_POST['coordinator_elect'],
-						'Treasurer'         => $_POST['treasurer_elect'],
-					  );
+	$positions = array(	'President'         => '',
+						'Vice President'    => '',
+						'Coordinator'       => '',
+						'Treasurer'         => ''
+					   );
+	/* An array mapping the position to the POST data name */
+	$positions_post = array('President'			=> 'president_elect', 
+							'Vice President'	=> 'vicepresident_elect', 
+							'Coordinator'       => 'coordinator_elect', 
+							'Treasurer'         => 'treasurer_elect'
+						   );
+	
+	/* TODO CLEAN THIS UP -- I DO NOT LIKE THIS!!!
+	 * For each position's post data select just the name of the nominee from the position, ignoring the 
+	 * parentheses indicating "(candidate)" or "(incumbent)"
+	 */
+	foreach ($positions_post as $position => $post_name)
+	{
+		if (preg_match('/(^(([A-Za-z]+)|\s{1}[A-Za-z]+)+)\s*?(\(Candidate\)|\(Incumbent\))$/', $_POST[$post_name], $matches))
+		{
+			// The first regex group, $matches[1] is the nominee's name
+			$positions[$position] = $matches[1];
+		}
+	}
 	
 	/* If election vote post data valid and its election period, record election vote */
 	if (validate_election_vote($mysqli_elections, $positions)

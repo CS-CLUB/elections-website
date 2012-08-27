@@ -69,7 +69,7 @@ function validate_password($password)
  */
 function validate_nom_entry($name)
 {
-	if (preg_match('/^[A-Za-z\w]+*$/', $name)
+	if (preg_match('/^(([A-Za-z]+)|\s{1}[A-Za-z]+)+$/', $name)
 			&& strlen($name) < 32)
 	{
 		return TRUE;
