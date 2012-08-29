@@ -28,7 +28,7 @@
  * TODO More work perhaps to add OOP features for scoping instead of just an
  * aggregation of many functions, a hierarchy of classes would be nice
  */
-
+$NONE = 'None';
 
 /**
  * A function which creates the appropriate tables for the start of a new election year
@@ -970,6 +970,57 @@ function has_voted_position($mysqli_elections, $access_account, $position, $vote
 	return $has_voted_position;
 }
 
+/**
+ * A function which verifies if a user has already voted for a position
+ *
+ * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
+ * @param int $access_account The unique (primary key) access account number of the user
+ * who is currently logged in
+ * @param string $position The position that the user is submitting a vote for
+ * @param string $vote_type The type of vote they are casting, a "nomination" or
+ * "election" vote
+ * @return boolean True if the user has already voted for the position
+ */
+function has_voted_pos($mysqli_elections, $access_account, $position)
+{
+	$has_voted_position = TRUE;
+	$voting_record_tbl = '';
+	$current_year = date('Y');
+
+	/* Set the table to check their voting record based on the type of vote being cast */
+	if (is_nomination($mysqli_elections))
+	{
+		$voting_record_tbl = 'voters_nom_' . $current_year;
+	}
+	elseif (is_election($mysqli_elections))
+	{
+		$voting_record_tbl = 'voters_elect_' . $current_year;
+	}
+
+	/* Verify that the user has not already voted for that position */
+	if ($stmt = $mysqli_elections->prepare("SELECT EXISTS(
+                                                    SELECT 1 FROM ".$voting_record_tbl.
+			" WHERE reference=? AND position LIKE ?)"))
+	{
+		/* bind parameters for markers */
+		$stmt->bind_param('is', $access_account, $position);
+
+		/* execute query */
+		$stmt->execute();
+
+		/* bind result variables */
+		$stmt->bind_result($has_voted_position);
+
+		/* fetch value */
+		$stmt->fetch();
+
+		/* close statement */
+		$stmt->close();
+	}
+
+	return $has_voted_position;
+}
+
 
 /**
  * A function which records the positions that a user has voted for, this is
@@ -1078,7 +1129,8 @@ function nomination_vote($mysqli_elections, $access_account, $positions)
 	foreach ($positions as $position => $nominee)
 	{
 		/* Verify that the user has not already voted for that position */
-		if (! has_voted_position($mysqli_elections, $access_account, $position, 'nomination'))
+		if (! has_voted_position($mysqli_elections, $access_account, $position, 'nomination') 
+				&& strcmp($nominee, $NONE) !== 0)
 		{
 			/* Increment by 1 the votes for the nominee of the position they voted for */
 			if ($stmt = $mysqli_elections->prepare("UPDATE ".$positions_nom_table." p INNER JOIN ".$members_table.

@@ -58,10 +58,19 @@
 				      	<div class="controls">
 				      		<select id="president_nom" name="president_nom" class="input-xlarge">
 				      			<?php
-				      				echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
-				      				foreach ($nominees['President'] as $nominee)
+				      				echo '<option> ' . $NONE . ' </option>';
+				      				if(TRUE)
 				      				{
-				      					echo '<option>' . $nominee . '</option>';
+				      					echo '<select id="president_nom" name="president_nom" class="input-xlarge">';
+				      					echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
+					      				foreach ($nominees['President'] as $nominee)
+					      				{
+					      					echo '<option>' . $nominee . '</option>';
+					      				}
+				      				}
+				      				else
+				      				{
+				      					echo '<select id="president_nom" name="president_nom" class="input-xlarge" disabled="disabled">';
 				      				}
 				      			?>
 				      		</select>
@@ -72,6 +81,7 @@
 				      	<div class="controls">
 				      		<select id="vicepresident_nom" name="vicepresident_nom" class="input-xlarge">
 				      			<?php
+				      				echo '<option> ' . $NONE . ' </option>';
 				      				echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
 				      				foreach ($nominees['Vice President'] as $nominee)
 				      				{
@@ -86,6 +96,7 @@
 				      	<div class="controls">
 				      		<select id="coordinator_nom" name="coordinator_nom" class="input-xlarge">
 				      			<?php
+				      				echo '<option> ' . $NONE . ' </option>';
 				      				echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
 				      				foreach ($nominees['Coordinator'] as $nominee)
 				      				{
@@ -100,6 +111,7 @@
 				      	<div class="controls">
 				      		<select id="treasurer_nom" name="treasurer_nom" class="input-xlarge">
 				      			<?php
+				      				echo '<option> ' . $NONE . ' </option>';
 				      				echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
 				      				foreach ($nominees['Treasurer'] as $nominee)
 				      				{
