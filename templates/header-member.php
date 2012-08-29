@@ -72,7 +72,7 @@
 	              <ul class="dropdown-menu">
 	                <li><a href="#">Edit Profile</a></li>
 	                <li><a href="#">Vote</a></li>
-	                <li><a href="#">View Election Results</a></li>
+	                <li><a href="results.php">View Election Results</a></li>
 	                <li class="divider"></li>
 	                <li>
 	                	<form action="index.php" class="form-horizontal logout-form" method="post" accept-charset="UTF-8">
