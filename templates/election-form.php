@@ -26,8 +26,8 @@
  * DEPENDENCIES
  * ------------
  * 
- * This template depends on a multi-dimensional array $nominees containing the positions
- * and an array of the nominees for each position
+ * This template depends on the arrays $candidates and incumbents containing the positions
+ * and the nominee for each position
  * 
  * An array mapping the positions to the incumbent
  * $candidates = array(	'President'         => '',

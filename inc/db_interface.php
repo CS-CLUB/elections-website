@@ -665,6 +665,72 @@ function get_incumbents($mysqli_elections)
 	return $incumbents;
 }
 
+
+/**
+ * A function which gets the winners of the election for the current year
+ *
+ * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
+ * @return An array mapping the positions to an array for the winner containing the first name,
+ * last name, and username
+ */
+function get_winners($mysqli_elections)
+{
+	/* An array mapping the position to the winner */
+	$winners = array('President'         => array('first_name' => '',
+  										  		  'last_name' => '', 												 
+												  'username' => ''),
+					 'Vice President'    => array('first_name' => '',
+ 												  'last_name' => '',
+ 												  'username' => ''),
+					 'Coordinator'       => array('first_name' => '',
+												  'last_name' => '',
+ 												  'username' => ''),
+					 'Treasurer'         => array('first_name' => '',
+ 												  'last_name' => '',
+ 												  'username' => '')
+				    );
+	
+	$current_year = date('Y');
+	$winners_table = "winners_elect_" . $current_year;
+	$members_table = "members_" . $current_year;
+	$ucsc_members_table = "ucsc_accounts.ucsc_members";
+	
+	/* Get the winner for each position */
+	foreach ($winners as $position => $winner)
+	{
+		/* Get the winner for the current position from the database */
+		if ($stmt = $mysqli_elections->prepare("SELECT u.first_name, u.last_name, u.username 
+													FROM ".$winners_table." w 
+														INNER JOIN ".$members_table." m 
+														INNER JOIN ".$ucsc_members_table." u 
+															ON w.reference = m.access_account 
+															AND w.reference = u.access_account 
+																WHERE w.position LIKE ?"))
+		{
+			/* bind parameters for markers */
+			$stmt->bind_param('s', $position);
+
+			/* execute query */
+			$stmt->execute();
+
+			/* bind result variables */
+			$stmt->bind_result($first_name, $last_name, $username);
+
+			$stmt->fetch();
+
+			$winners[$position]['first_name'] = $first_name;
+			$winners[$position]['last_name'] = $last_name;
+			$winners[$position]['username'] = $username;
+
+			/* close statement */
+			$stmt->close();
+		}
+	}
+
+	return $winners;
+}
+
+
 /**
  * TODO test and make sure it actually works
  * TODO add a column for the user name in the members table
