@@ -281,7 +281,7 @@ elseif ((verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 			nominate_self($mysqli_elections, $_SESSION['access_account'], $positions_self);
 		}
 		
-		/* Record the nominees and the position they are in that the user voted for */ 
+		/* Record the nominees and the position the nominees are in that the user voted for */ 
 		nomination_vote($mysqli_elections, $_SESSION['access_account'], $positions);
 		
 		/* Refresh the page */
