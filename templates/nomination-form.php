@@ -42,6 +42,42 @@
  *						'Treasurer'         => array()
  *					)
  */
+require_once '../inc/db_interface.php';
+require_once '../inc/election_auth.php';
+$mysqli_elections = new mysqli("localhost", $db_user, $db_pass, $db_elec_name);
+$pres_disabled='';
+$vice_disabled='';
+$coor_disabled='';
+$trea_disabled='';
+
+$disable=FALSE;
+
+//if(isset($_SESSION['access_account']) && !has_voted_pos($mysqli_elections, $_SESSION['access_account'], 'President'))
+if($disable)
+{
+	$pres_disabled='disabled';
+}
+
+//if(isset($_SESSION['access_account']) && !has_voted_pos($mysqli_elections, $_SESSION['access_account'], 'Vice President'))
+if($disable)
+{
+	$vice_disabled='disabled';
+}
+
+//if(isset($_SESSION['access_account']) && !has_voted_pos($mysqli_elections, $_SESSION['access_account'], 'Coordinator'))
+if($disable)
+{
+	$coor_disabled='disabled';
+}
+
+//if(isset($_SESSION['access_account']) && !has_voted_pos($mysqli_elections, $_SESSION['access_account'], 'Treasurer	'))
+if($disable)
+{
+	$trea_disabled='disabled';
+}
+
+
+
 ?>
 <section id="nomination-form">
 	<div class="page-header">
@@ -51,26 +87,24 @@
 	<br />
 	<div class="row">
 		<div class="span8">
-			<form class="well form-horizontal" action="index.php" method="post" accept-charset="UTF-8">
+			<form class="well form-horizontal" action="../index.php" method="post" accept-charset="UTF-8">
 				<fieldset>
 					<div class="control-group">
 			      		<label for="president_nom" class="control-label">President</label>
 				      	<div class="controls">
-				      		<select id="president_nom" name="president_nom" class="input-xlarge">
-				      			<?php
+				      		<select id="president_nom" name="president_nom" class="input-xlarge" 
+				      		<?php if($pres_disabled === 'disabled') echo 'disabled="' . $pres_disabled . '"' ?>>
+				      		
+				      		<?php
 				      				echo '<option> ' . $NONE . ' </option>';
-				      				if(TRUE)
+				      							      				
+				      				if ($pres_disabled === '')
 				      				{
-				      					echo '<select id="president_nom" name="president_nom" class="input-xlarge">';
 				      					echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
 					      				foreach ($nominees['President'] as $nominee)
 					      				{
 					      					echo '<option>' . $nominee . '</option>';
 					      				}
-				      				}
-				      				else
-				      				{
-				      					echo '<select id="president_nom" name="president_nom" class="input-xlarge" disabled="disabled">';
 				      				}
 				      			?>
 				      		</select>
@@ -79,13 +113,17 @@
 		      		<div class="control-group">
 			      		<label for="vicepresident_nom" class="control-label">Vice President</label>
 				      	<div class="controls">
-				      		<select id="vicepresident_nom" name="vicepresident_nom" class="input-xlarge">
+				      		<select id="vicepresident_nom" name="vicepresident_nom" class="input-xlarge"
+				      		<?php if($vice_disabled === 'disabled') echo 'disabled="' . $vice_disabled . '"' ?>>
 				      			<?php
 				      				echo '<option> ' . $NONE . ' </option>';
-				      				echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
-				      				foreach ($nominees['Vice President'] as $nominee)
+				      				
+				      				if ($vice_disabled === '')
 				      				{
-				      					echo '<option>' . $nominee . '</option>';
+				      					foreach ($nominees['Vice President'] as $nominee)
+					      				{
+					      					echo '<option>' . $nominee . '</option>';
+					      				}
 				      				}
 				      			?>
 				      		</select>
@@ -94,13 +132,18 @@
 		      		<div class="control-group">
 			      		<label for="coordinator_nom" class="control-label">Coordinator</label>
 				      	<div class="controls">
-				      		<select id="coordinator_nom" name="coordinator_nom" class="input-xlarge">
+				      		<select id="coordinator_nom" name="coordinator_nom" class="input-xlarge"
+				      		<?php if($coor_disabled === 'disabled') echo 'disabled="' . $coor_disabled . '"' ?>>
 				      			<?php
 				      				echo '<option> ' . $NONE . ' </option>';
-				      				echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
-				      				foreach ($nominees['Coordinator'] as $nominee)
+				      				
+				      				if ($coor_disabled === '')
 				      				{
-				      					echo '<option>' . $nominee . '</option>';
+					      				echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
+					      				foreach ($nominees['Coordinator'] as $nominee)
+					      				{
+					      					echo '<option>' . $nominee . '</option>';
+					      				}
 				      				}
 				      			?>
 				      		</select>
@@ -109,13 +152,17 @@
       				<div class="control-group">
 			      		<label for="treasurer_nom" class="control-label">Treasurer</label>
 				      	<div class="controls">
-				      		<select id="treasurer_nom" name="treasurer_nom" class="input-xlarge">
+				      		<select id="treasurer_nom" name="treasurer_nom" class="input-xlarge"
+				      		<?php if($trea_disabled === 'disabled') echo 'disabled="' . $trea_disabled . '"' ?>>
 				      			<?php
 				      				echo '<option> ' . $NONE . ' </option>';
-				      				echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
-				      				foreach ($nominees['Treasurer'] as $nominee)
+				      				if ($trea_disabled === '')
 				      				{
-				      					echo '<option>' . $nominee . '</option>';
+				      					echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
+				      					foreach ($nominees['Treasurer'] as $nominee)
+				      					{
+				      						echo '<option>' . $nominee . '</option>';
+				      					}
 				      				}
 				      			?>
 				      		</select>

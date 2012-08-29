@@ -30,6 +30,8 @@
  */
 $NONE = 'None';
 
+require_once 'election.php';
+
 /**
  * A function which creates the appropriate tables for the start of a new election year
  *
@@ -911,13 +913,11 @@ function has_voted_position($mysqli_elections, $access_account, $position, $vote
  * @param int $access_account The unique (primary key) access account number of the user
  * who is currently logged in
  * @param string $position The position that the user is submitting a vote for
- * @param string $vote_type The type of vote they are casting, a "nomination" or
- * "election" vote
  * @return boolean True if the user has already voted for the position
  */
 function has_voted_pos($mysqli_elections, $access_account, $position)
 {
-	$has_voted_position = TRUE;
+	$has_voted_pos = TRUE;
 	$voting_record_tbl = '';
 	$current_year = date('Y');
 
@@ -943,7 +943,7 @@ function has_voted_pos($mysqli_elections, $access_account, $position)
 		$stmt->execute();
 
 		/* bind result variables */
-		$stmt->bind_result($has_voted_position);
+		$stmt->bind_result($has_voted_pos);
 
 		/* fetch value */
 		$stmt->fetch();
@@ -952,7 +952,7 @@ function has_voted_pos($mysqli_elections, $access_account, $position)
 		$stmt->close();
 	}
 
-	return $has_voted_position;
+	return $has_voted_pos;
 }
 
 
