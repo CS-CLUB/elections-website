@@ -28,7 +28,7 @@
  * TODO More work perhaps to add OOP features for scoping instead of just an
  * aggregation of many functions, a hierarchy of classes would be nice
  */
-$NONE = 'None';
+
 
 require_once 'election.php';
 
@@ -1021,6 +1021,32 @@ function has_voted_pos($mysqli_elections, $access_account, $position)
 	return $has_voted_pos;
 }
 
+/**
+ * Checks if the user has voted for each position
+ * 
+ * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
+ * @param int $access_account The unique (primary key) access account number of the user
+ * who is currently logged in
+ * @param string $position The position that the user is submitting a vote for
+ * @return boolean True if the user has voted for every position
+ */
+function has_voted_all_positions($mysqli_elections, $access_account, $vote_type)
+{
+	$positions = array( 'President',
+						'Vice President',
+						'Coordinator',
+						'Treasurer'
+					  );
+	
+	foreach ($positions as $index => $position)
+	{
+		if (!has_voted_position($mysqli_elections, $access_account, $positions[$index], $vote_type))
+		{
+			return FALSE;
+		}
+	}
+	return TRUE;
+}
 
 /**
  * A function which records the positions that a user has voted for, this is
@@ -1121,6 +1147,8 @@ function nominate_self($mysqli_elections, $access_account, $positions)
  */
 function nomination_vote($mysqli_elections, $access_account, $positions)
 {
+	$NONE = 'None';
+	
 	$current_year = date('Y');
 	$members_table = "members_" . $current_year;
 	$positions_nom_table = "positions_nom_" . $current_year;

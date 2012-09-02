@@ -158,9 +158,9 @@ function validate_nomination_vote($mysqli_elections, $positions)
 		if (validate_nom_entry($nominee))
 				//&& validate_username($username))
 		{
-			if (has_voted_position($mysqli_elections, $_SESSION['access_account'], $position, "nomination")
+			if ((has_voted_position($mysqli_elections, $_SESSION['access_account'], $position, "nomination")
 					|| (!is_nominee($mysqli_elections, $nominee, $position)
-						&& !validate_nominate_self($nominee)))
+						&& !validate_nominate_self($nominee))) && $nominee !== 'None')
 			{
 				return FALSE;
 			}
