@@ -667,6 +667,73 @@ function get_incumbents($mysqli_elections)
 
 
 /**
+ * A function which gets the voting results for the current election for the
+ * election type specified. Use this function to get the vote breakdown after the
+ * nomination/election.
+ * 
+ * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
+ * @param string $vote_type The type of vote they are casting, a "nomination" or
+ * "election" vote
+ * @return An array containing the positions and the names of the individuals and the
+ * number of votes they received
+ */
+function get_results($mysqli_elections, $vote_type)
+{
+	$current_year = date('Y');
+	$positions_tbl = '';
+	$members_tbl = 'members_' . $current_year;
+	
+	$results = array(	'President'         => array(),
+						'Vice President'    => array(),
+						'Coordinator'       => array(),
+						'Treasurer'         => array()
+					);
+	
+	/* Set the table to check their voting record based on the type of vote being cast */
+	if (strcasecmp($vote_type, 'nomination') === 0)
+	{
+		$positions_tbl = 'positions_nom_' . $current_year;
+	}
+	elseif (strcasecmp($vote_type, 'election') === 0)
+	{
+		$positions_tbl = 'positions_elect_' . $current_year;
+	}
+
+	/* Get the results for the individuals running for each position */
+	foreach ($results as $position => $individuals)
+	{
+		if ($stmt = $mysqli_elections->prepare("SELECT m.first_name, m.last_name, p.votes 
+													FROM ".$positions_tbl." p 
+													INNER JOIN ".$members_tbl." m 
+														ON p.reference = m.access_account 
+															WHERE p.position LIKE ? 
+																ORDER BY p.votes DESC")) 
+		{
+			/* bind parameters for markers */
+			$stmt->bind_param('s', $position);
+	
+			/* execute query */
+			$stmt->execute();
+	
+			/* bind result variables */
+			$stmt->bind_result($first_name, $last_name, $votes);
+	
+			/* fetch each individual that ran for the position */
+			while ($stmt->fetch())
+			{
+				/* TODO This is not valid if two people have the exact same name! */
+				$results[$position][$first_name.' '.$last_name] = $votes;
+			}
+	
+			/* close statement */
+			$stmt->close();
+		}
+	}
+	
+	return $results;
+}
+
+/**
  * A function which gets the winners of the election for the current year
  *
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
