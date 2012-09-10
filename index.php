@@ -252,6 +252,26 @@ elseif ((verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 		|| verify_login_session($mysqli_accounts, $_SESSION['login'], $SESSION_KEY))
 		&& isset($_POST['nomination_vote']))
 {
+	
+	if (!isset($_POST['president_nom']))
+	{
+		$_POST['president_nom'] = 'None';
+	}
+	
+	if (!isset($_POST['vicepresident_nom']))
+	{
+		$_POST['vicepresident_nom'] = 'None';
+	}
+	
+	if (!isset($_POST['coordinator_nom']))
+	{
+		$_POST['coordinator_nom'] = 'None';
+	}
+	
+	if (!isset($_POST['treasurer_nom']))
+	{
+		$_POST['treasurer_nom'] = 'None';
+	}
 	/* An array mapping the positions to the nominee */
 	$positions = array(	'President'         => $_POST['president_nom'],
 						'Vice President'    => $_POST['vicepresident_nom'],
@@ -366,7 +386,8 @@ elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 	include 'templates/header-member.php';
 	
 	/* a) If the user has not already voted display the template for nomination/election period voting */
-	if (!has_voted($mysqli_elections, $_SESSION['access_account'], "nomination")
+	if (!has_voted_all_positions($mysqli_elections, $_SESSION['access_account'], "nomination")
+	//(!has_voted($mysqli_elections, $_SESSION['access_account'], "nomination")
 		&& is_nomination($mysqli_elections))
 	{
 		/* Get the nominees needed to populate the nomination voting form */
