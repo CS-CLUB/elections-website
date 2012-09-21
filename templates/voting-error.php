@@ -34,5 +34,5 @@
 	  that does not resolve the issue then please contact the Computer Science
 	  Club.
   </p>
-  <p><a href="http://uoitcsc.dyndns.org" class="btn btn-primary btn-large">Contact Us »</a></p>
+  <p><a href="http://cs-club.ca" class="btn btn-primary btn-large">Contact Us »</a></p>
 </div>

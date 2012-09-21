@@ -25,7 +25,7 @@
 ?>
       <footer class="footer">
         <div class="pull-left">
-          <p>Designed and built by the <a target="_blank" href="http://uoitcsc.dyndns.org">Computer Science Club</a></p>
+          <p>Designed and built by the <a target="_blank" href="http://cs-club.ca">Computer Science Club</a></p>
           <p>This website is Open Source, code licensed under the 
           	<a target="_blank" href="http://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License, Version 3</a>
           </p>
