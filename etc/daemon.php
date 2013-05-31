@@ -55,6 +55,17 @@ foreach ($argv as $k=>$arg)
 	}
 }
 
+if ($runmode['help'] == true)
+{
+	echo 'Usage: '.$argv[0].' [runmode]' . "\n";
+	echo 'Available runmodes:' . "\n";
+	foreach ($runmode as $runmod=>$val)
+	{
+		echo ' --'.$runmod . "\n";
+	}
+	die();
+}
+
 /* Specify the options for the daemon */
 $options = array(
 		'appName' => 'election_daemon',
@@ -69,11 +80,21 @@ $options = array(
 
 System_Daemon::setOptions($options);
 
-
 /* Write start/stop scripts to manage the Daemon if option specified by the user */
-if ($runmode['write-initd'])
+if (!$runmode['write-initd'])
 {
-	System_Daemon::writeAutoRun();
+	System_Daemon::info('not writing an init.d script this time');
+} 
+else 
+{
+	if (($initd_location = System_Daemon::writeAutoRun()) === false)
+	{
+		System_Daemon::notice('unable to write init.d script');
+	}
+	else
+	{
+		System_Daemon::info('sucessfully written startup script: %s',$initd_location);
+	}
 }
 
 
