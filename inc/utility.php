@@ -29,7 +29,8 @@
  * A function which detemines the winner of an election in the case of a tie by using
  * a Pseudo Random Number Generator (PRNG) MOD <# of tied nominees> where 0 is first
  * nominee 1 is second nominee and so on for each nominee tied for the position
- *
+ * @package utility
+ * 
  * @param array $nominees An array of the nominees tied for the position
  * @return The winner by random selection using a PRNG
  */
@@ -55,13 +56,17 @@ function tie_breaker($nominees)
  * date would be the Monday.
  *
  * TODO Fix this to handle scenarios where the next day of the week occurs on the next month
- *
+ * 
+ * @package utility
+ * 
  * @param DateTime $date The date you want to determine the next weekday for, formatted as 'Y-m-d-H-i'
  * @return string The next available date that falls on a weekday in the format of year-month-day
  * (ie. 2012-09-15) for September 15, 2012.
  */
 function get_next_weekday($date)
 {
+	$cur_date = DateTime::createFromFormat('Y-m-d', $date);
+	
 	$cur_day_of_week = $date->format('l');
 	$next_day_of_week = $date;
 

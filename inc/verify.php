@@ -21,6 +21,7 @@
 /**
  * A function which returns a login session string which is the
  * session username encrypted with AES256 and then encoded with base64
+ * @package verify
  * 
  * @param string $username The username of the person logged in
  * @param string $SESSION_KEY The session encrypt/decrypt key
@@ -38,6 +39,7 @@ function generate_session($username, $SESSION_KEY)
 /** 
  * A function which validates the session by decrypting the validate session
  * variable and comparing it to the username session variable
+ * @package verify
  * 
  * @param mysqli $mysqli_accounts The mysqli connection object for the ucsc accounts DB
  * @param string $ses_validate The session data to validate
@@ -89,7 +91,9 @@ function verify_login_session($mysqli_accounts, $ses_validate, $SESSION_KEY)
  * with base64, get the username from the session login/cookie by decrypting the data.
  * 
  * NOTE: This method is primarily used to get the username from a valid login cookie
- *
+ * 
+ * @package verify
+ * 
  * @param mysqli $mysqli_accounts The mysqli connection object for the ucsc accounts DB
  * @param string $ses_validate The session data to validate
  * @param string $SESSION_KEY The session encrypt/decrypt key
@@ -137,6 +141,7 @@ function username_from_session($mysqli_accounts, $ses_validate, $SESSION_KEY)
 /** 
  * A function which verifies the login information provided by the user
  * returns true if the login username and password provided are valid
+ * @package verify
  * 
  * @param mysqli $mysqli_accounts The mysqli connection object for the ucsc accounts DB
  * @param string $username The username of the person logging in
@@ -205,7 +210,8 @@ function verify_login($mysqli_accounts, $username, $password, $AES_KEY)
  * to the elections website. It starts the session and stores the login
  * validation session variable, the username, access_account, and fullname
  * of the user.
- *
+ * @package verify
+ * 
  * @param mysqli $mysqli_accounts The mysqli connection object for the ucsc accounts DB
  * @param string $username The username of the valid user who is logged in
  * @param string $SESSION_KEY The session encrypt/decrypt key
@@ -232,6 +238,8 @@ function set_session_data($mysqli_accounts, $username, $SESSION_KEY)
  * NOTE: This method requires that the user has already logged into the
  * website with a valid account and that a login session has been created.
  * 
+ * @package verify
+ * 
  * @return boolean TRUE If the cookie was set correctly in the user's browser
  */
 function set_login_cookie()
@@ -252,7 +260,8 @@ function set_login_cookie()
  * A function which validates the login cookie, this verifies that the
  * login information set in the cookie is valid for the user, if it
  * is then the user is logged in.
- *
+ * @package verify
+ * 
  * @param mysqli $mysqli_accounts The mysqli connection object for the ucsc accounts DB
  * @param string $SESSION_KEY The session encrypt/decrypt key
  * @return TRUE If the cookie is a valid login cookie

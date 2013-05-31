@@ -18,6 +18,13 @@
  */
 
 
+/**
+ * Validate the mysqli connection is created.
+ * @package validate
+ * 
+ * @param unknown $mysqli_connection
+ * @return boolean
+ */
 function validate_mysqli_connect($mysqli_connection)
 {
 	if ($mysqli_connection->connect_errno)
@@ -27,11 +34,12 @@ function validate_mysqli_connect($mysqli_connection)
 	return TRUE;
 }
 
-/*
+/**
  * Check that the user has entered valid data, do not attempt
- * to login to the account otherwise
- *
- * Validate the username and password before verifying if they are correct
+ * to login to the account otherwise. Use this to validate the 
+ * username and password before verifying if they are correct.
+ * @package validate
+ * 
  * @param string $username the username post data.
  * @return boolean TRUE if the input for the username is valid
  */
@@ -46,7 +54,10 @@ function validate_username($username)
 }
 
 
-/* Validate the password 
+/**
+ * Validate the password 
+ * @package validate
+ * 
  * @param string $password the password post data
  * @return boolean TRUE if the input for the password is valid
  */
@@ -62,7 +73,9 @@ function validate_password($password)
 	}
 }
 
-/*
+/**
+ * Validate the nomination entry.
+ * @package validate
  * 
  * @param string $name the name to be validated if there is only letters and spaces
  * @return boolean TRUE if there is only letters and spaces
@@ -78,9 +91,10 @@ function validate_nom_entry($name)
 }
 
 /**
- * TODO test and make sure it actually works
  * Used to check if a given candidate (with their first, last and user name) is a candidate 
  * capable to be elected for the given position.
+ * TODO test and make sure it actually works
+ * @package validate
  * 
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param string $first_name the first name of a potential candidate
@@ -101,10 +115,11 @@ function validate_candidate($mysqli_elections, $first_name, $last_name, $user_na
 }
 
 /**
- * TODO test and make sure it actually works
  * Used to check if a given nominee (with their first, last and user name) is a nominee
  * capable to be elected for the given position. First checks if the given information is valid.
- *
+ * TODO test and make sure it actually works
+ * @package validate
+ * 
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param string $first_name the first name of a potential nominee
  * @param string $last_name the last name of a potential nominee
@@ -124,9 +139,10 @@ function validate_nominee($mysqli_elections, $first_name, $last_name, $user_name
 }
 
 /**
- * TODO test and make sure it actually works
  * Used to check if a given nominee (with their first, last and user name) is a
  * user nominating themselves for a position during the nomination period.
+ * TODO test and make sure it actually works
+ * @package validate
  * 
  * @param string $nominee the full name of the nominee
  * @return boolean TRUE if the user is nominating themselves
@@ -142,10 +158,11 @@ function validate_nominate_self($nominee)
 }
 
 /**
- * TODO test and make sure it actually works
  * Used to check if a given nominee (with their first, last and user name) is a nominee
  * capable to be elected for the given position. First checks if the given information is valid.
- *
+ * TODO test and make sure it actually works
+ * @package validate
+ * 
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param $positions An array of the positions and the full name of the nominee they voted for
  * @return 
@@ -174,8 +191,10 @@ function validate_nomination_vote($mysqli_elections, $positions)
 }
 
 /**
+ * Validate the election vote.
  * TODO test and make sure it actually works
- *
+ * @package validate
+ * 
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param $positions An array of the positions and the full name of the nominee they voted for
  * @return
