@@ -8,6 +8,12 @@ Each year at the start of the fall semester the UOIT/DC Computer Science Club ha
 an election to determine the executives for the current year. This is the source
 code for the election website that the club uses for elections each year.
 
+Setup
+----------
+
+For detailed instructions on how to configure and setup the elections website, please see the
+following [setup instructions](setup/SETUP.md).
+
 Why is the Elections Website Open Source?
 -----------------------------------------
 
