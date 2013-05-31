@@ -21,6 +21,8 @@
 
 require_once 'utility.php';
 
+date_default_timezone_set('America/Toronto');
+
 /* September 1, 12:00 am */
 $nomination_start_date = '09-01-00-00';
 

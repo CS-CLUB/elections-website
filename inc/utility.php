@@ -67,7 +67,7 @@ function tie_breaker($nominees)
  */
 function get_next_weekday($date)
 {
-	$cur_date = DateTime::createFromFormat('Y-m-d', $date);
+	/* $cur_date = DateTime::createFromFormat('Y-m-d', $date); */
 	
 	$cur_day_of_week = $date->format('l');
 	$next_day_of_week = $date;
