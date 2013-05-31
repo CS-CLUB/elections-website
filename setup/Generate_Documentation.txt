@@ -1,0 +1,18 @@
+Generating Documentation using PHPDocumentor
+--------------------------------------------
+
+1.  Install the php-xsl package, on most systems it can be installed with:
+
+    apt-get install php-xsl
+
+2.  Configure /etc/php/php.ini and look for the module "xsl" and uncomment it
+    so that it's enabled. You need to restart apache after.
+
+3.  Install phpdocumentor from pear
+
+    pear channel-discover pear.phpdoc.org
+    pear install phpdoc/phpDocumentor-alpha
+
+4.  Navigate to the elections-website folder, update the auto-generated docs
+
+    phpdoc --title "Elections Website" --sourcecode -d inc/ . -t doc/
