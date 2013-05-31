@@ -61,6 +61,11 @@ form.logout-form {
   margin-bottom: 5px;
 }
 
+form.well.form-horizontal {
+	padding-top: 35px;
+	padding-bottom: 25px; 
+}
+
 /* Some additional styling for the footer */
 .footer {
     border-top: 1px solid #E5E5E5;
