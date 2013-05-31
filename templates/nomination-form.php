@@ -86,10 +86,9 @@ if(isset($_SESSION['access_account']) && has_voted_pos($mysqli_elections, $_SESS
 	<div class="page-header">
 		<h1>Nomination Period Voting</h1>
 	</div>
-	<?php include 'templates/nomination-notice.php'; ?>
-	<br />
 	<div class="row">
 		<div class="span8">
+			<?php include 'templates/nomination-notice.php'; ?>
 			<form class="well form-horizontal" action="index.php" method="post" accept-charset="UTF-8">
 				<fieldset>
 					<div class="control-group">
