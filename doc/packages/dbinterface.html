@@ -1,0 +1,767 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elections Website » dbinterface</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Elections Website</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/dbinterface.html"><i class="icon-folder-open"></i> dbinterface</a></li>
+<li><a href="../packages/election.html"><i class="icon-folder-open"></i> election</a></li>
+<li><a href="../packages/utility.html"><i class="icon-folder-open"></i> utility</a></li>
+<li><a href="../packages/validate.html"><i class="icon-folder-open"></i> validate</a></li>
+<li><a href="../packages/verify.html"><i class="icon-folder-open"></i> verify</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">34</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-map-marker"></i> Packages</li>
+<li>
+<a href="../packages/dbinterface.html" title="dbinterface"><i class="icon-folder-open"></i>dbinterface</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-function"></i> Functions</li>
+<li class="function  "><a href="#function_add_member" title="add_member :: A function which adds a person who has logged into the elections website
+to the members table if they do not already exist in the table."><span class="description">A function which adds a person who has logged into the elections website
+to the members table if they do not already exist in the table.</span><pre>add_member</pre></a></li>
+<li class="function  "><a href="#function_determine_winners" title="determine_winners :: A function which determines the winners of the election by comparing the number
+of votes that the candidate and incumbent each have."><span class="description">A function which determines the winners of the election by comparing the number
+of votes that the candidate and incumbent each have.</span><pre>determine_winners</pre></a></li>
+<li class="function  "><a href="#function_election_tables_exist" title="election_tables_exist :: A function which determines if the election tables for the current year already exist
+the purpose of this function is to determine if the daemon has already created the tables
+for the current election year."><span class="description">A function which determines if the election tables for the current year already exist
+the purpose of this function is to determine if the daemon has already created the tables
+for the current election year.</span><pre>election_tables_exist</pre></a></li>
+<li class="function  "><a href="#function_election_vote" title="election_vote :: A function for the final election voting, which takes a list of the positions
+and nominee that the member voted for and adds a vote to that nominee if the
+user has not already cast a vote for that position."><span class="description">A function for the final election voting, which takes a list of the positions
+and nominee that the member voted for and adds a vote to that nominee if the
+user has not already cast a vote for that position.</span><pre>election_vote</pre></a></li>
+<li class="function  "><a href="#function_get_candidates" title="get_candidates :: A function which gets the candidates who are the individuals who won in the
+nomination period."><span class="description">A function which gets the candidates who are the individuals who won in the
+nomination period.</span><pre>get_candidates</pre></a></li>
+<li class="function  "><a href="#function_get_incumbents" title="get_incumbents :: A function which gets the incumbents who are the individuals who won in the
+election from the previous year."><span class="description">A function which gets the incumbents who are the individuals who won in the
+election from the previous year.</span><pre>get_incumbents</pre></a></li>
+<li class="function  "><a href="#function_get_member" title="get_member :: A function which returns the access account number and full name of a user who
+exists in the elections database members table."><span class="description">A function which returns the access account number and full name of a user who
+exists in the elections database members table.</span><pre>get_member</pre></a></li>
+<li class="function  "><a href="#function_get_nominees" title="get_nominees :: A function which gets the nominees for each position from the database."><span class="description">A function which gets the nominees for each position from the database.</span><pre>get_nominees</pre></a></li>
+<li class="function  "><a href="#function_get_results" title="get_results :: A function which gets the voting results for the current election for the
+election type specified."><span class="description">A function which gets the voting results for the current election for the
+election type specified.</span><pre>get_results</pre></a></li>
+<li class="function  "><a href="#function_get_top_three_candidates" title="get_top_three_candidates :: A function which gets the top three nominees for the candidate positions, the function
+returns an array of the positions and the first, second, and third place nominees
+as well as the number of votes they received."><span class="description">A function which gets the top three nominees for the candidate positions, the function
+returns an array of the positions and the first, second, and third place nominees
+as well as the number of votes they received.</span><pre>get_top_three_candidates</pre></a></li>
+<li class="function  "><a href="#function_get_winners" title="get_winners :: A function which gets the winners of the election for the current year"><span class="description">A function which gets the winners of the election for the current year</span><pre>get_winners</pre></a></li>
+<li class="function  "><a href="#function_has_voted" title="has_voted :: A function which verifies that a user has not already voted for a position before."><span class="description">A function which verifies that a user has not already voted for a position before.</span><pre>has_voted</pre></a></li>
+<li class="function  "><a href="#function_has_voted_all_positions" title="has_voted_all_positions :: Checks if the user has voted for each position"><span class="description">Checks if the user has voted for each position</span><pre>has_voted_all_positions</pre></a></li>
+<li class="function  "><a href="#function_has_voted_pos" title="has_voted_pos :: A function which verifies if a user has already voted for a position"><span class="description">A function which verifies if a user has already voted for a position</span><pre>has_voted_pos</pre></a></li>
+<li class="function  "><a href="#function_has_voted_position" title="has_voted_position :: A function which verifies if a user has already voted for a position"><span class="description">A function which verifies if a user has already voted for a position</span><pre>has_voted_position</pre></a></li>
+<li class="function  "><a href="#function_is_candidate" title="is_candidate :: Used to check if a given candidate (with their first, last and user name) is a candidate
+capable to be elected for the given position."><span class="description">Used to check if a given candidate (with their first, last and user name) is a candidate
+capable to be elected for the given position.</span><pre>is_candidate</pre></a></li>
+<li class="function  "><a href="#function_is_member" title="is_member :: A Function which determines if a user already exists in the elections members table"><span class="description">A Function which determines if a user already exists in the elections members table</span><pre>is_member</pre></a></li>
+<li class="function  "><a href="#function_is_nominated" title="is_nominated :: A function which verifies if a user has already been nominated for a position"><span class="description">A function which verifies if a user has already been nominated for a position</span><pre>is_nominated</pre></a></li>
+<li class="function  "><a href="#function_is_nominee" title="is_nominee :: Used to check if a given nominee (with their first, last and user name) is a nominee
+capable to be elected for the given position."><span class="description">Used to check if a given nominee (with their first, last and user name) is a nominee
+capable to be elected for the given position.</span><pre>is_nominee</pre></a></li>
+<li class="function  "><a href="#function_new_election_tables" title="new_election_tables :: A function which creates the appropriate tables for the start of a new election year"><span class="description">A function which creates the appropriate tables for the start of a new election year</span><pre>new_election_tables</pre></a></li>
+<li class="function  "><a href="#function_nominate_self" title="nominate_self :: A function which handles a list of positions that a user is nominating themselves
+for and adds them to the list of nominees so that other users can vote for them."><span class="description">A function which handles a list of positions that a user is nominating themselves
+for and adds them to the list of nominees so that other users can vote for them.</span><pre>nominate_self</pre></a></li>
+<li class="function  "><a href="#function_nomination_vote" title="nomination_vote :: A function which takes a list of the positions and nominee that the member
+voted for and adds a vote to that nominee if the user has not already cast
+a vote for that position."><span class="description">A function which takes a list of the positions and nominee that the member
+voted for and adds a vote to that nominee if the user has not already cast
+a vote for that position.</span><pre>nomination_vote</pre></a></li>
+<li class="function  "><a href="#function_pop_election_table" title="pop_election_table :: A function which populates the election table with the candidates and
+incumbents for the final phase of the election."><span class="description">A function which populates the election table with the candidates and
+incumbents for the final phase of the election.</span><pre>pop_election_table</pre></a></li>
+<li class="function  "><a href="#function_record_user_vote" title="record_user_vote :: A function which records the positions that a user has voted for, this is
+a precaution to prevent double voting even in the event of users trying
+to hack/subvert the system."><span class="description">A function which records the positions that a user has voted for, this is
+a precaution to prevent double voting even in the event of users trying
+to hack/subvert the system.</span><pre>record_user_vote</pre></a></li>
+<li class="function  "><a href="#function_record_winners" title="record_winners :: A function which records the winners of a nomination/election in the database"><span class="description">A function which records the winners of a nomination/election in the database</span><pre>record_winners</pre></a></li>
+</ul>
+</div>
+<div class="span8 package-contents">
+<ul class="breadcrumb"><li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li class="active"><a href="../packages/dbinterface.html">dbinterface</a></li>
+</li></ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-function"></i> Functions</h3>
+<a id="function_add_member"></a><div class="element clickable function  function_add_member" data-toggle="collapse" data-target=".function_add_member .collapse">
+<h2>A function which adds a person who has logged into the elections website
+to the members table if they do not already exist in the table.</h2>
+<pre>add_member(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_accounts, <a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections, string $username) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This is
+the default operation each time a person logs into the website as there is
+no other feasible way to determine who can be an eligible nominee.</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_accounts</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc accounts DB</p></div>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>The username of the person to add to the members table</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>An array containing the users unique access account (primary key) and name</div>
+</div></div>
+</div>
+<a id="function_determine_winners"></a><div class="element clickable function  function_determine_winners" data-toggle="collapse" data-target=".function_determine_winners .collapse">
+<h2>A function which determines the winners of the election by comparing the number
+of votes that the candidate and incumbent each have.</h2>
+<pre>determine_winners(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections, string $election_type) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>In the event of a tie between the candidate and incumbent for a position then
+the winning person is selected by a Pseudo Random Number Generator (PRNG) MOD 2
+where 0 is candidate and 1 is the incumbent</p>
+
+<p>TODO This is a method, along with the determine_candidate method that should be
+executed by the system_daemon</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<div class="subelement argument">
+<h4>$election_type</h4>
+<code>string</code><p>The type of election to determine the winners for,
+a "nomination" or "election"</p>
+</div>
+</div></div>
+</div>
+<a id="function_election_tables_exist"></a><div class="element clickable function  function_election_tables_exist" data-toggle="collapse" data-target=".function_election_tables_exist .collapse">
+<h2>A function which determines if the election tables for the current year already exist
+the purpose of this function is to determine if the daemon has already created the tables
+for the current election year.</h2>
+<pre>election_tables_exist(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>TODO CLEAN THIS METHOD UP, I DON'T LIKE THE IMPLEMENTATION OF ALL THE "IF STATEMENTS"</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+</div></div>
+</div>
+<a id="function_election_vote"></a><div class="element clickable function  function_election_vote" data-toggle="collapse" data-target=".function_election_vote .collapse">
+<h2>A function for the final election voting, which takes a list of the positions
+and nominee that the member voted for and adds a vote to that nominee if the
+user has not already cast a vote for that position.</h2>
+<pre>election_vote(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections, int $access_account, $positions) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>TODO Add support to handle initially populating the positions_elect table using
+a PHP daemon (System_Daemon) instead of EACH TIME the function is called
+with the candidates and incumbents with a starting value of 0 votes</p>
+
+<p>TODO This method along with the nomination_vote method can probably just
+be combined into one method "record_user_vote"</p>
+
+<p>TODO Perhaps add some kind of AJAX support or page rendering support to
+remove positions they have already voted for. This covers the case where
+a user votes for maybe only one position and then returns to vote again.</p>
+
+<p>TODO Perhaps add some kind of support where a user can change their vote,
+although most electoral systems don't have this...</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<div class="subelement argument">
+<h4>$access_account</h4>
+<code>int</code><p>The unique (primary key) access account number of the user
+who is currently logged in</p>
+</div>
+<div class="subelement argument">
+<h4>$positions</h4><p>An array of the positions and the full name of the nominee they voted for</p></div>
+</div></div>
+</div>
+<a id="function_get_candidates"></a><div class="element clickable function  function_get_candidates" data-toggle="collapse" data-target=".function_get_candidates .collapse">
+<h2>A function which gets the candidates who are the individuals who won in the
+nomination period.</h2>
+<pre>get_candidates(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections) : \A</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>TODO: Add support to handle the case where the incumbents are no longer attending UOIT</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\A</code>multi-dimensional array containing the positions and candidates for each position</div>
+</div></div>
+</div>
+<a id="function_get_incumbents"></a><div class="element clickable function  function_get_incumbents" data-toggle="collapse" data-target=".function_get_incumbents .collapse">
+<h2>A function which gets the incumbents who are the individuals who won in the
+election from the previous year.</h2>
+<pre>get_incumbents(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections) : \A</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>TODO: Add support to handle the case where the incumbents are no longer attending UOIT</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\A</code>multi-dimensional array containing the positions and incumbents for each position</div>
+</div></div>
+</div>
+<a id="function_get_member"></a><div class="element clickable function  function_get_member" data-toggle="collapse" data-target=".function_get_member .collapse">
+<h2>A function which returns the access account number and full name of a user who
+exists in the elections database members table.</h2>
+<pre>get_member(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_accounts, string $username) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Use this method if you have verified
+that the member exists in the database using the is_member() method.</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_accounts</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc accounts DB</p></div>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>The username of the member</p></div>
+</div></div>
+</div>
+<a id="function_get_nominees"></a><div class="element clickable function  function_get_nominees" data-toggle="collapse" data-target=".function_get_nominees .collapse">
+<h2>A function which gets the nominees for each position from the database.</h2>
+<pre>get_nominees(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections) : \A</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>By default the only person you can nominate is yourself or others who have
+nominated themselves, this avoids the situation of someone being nominated
+for a position they don't want to fulfill.</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\A</code>multi-dimensional array containing the positions and nominees for each position</div>
+</div></div>
+</div>
+<a id="function_get_results"></a><div class="element clickable function  function_get_results" data-toggle="collapse" data-target=".function_get_results .collapse">
+<h2>A function which gets the voting results for the current election for the
+election type specified.</h2>
+<pre>get_results(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections, string $vote_type) : \An</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Use this function to get the vote breakdown after the
+nomination/election.</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<div class="subelement argument">
+<h4>$vote_type</h4>
+<code>string</code><p>The type of vote they are casting, a "nomination" or
+"election" vote</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\An</code>array containing the positions and the names of the individuals and the
+number of votes they received</div>
+</div></div>
+</div>
+<a id="function_get_top_three_candidates"></a><div class="element clickable function  function_get_top_three_candidates" data-toggle="collapse" data-target=".function_get_top_three_candidates .collapse">
+<h2>A function which gets the top three nominees for the candidate positions, the function
+returns an array of the positions and the first, second, and third place nominees
+as well as the number of votes they received.</h2>
+<pre>get_top_three_candidates(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections) : \A</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>TODO Finish the get_top_three_candidates method and add support to also get the
+top three winners of the election, this can be done in one method</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\A</code>multi-dimensional array of the candidate positions and the first, second,
+and third place nominees and the number of votes they received.</div>
+</div></div>
+</div>
+<a id="function_get_winners"></a><div class="element clickable function  function_get_winners" data-toggle="collapse" data-target=".function_get_winners .collapse">
+<h2>A function which gets the winners of the election for the current year</h2>
+<pre>get_winners(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections) : \An</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\An</code>array mapping the positions to an array for the winner containing the first name,
+last name, and username</div>
+</div></div>
+</div>
+<a id="function_has_voted"></a><div class="element clickable function  function_has_voted" data-toggle="collapse" data-target=".function_has_voted .collapse">
+<h2>A function which verifies that a user has not already voted for a position before.</h2>
+<pre>has_voted(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections, int $access_account, string $vote_type) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<div class="subelement argument">
+<h4>$access_account</h4>
+<code>int</code><p>The unique (primary key) access account number of the user</p>
+</div>
+<div class="subelement argument">
+<h4>$vote_type</h4>
+<code>string</code><p>The type of position that the user is voting for</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True if the user has already voted for that position.</div>
+</div></div>
+</div>
+<a id="function_has_voted_all_positions"></a><div class="element clickable function  function_has_voted_all_positions" data-toggle="collapse" data-target=".function_has_voted_all_positions .collapse">
+<h2>Checks if the user has voted for each position</h2>
+<pre>has_voted_all_positions(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections, int $access_account, $vote_type) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<div class="subelement argument">
+<h4>$access_account</h4>
+<code>int</code><p>The unique (primary key) access account number of the user
+who is currently logged in</p>
+</div>
+<div class="subelement argument"><h4>$vote_type</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True if the user has voted for every position</div>
+</div></div>
+</div>
+<a id="function_has_voted_pos"></a><div class="element clickable function  function_has_voted_pos" data-toggle="collapse" data-target=".function_has_voted_pos .collapse">
+<h2>A function which verifies if a user has already voted for a position</h2>
+<pre>has_voted_pos(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections, int $access_account, string $position) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<div class="subelement argument">
+<h4>$access_account</h4>
+<code>int</code><p>The unique (primary key) access account number of the user
+who is currently logged in</p>
+</div>
+<div class="subelement argument">
+<h4>$position</h4>
+<code>string</code><p>The position that the user is submitting a vote for</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True if the user has already voted for the position</div>
+</div></div>
+</div>
+<a id="function_has_voted_position"></a><div class="element clickable function  function_has_voted_position" data-toggle="collapse" data-target=".function_has_voted_position .collapse">
+<h2>A function which verifies if a user has already voted for a position</h2>
+<pre>has_voted_position(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections, int $access_account, string $position, string $vote_type) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<div class="subelement argument">
+<h4>$access_account</h4>
+<code>int</code><p>The unique (primary key) access account number of the user
+who is currently logged in</p>
+</div>
+<div class="subelement argument">
+<h4>$position</h4>
+<code>string</code><p>The position that the user is submitting a vote for</p></div>
+<div class="subelement argument">
+<h4>$vote_type</h4>
+<code>string</code><p>The type of vote they are casting, a "nomination" or
+"election" vote</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True if the user has already voted for the position</div>
+</div></div>
+</div>
+<a id="function_is_candidate"></a><div class="element clickable function  function_is_candidate" data-toggle="collapse" data-target=".function_is_candidate .collapse">
+<h2>Used to check if a given candidate (with their first, last and user name) is a candidate
+capable to be elected for the given position.</h2>
+<pre>is_candidate(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections, string $nominee, string $position) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>TODO test and make sure it actually works
+TODO add a column for the user name in the members table</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<div class="subelement argument">
+<h4>$nominee</h4>
+<code>string</code><p>the full name of the nominee</p></div>
+<div class="subelement argument">
+<h4>$position</h4>
+<code>string</code><p>the position that the candidate might hold</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>$is_candidate TRUE if the candidate is found in the database with the given position</div>
+</div></div>
+</div>
+<a id="function_is_member"></a><div class="element clickable function  function_is_member" data-toggle="collapse" data-target=".function_is_member .collapse">
+<h2>A Function which determines if a user already exists in the elections members table</h2>
+<pre>is_member($mysqli_accounts, <a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections, $username) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$mysqli_accounts</h4></div>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<div class="subelement argument"><h4>$username</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True if the user already exists in the members table</div>
+</div></div>
+</div>
+<a id="function_is_nominated"></a><div class="element clickable function  function_is_nominated" data-toggle="collapse" data-target=".function_is_nominated .collapse">
+<h2>A function which verifies if a user has already been nominated for a position</h2>
+<pre>is_nominated(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections, int $access_account, string $position) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<div class="subelement argument">
+<h4>$access_account</h4>
+<code>int</code><p>The unique (primary key) access account number of the user</p>
+</div>
+<div class="subelement argument">
+<h4>$position</h4>
+<code>string</code><p>The position that the user is submitting a vote for</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True if the user has already been nominated for the position</div>
+</div></div>
+</div>
+<a id="function_is_nominee"></a><div class="element clickable function  function_is_nominee" data-toggle="collapse" data-target=".function_is_nominee .collapse">
+<h2>Used to check if a given nominee (with their first, last and user name) is a nominee
+capable to be elected for the given position.</h2>
+<pre>is_nominee(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections, string $nominee, string $position) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>TODO test and make sure it actually works</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<div class="subelement argument">
+<h4>$nominee</h4>
+<code>string</code><p>the full name of the nominee</p></div>
+<div class="subelement argument">
+<h4>$position</h4>
+<code>string</code><p>the position that the nominee might hold</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>$is_nominee TRUE if the nominee is found in the database with the given position</div>
+</div></div>
+</div>
+<a id="function_new_election_tables"></a><div class="element clickable function  function_new_election_tables" data-toggle="collapse" data-target=".function_new_election_tables .collapse">
+<h2>A function which creates the appropriate tables for the start of a new election year</h2>
+<pre>new_election_tables(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+</div></div>
+</div>
+<a id="function_nominate_self"></a><div class="element clickable function  function_nominate_self" data-toggle="collapse" data-target=".function_nominate_self .collapse">
+<h2>A function which handles a list of positions that a user is nominating themselves
+for and adds them to the list of nominees so that other users can vote for them.</h2>
+<pre>nominate_self(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections, int $access_account, $positions) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This is a precaution so that other users cannot nominate someone for a position
+they do not want to be in.</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<div class="subelement argument">
+<h4>$access_account</h4>
+<code>int</code><p>The unique (primary key) access account number of the user
+who is currently logged in and nominating themself</p>
+</div>
+<div class="subelement argument">
+<h4>$positions</h4><p>An array of the positions the user is nominating themselves for</p></div>
+</div></div>
+</div>
+<a id="function_nomination_vote"></a><div class="element clickable function  function_nomination_vote" data-toggle="collapse" data-target=".function_nomination_vote .collapse">
+<h2>A function which takes a list of the positions and nominee that the member
+voted for and adds a vote to that nominee if the user has not already cast
+a vote for that position.</h2>
+<pre>nomination_vote(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections, int $access_account, $positions) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>TODO Perhaps add some kind of AJAX support or page rendering support to
+remove positions they have already voted for. This covers the case where
+a user votes for maybe only one position and then returns to vote again.</p>
+
+<p>TODO Perhaps add some kind of support where a user can change their vote,
+although most electoral systems don't have this...</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<div class="subelement argument">
+<h4>$access_account</h4>
+<code>int</code><p>The unique (primary key) access account number of the user
+who is currently logged in</p>
+</div>
+<div class="subelement argument">
+<h4>$positions</h4><p>An array of the positions and the full name of the nominee they voted for</p></div>
+</div></div>
+</div>
+<a id="function_pop_election_table"></a><div class="element clickable function  function_pop_election_table" data-toggle="collapse" data-target=".function_pop_election_table .collapse">
+<h2>A function which populates the election table with the candidates and
+incumbents for the final phase of the election.</h2>
+<pre>pop_election_table(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>TODO Clean this method up, already have function to get candidates/incumbents
+TODO Handle the case where there is no candidate for a position
+TODO Handle the case where the inumbent is no longer attending UOIT</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+</div></div>
+</div>
+<a id="function_record_user_vote"></a><div class="element clickable function  function_record_user_vote" data-toggle="collapse" data-target=".function_record_user_vote .collapse">
+<h2>A function which records the positions that a user has voted for, this is
+a precaution to prevent double voting even in the event of users trying
+to hack/subvert the system.</h2>
+<pre>record_user_vote(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections, int $access_account, $position, string $vote_type) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<div class="subelement argument">
+<h4>$access_account</h4>
+<code>int</code><p>The unique (primary key) access account number of the user
+who is currently logged in</p>
+</div>
+<div class="subelement argument">
+<h4>$position</h4><p>The position that the user has voted for</p></div>
+<div class="subelement argument">
+<h4>$vote_type</h4>
+<code>string</code><p>The type of vote they are casting, a "nomination" or
+"election" vote</p>
+</div>
+</div></div>
+</div>
+<a id="function_record_winners"></a><div class="element clickable function  function_record_winners" data-toggle="collapse" data-target=".function_record_winners .collapse">
+<h2>A function which records the winners of a nomination/election in the database</h2>
+<pre>record_winners(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections, array $positions, string $vote_type) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/dbinterface.html">dbinterface</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysqli_elections</h4>
+<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
+<div class="subelement argument">
+<h4>$positions</h4>
+<code>array</code><p>An array of the positions mapping to the access_account that won in the position
+of the winning candidate for the position</p></div>
+<div class="subelement argument">
+<h4>$vote_type</h4>
+<code>string</code><p>The type of vote they are casting, a "nomination" or
+"election" vote</p>
+</div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-05-30T23:23:37-04:00.<br></footer></div>
+</div>
+</body>
+</html>

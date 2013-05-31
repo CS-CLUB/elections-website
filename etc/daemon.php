@@ -1,21 +1,23 @@
 #!/usr/bin/php -q
 <?php
 /*
- *  UOIT/DC Computer Science Club Elections Website
- *  Copyright (C) 2012 UOIT/DC Computer Science Club
+ * CS-CLUB Elections Website
  *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as
- *  published by the Free Software Foundation, either version 3 of the
- *  License, or (at your option) any later version.
+ * Copyright (C) 2013 Jonathan Gillett, Joseph Heron, Computer Science Club at DC and UOIT
+ * All rights reserved.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 
@@ -53,6 +55,17 @@ foreach ($argv as $k=>$arg)
 	}
 }
 
+if ($runmode['help'] == true)
+{
+	echo 'Usage: '.$argv[0].' [runmode]' . "\n";
+	echo 'Available runmodes:' . "\n";
+	foreach ($runmode as $runmod=>$val)
+	{
+		echo ' --'.$runmod . "\n";
+	}
+	die();
+}
+
 /* Specify the options for the daemon */
 $options = array(
 		'appName' => 'election_daemon',
@@ -67,11 +80,21 @@ $options = array(
 
 System_Daemon::setOptions($options);
 
-
 /* Write start/stop scripts to manage the Daemon if option specified by the user */
-if ($runmode['write-initd'])
+if (!$runmode['write-initd'])
 {
-	System_Daemon::writeAutoRun();
+	System_Daemon::info('not writing an init.d script this time');
+} 
+else 
+{
+	if (($initd_location = System_Daemon::writeAutoRun()) === false)
+	{
+		System_Daemon::notice('unable to write init.d script');
+	}
+	else
+	{
+		System_Daemon::info('sucessfully written startup script: %s',$initd_location);
+	}
 }
 
 

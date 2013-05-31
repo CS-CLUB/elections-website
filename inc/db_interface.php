@@ -1,20 +1,22 @@
 <?php
 /*
- *  UOIT/DC Computer Science Club Elections Website
- *  Copyright (C) 2012 UOIT/DC Computer Science Club
+ * CS-CLUB Elections Website
  *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as
- *  published by the Free Software Foundation, either version 3 of the
- *  License, or (at your option) any later version.
+ * Copyright (C) 2013 Jonathan Gillett, Joseph Heron, Computer Science Club at DC and UOIT
+ * All rights reserved.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 
@@ -32,9 +34,11 @@
 
 require_once 'election.php';
 
+
 /**
  * A function which creates the appropriate tables for the start of a new election year
- *
+ * @package dbinterface
+ * 
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  */
 function new_election_tables($mysqli_elections)
@@ -110,8 +114,8 @@ function new_election_tables($mysqli_elections)
  * A function which determines if the election tables for the current year already exist
  * the purpose of this function is to determine if the daemon has already created the tables
  * for the current election year.
- * 
  * TODO CLEAN THIS METHOD UP, I DON'T LIKE THE IMPLEMENTATION OF ALL THE "IF STATEMENTS"
+ * @package dbinterface
  * 
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB 
  */
@@ -171,6 +175,8 @@ function election_tables_exist($mysqli_elections)
  * TODO Handle the case where there is no candidate for a position
  * TODO Handle the case where the inumbent is no longer attending UOIT
  * 
+ * @package dbinterface
+ *  
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB 
  */
 function pop_election_table($mysqli_elections)
@@ -290,7 +296,8 @@ function pop_election_table($mysqli_elections)
 
 /**
  * A Function which determines if a user already exists in the elections members table
- *
+ * @package dbinterface
+ * 
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param int $access_Account The unique (primary key) access account number of the user
  * @return boolean True if the user already exists in the members table
@@ -352,7 +359,8 @@ function is_member($mysqli_accounts, $mysqli_elections, $username)
  * to the members table if they do not already exist in the table. This is
  * the default operation each time a person logs into the website as there is
  * no other feasible way to determine who can be an eligible nominee.
- *
+ * @package dbinterface
+ * 
  * @param mysqli $mysqli_accounts The mysqli connection object for the ucsc accounts DB
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param string $username The username of the person to add to the members table
@@ -438,6 +446,7 @@ function add_member($mysqli_accounts, $mysqli_elections, $username)
  * A function which returns the access account number and full name of a user who
  * exists in the elections database members table. Use this method if you have verified
  * that the member exists in the database using the is_member() method. 
+ * @package dbinterface
  * 
  * @param mysqli $mysqli_accounts The mysqli connection object for the ucsc accounts DB
  * @param string $username The username of the member
@@ -505,7 +514,8 @@ function get_member($mysqli_accounts, $username)
  * By default the only person you can nominate is yourself or others who have
  * nominated themselves, this avoids the situation of someone being nominated
  * for a position they don't want to fulfill.
- *
+ * @package dbinterface
+ * 
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @return A multi-dimensional array containing the positions and nominees for each position
  */
@@ -561,7 +571,8 @@ function get_nominees($mysqli_elections)
  * A function which gets the candidates who are the individuals who won in the
  * nomination period.
  * TODO: Add support to handle the case where the incumbents are no longer attending UOIT
- *
+ * @package dbinterface
+ * 
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @return A multi-dimensional array containing the positions and candidates for each position
  */
@@ -614,7 +625,8 @@ function get_candidates($mysqli_elections)
  * A function which gets the incumbents who are the individuals who won in the
  * election from the previous year.
  * TODO: Add support to handle the case where the incumbents are no longer attending UOIT
- *
+ * @package dbinterface
+ * 
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @return A multi-dimensional array containing the positions and incumbents for each position
  */
@@ -670,6 +682,7 @@ function get_incumbents($mysqli_elections)
  * A function which gets the voting results for the current election for the
  * election type specified. Use this function to get the vote breakdown after the
  * nomination/election.
+ * @package dbinterface
  * 
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param string $vote_type The type of vote they are casting, a "nomination" or
@@ -735,7 +748,8 @@ function get_results($mysqli_elections, $vote_type)
 
 /**
  * A function which gets the winners of the election for the current year
- *
+ * @package dbinterface
+ * 
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @return An array mapping the positions to an array for the winner containing the first name,
  * last name, and username
@@ -799,11 +813,14 @@ function get_winners($mysqli_elections)
 
 
 /**
- * TODO test and make sure it actually works
- * TODO add a column for the user name in the members table
  * Used to check if a given candidate (with their first, last and user name) is a candidate
  * capable to be elected for the given position.
- *
+ * 
+ * TODO test and make sure it actually works
+ * TODO add a column for the user name in the members table
+ * 
+ * @package dbinterface
+ * 
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param string $nominee the full name of the nominee
  * @param string $user_name the user name of a potential candidate
@@ -850,10 +867,11 @@ function is_candidate($mysqli_elections, $nominee, $position)
 }
 
 /**
- * TODO test and make sure it actually works
  * Used to check if a given nominee (with their first, last and user name) is a nominee
  * capable to be elected for the given position.
- *
+ * TODO test and make sure it actually works
+ * @package dbinterface
+ * 
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param string $nominee the full name of the nominee
  * @param string $user_name the user name of a potential nominee
@@ -901,7 +919,8 @@ function is_nominee($mysqli_elections, $nominee, $position)
 
 /**
  * A function which verifies if a user has already been nominated for a position
- *
+ * @package dbinterface
+ * 
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param int $access_account The unique (primary key) access account number of the user
  * @param string $position The position that the user is submitting a vote for
@@ -939,6 +958,15 @@ function is_nominated($mysqli_elections, $access_account, $position)
 	return $is_nominated;
 }
 
+/**
+ * A function which verifies that a user has not already voted for a position before.
+ * @package dbinterface
+ *
+ * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
+ * @param int $access_account The unique (primary key) access account number of the user
+ * @param string $vote_type The type of position that the user is voting for
+ * @return boolean True if the user has already voted for that position.
+ */
 function has_voted($mysqli_elections, $access_account, $vote_type)
 {
 	/* Array of the positions */
@@ -989,6 +1017,7 @@ function has_voted($mysqli_elections, $access_account, $vote_type)
 
 /**
  * A function which verifies if a user has already voted for a position
+ * @package dbinterface
  *
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param int $access_account The unique (primary key) access account number of the user
@@ -1041,6 +1070,7 @@ function has_voted_position($mysqli_elections, $access_account, $position, $vote
 
 /**
  * A function which verifies if a user has already voted for a position
+ * @package dbinterface
  *
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param int $access_account The unique (primary key) access account number of the user
@@ -1090,7 +1120,8 @@ function has_voted_pos($mysqli_elections, $access_account, $position)
 
 /**
  * Checks if the user has voted for each position
- * 
+ * @package dbinterface
+ *
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param int $access_account The unique (primary key) access account number of the user
  * who is currently logged in
@@ -1119,6 +1150,7 @@ function has_voted_all_positions($mysqli_elections, $access_account, $vote_type)
  * A function which records the positions that a user has voted for, this is
  * a precaution to prevent double voting even in the event of users trying
  * to hack/subvert the system.
+ * @package dbinterface
  *
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param int $access_account The unique (primary key) access account number of the user
@@ -1162,6 +1194,7 @@ function record_user_vote($mysqli_elections, $access_account, $position, $vote_t
  * for and adds them to the list of nominees so that other users can vote for them.
  * This is a precaution so that other users cannot nominate someone for a position
  * they do not want to be in.
+ * @package dbinterface
  *
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param int $access_account The unique (primary key) access account number of the user
@@ -1199,13 +1232,15 @@ function nominate_self($mysqli_elections, $access_account, $positions)
  * A function which takes a list of the positions and nominee that the member
  * voted for and adds a vote to that nominee if the user has not already cast
  * a vote for that position.
- *
+ * 
  * TODO Perhaps add some kind of AJAX support or page rendering support to
  * remove positions they have already voted for. This covers the case where
  * a user votes for maybe only one position and then returns to vote again.
  *
  * TODO Perhaps add some kind of support where a user can change their vote,
  * although most electoral systems don't have this...
+ * 
+ * @package dbinterface
  *
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param int $access_account The unique (primary key) access account number of the user
@@ -1261,7 +1296,7 @@ function nomination_vote($mysqli_elections, $access_account, $positions)
  * A function for the final election voting, which takes a list of the positions
  * and nominee that the member voted for and adds a vote to that nominee if the
  * user has not already cast a vote for that position.
- *
+ * 
  * TODO Add support to handle initially populating the positions_elect table using
  * a PHP daemon (System_Daemon) instead of EACH TIME the function is called
  * with the candidates and incumbents with a starting value of 0 votes
@@ -1275,6 +1310,8 @@ function nomination_vote($mysqli_elections, $access_account, $positions)
  *
  * TODO Perhaps add some kind of support where a user can change their vote,
  * although most electoral systems don't have this...
+ * 
+ * @package dbinterface
  *
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param int $access_account The unique (primary key) access account number of the user
@@ -1325,6 +1362,7 @@ function election_vote($mysqli_elections, $access_account, $positions)
 
 /**
  * A function which records the winners of a nomination/election in the database
+ * @package dbinterface
  *
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param array $positions An array of the positions mapping to the access_account that won in the position
@@ -1372,9 +1410,11 @@ function record_winners($mysqli_elections, $positions, $vote_type)
  * In the event of a tie between the candidate and incumbent for a position then
  * the winning person is selected by a Pseudo Random Number Generator (PRNG) MOD 2
  * where 0 is candidate and 1 is the incumbent
- *
+ * 
  * TODO This is a method, along with the determine_candidate method that should be
  * executed by the system_daemon
+ * 
+ * @package dbinterface
  *
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param string $election_type The type of election to determine the winners for,
@@ -1474,6 +1514,8 @@ function determine_winners($mysqli_elections, $election_type)
  * TODO Finish the get_top_three_candidates method and add support to also get the
  * top three winners of the election, this can be done in one method
  * 
+ * @package dbinterface
+ *
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @return A multi-dimensional array of the candidate positions and the first, second,
  * and third place nominees and the number of votes they received.

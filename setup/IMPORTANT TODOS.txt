@@ -1,0 +1,45 @@
+IMPORTANT TODOS
+===============
+
+1.	At the moment the site forces you to either nominate yourself or vote for
+	someone who has already nominated themselves, this causes the following
+	problems.
+
+	a)	To nominate yourself you also HAVE to vote as well...
+
+	b)	The first several people to login basically have to either nominate
+		themselves or vote for the handful of other people who also nominated
+		themselves.
+
+	c)	The first person to login during nomination period has to nominate
+		themselves for EVERYTHING.
+
+	SOLUTION: The best solution would be to have a nomination period where users
+			  can login and nominate themselves (no actual voting). Then during
+			  the actual nomination voting period have the positions they already
+			  nominated themselves for grayed out.
+
+			  -> During the nomination period enable having some entries blank
+				 so you can submit just nominating yourself for 1 position.
+
+
+2.	Need to add support to prevent someone who is an incumbent from nominating
+	themselves, this avoids situations where you have someone running against
+	themselves!
+
+
+3.	Need to add a check for new login members that they have been a member for
+	at least 1 semester (3/4 months)...
+
+	-> This prevents new club members from screwing around with the election
+
+
+4.	Add to election_date.php the number of days the nomination/election period
+	is open for as the daemon has hardcoded in seconds for sleeping the # of
+	days for the nomination period (14 days)
+
+5.	Have to MANUALLY make the table this year for the incumbents, call in
+	winners_elect_2011 and put in the 4 positions from this year.
+
+	->	These users should also be in members_2012 as well, they would have been
+		added if they logged into the site.

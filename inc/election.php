@@ -1,20 +1,22 @@
 <?php
 /*
- *  UOIT/DC Computer Science Club Elections Website
- *  Copyright (C) 2012 UOIT/DC Computer Science Club
+ * CS-CLUB Elections Website
  *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as
- *  published by the Free Software Foundation, either version 3 of the
- *  License, or (at your option) any later version.
+ * Copyright (C) 2013 Jonathan Gillett, Joseph Heron, Computer Science Club at DC and UOIT
+ * All rights reserved.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 
@@ -30,6 +32,7 @@ require 'election_date.php';
 
 /**
  * A function which determines if it is currently the nomination period of the election
+ * @package election
  * 
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @return boolean True if it is currently the nomination period of the election
@@ -64,6 +67,7 @@ function is_nomination($mysqli_elections)
  * A function which determines if the nomination period of the election is closed,
  * some years this many not apply as the election period will open within 1 minute 
  * of the nomination period closing!
+ * @package election
  * 
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @return boolean True if the nomination period of the election is closed
@@ -96,7 +100,8 @@ function is_nomination_closed($mysqli_elections)
 
 /**
  * A function which determines if the election is open for voting
- *
+ * @package election
+ * 
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @return boolean True if the election is open for voting
  */
