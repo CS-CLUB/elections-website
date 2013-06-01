@@ -29,12 +29,18 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>UCSC Elections Website</title>
+    <title>CS-CLUB Elections Website</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Computer Science Club Elections">
     <meta name="author" content="Computer Science Club at DC and UOIT">
 
     <!-- CSS styles -->
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 20px;
+      }
+    </style>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="css/sparkbox-select.css" rel="stylesheet">
@@ -46,13 +52,12 @@
     <![endif]-->
   </head>
   <body>
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="#">
-            UCSC Elections Website
+          <a class="brand" href="index.php">
+            CS-CLUB Elections Website
           </a>
-          <div class="nav-collapse">
             <ul class="nav pull-right">
               <li class="divider-vertical"></li>
               <li class="dropdown">
@@ -71,7 +76,6 @@
                 </div>
               </li>
             </ul>
-          </div>
         </div>
       </div>
     </div>

@@ -38,8 +38,8 @@
   		If you are currently not a club member and would like more information about the Computer
   		Science Club then please click below to visit the Computer Science Club website. If you
   		are a member who has been registered for at least one semester and for some reason cannot
-  		login then please visit our <a target="_blank" href="http://uoitcsc.dyndns.org/contact">Contact Page</a>
+  		login then please visit our <a target="_blank" href="http://cs-club.ca/contact">Contact Page</a>
   		and contact us about your issue.
   </p>
-  <p><a href="http://uoitcsc.dyndns.org" class="btn btn-primary btn-large">Learn more »</a></p>
+  <p><a href="http://cs-club.ca" class="btn btn-primary btn-large">Learn more »</a></p>
 </div>
