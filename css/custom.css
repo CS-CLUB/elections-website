@@ -18,16 +18,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-/* Custom styling for the page pading */
-body {
-	padding-top: 60px;
-    padding-bottom: 20px;
- }
-
- /* Add sytling for the navbar drop down login menu as bootstrap does not
-  * provide any native styling for a login menu from the navbar
-  */
+/* Add sytling for the navbar drop down login menu as bootstrap does not
+ * provide any native styling for a login menu from the navbar
+ */
 div.login-dropdown {
 	padding: 15px;
 	padding-bottom: 0px;
@@ -51,14 +44,14 @@ input#login_button, .login-button {
 }
 
 input#signout_button {
-  clear: left;
   width: 93%;
   height: 32px;
   font-size: 13px;
+  margin-left: 6px;
 }
 
 form.logout-form {
-  margin-bottom: 5px;
+  margin-bottom: 9px;
 }
 
 form.well.form-horizontal {
