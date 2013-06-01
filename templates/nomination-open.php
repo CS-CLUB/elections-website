@@ -41,5 +41,5 @@
   		the Computer Science Club for at least one semester. If you would like to find out more about
   		the Computer Science Club and how you can become a member, please click below to find out more.
   </p>
-  <p><a href="http://uoitcsc.dyndns.org" class="btn btn-primary btn-large">Learn more »</a></p>
+  <p><a href="http://cs-club.ca" class="btn btn-primary btn-large">Learn more »</a></p>
 </div>
