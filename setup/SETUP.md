@@ -17,13 +17,16 @@ System daemon examples (from the creator) and package info:
     sudo apt-get install php-pear
     ```
 
-
 2.	Install System_Daemon
     
     ```
 	sudo pear install System_Daemon
     ```
-    
+
+3.  Ensure that [open_baseidr restriction](http://stackoverflow.com/questions/1846882/open-basedir-restriction-in-effect-file-is-not-within-the-allowed-paths) is disabled in your php.ini
+    configuration file, otherwise System_Daemon will **NOT** work.
+
+
 3.	Restart apache
 
     ```
@@ -191,7 +194,7 @@ Deploying the PHP website
     killall daemon.php
     ```
 	
-    b.	Start the daemon, configure it to also run on startup (incase system reboots)  
+    b.	As root start the daemon, configure it to also run on startup (incase system reboots)  
 
     ```bash
     cd /var/www/election/etc
