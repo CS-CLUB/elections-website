@@ -70,30 +70,30 @@ if (mysqli_connect_errno()) {
 /**
  * Handle which page to display based on the current events and whether or not the
  * user has a login cookie set, there are the following conditions.
- * 
+ *
  * TODO I DO NOT LIKE THIS IMPLEMENTATION, PERHAPS CLEANUP THE MULTILINE IF STATEMENTS INTO A CLEANER SET OF METHODS
- * 
+ *
  * 1. User is not logged in, display one of the templates if the nomination/election
  * 	  period is open/closed with info about the Computer Science Club
- * 
+ *
  * 2. User is not logged in and has submitted their login information
- * 		
- * 	  	a) If the login information is valid 
- * 
+ *
+ * 	  	a) If the login information is valid
+ *
  * 			i)	If they are already a member and have logged in for the election website
  * 				before then sign them in
  *
  * 			ii) If it is the first time they have logged in display the first time login
  * 				page with election information and terms and conditions
- * 
+ *
  * 		b) If the login information is invalid dislpay the invalid login page
  *
  * 3. User is logged in and has clicked the Sign Out button
  *
  * 4. User has logged in for the first time and submitted the terms and conditions form
- * 		
+ *
  * 		a) If the user accepted the terms and conditions they are allowed to login and vote
- * 
+ *
  * 		b) If the user did not accept the terms and conditions they are redirected to default site
  *
  * 5. User has a valid login cookie set / has logged into the site with valid account
@@ -106,7 +106,7 @@ if (mysqli_connect_errno()) {
  *		b)	Elseif (check if they are nominating themselves)
  *
  *			-> Record their nominate_self vote (does not use up their vote!)
- * 
+ *
  * 6. User has a valid login cookie set / has logged into the site with valid account
  * 	  and the post data for ELECTION voting is SET
  *
@@ -116,17 +116,17 @@ if (mysqli_connect_errno()) {
  *
  * 7. User has a valid login cookie set / has logged into the site with valid account
  *    and there is NO nomination/election post data
- * 
- * 		a) If the user has not already voted display the template for nomination/election 
- * 			 period voting 
- * 
+ *
+ * 		a) If the user has not already voted display the template for nomination/election
+ * 			 period voting
+ *
  * 		b) If the user has already voted then dislplay the thank you for voting page with
  * 			 election results/information if applicable
- * 
+ *
  * 8. Display the footer template at the bottom of the page regardless
  */
 
-/* 
+/*
  * 1. User is not logged in, display one of the templates if the nomination/election
  * 	  period is open/closed with info about the Computer Science Club
  */
@@ -138,7 +138,7 @@ if (verify_login_cookie($mysqli_accounts, $SESSION_KEY) === false
 	&& !isset($_POST['accept_rules']))
 {
 	include 'templates/header.php';
-	
+
 	/* "Nomination open" template if its between Sept. 1, 12am to Sept 14th 11:59pm */
 	if (is_nomination($mysqli_elections))
 	{
@@ -176,12 +176,12 @@ elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY) === false
 		if (is_member($mysqli_accounts, $mysqli_elections, $_POST['login_username']))
 		{
 			set_session_data($mysqli_accounts, $_POST['login_username'], $SESSION_KEY);
-			
+
 			if ($_POST['login_remember'] == 1)
 			{
 				set_login_cookie();
 			}
-			
+
 			/* Refresh the page */
 			header('Location: '.$_SERVER['REQUEST_URI']);
 		}
@@ -196,7 +196,7 @@ elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY) === false
 			$_SESSION['login_username'] = $_POST['login_username'];
 			$_SESSION['login_password'] = $_POST['login_password'];
 			$_SESSION['login_remember'] = $_POST['login_remember'];
-			
+
 			include 'templates/header.php';
 			include 'templates/first-login.php';
 		}
@@ -214,13 +214,13 @@ elseif ((verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 		&& isset($_POST['signout']))
 {
 	session_unset();
-	
+
 	/* Overwrite the login cookie as NULL if it exists */
 	if (isset($_COOKIE['login']))
 	{
 		setcookie('login', NULL, time()+1);
 	}
-	
+
 	/* Refresh the page */
 	header('Location: '.$_SERVER['REQUEST_URI']);
 }
@@ -231,19 +231,19 @@ elseif (isset($_SESSION['login_username']) && isset($_SESSION['login_password'])
 	$login_remember = $_SESSION['login_remember'];
 	$login_username = $_SESSION['login_username'];
 	session_unset();
-	
+
 	/* a) If the user accepted the terms and conditions they are allowed to login and vote */
 	if ($_POST['accept_rules'] == 1)
 	{
 		add_member($mysqli_accounts, $mysqli_elections, $login_username);
 		set_session_data($mysqli_accounts, $login_username, $SESSION_KEY);
-			
+
 		if ($login_remember == 1)
 		{
 			set_login_cookie();
 		}
 	}
-	
+
 	/* Refresh the page */
 	header('Location: '.$_SERVER['REQUEST_URI']);
 }
@@ -254,22 +254,22 @@ elseif ((verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 		|| verify_login_session($mysqli_accounts, $_SESSION['login'], $SESSION_KEY))
 		&& isset($_POST['nomination_vote']))
 {
-	
+
 	if (!isset($_POST['president_nom']))
 	{
 		$_POST['president_nom'] = 'None';
 	}
-	
+
 	if (!isset($_POST['vicepresident_nom']))
 	{
 		$_POST['vicepresident_nom'] = 'None';
 	}
-	
+
 	if (!isset($_POST['coordinator_nom']))
 	{
 		$_POST['coordinator_nom'] = 'None';
 	}
-	
+
 	if (!isset($_POST['treasurer_nom']))
 	{
 		$_POST['treasurer_nom'] = 'None';
@@ -280,10 +280,10 @@ elseif ((verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 						'Coordinator'       => $_POST['coordinator_nom'],
 						'Treasurer'         => $_POST['treasurer_nom'],
 					  );
-	
+
 	/* An array containing the positions a person has nominated themselves for */
 	$positions_self = array();
-	
+
 	/* If nomination vote post data valid and its nomination period, record nomination vote */
 	if (validate_nomination_vote($mysqli_elections, $positions)
 		&& is_nomination($mysqli_elections))
@@ -296,16 +296,16 @@ elseif ((verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 				$positions_self[] = $position;
 			}
 		}
-		
+
 		/* Nominate user for each position the user nominated themselves for, now others can vote for them */
 		if (count($positions_self) > 0)
 		{
 			nominate_self($mysqli_elections, $_SESSION['access_account'], $positions_self);
 		}
-		
-		/* Record the nominees and the position the nominees are in that the user voted for */ 
+
+		/* Record the nominees and the position the nominees are in that the user voted for */
 		nomination_vote($mysqli_elections, $_SESSION['access_account'], $positions);
-		
+
 		/* Refresh the page */
 		header('Location: '.$_SERVER['REQUEST_URI']);
 	}
@@ -314,7 +314,7 @@ elseif ((verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 	{
 		include 'templates/header-member.php';
 		include 'templates/voting-error.php';
-		
+
 	}
 }
 /* 6. User has a valid login cookie set / has logged into the site with valid account
@@ -331,14 +331,14 @@ elseif ((verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 						'Treasurer'         => ''
 					   );
 	/* An array mapping the position to the POST data name */
-	$positions_post = array('President'			=> 'president_elect', 
-							'Vice President'	=> 'vicepresident_elect', 
-							'Coordinator'       => 'coordinator_elect', 
+	$positions_post = array('President'			=> 'president_elect',
+							'Vice President'	=> 'vicepresident_elect',
+							'Coordinator'       => 'coordinator_elect',
 							'Treasurer'         => 'treasurer_elect'
 						   );
-	
+
 	/* TODO CLEAN THIS UP -- I DO NOT LIKE THIS!!!
-	 * For each position's post data select just the name of the nominee from the position, ignoring the 
+	 * For each position's post data select just the name of the nominee from the position, ignoring the
 	 * parentheses indicating "(candidate)" or "(incumbent)"
 	 */
 	foreach ($positions_post as $position => $post_name)
@@ -349,14 +349,14 @@ elseif ((verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 			$positions[$position] = $matches[1];
 		}
 	}
-	
+
 	/* If election vote post data valid and its election period, record election vote */
 	if (validate_election_vote($mysqli_elections, $positions)
 		&& is_election($mysqli_elections))
 	{
 		/* Record the final election nominees and the position they are in that the user voted for */
 		election_vote($mysqli_elections, $_SESSION['access_account'], $positions);
-		
+
 		/* Refresh the page */
 		header('Location: '.$_SERVER['REQUEST_URI']);
 	}
@@ -371,7 +371,7 @@ elseif ((verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 		|| verify_login_session($mysqli_accounts, $_SESSION['login'], $SESSION_KEY))
 {
-	
+
 	/* FIX, forgot to account for when user has login cookie set but there is no session
 	 * data, have to retrieve username from cookie and then set the session data
 	 */
@@ -379,14 +379,14 @@ elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 	{
 		/* Get the login cookie data */
 		$login_cookie = htmlspecialchars($_COOKIE['login']);
-	
+
 		/* Get the username from login cookie data and set session info */
 		$username = username_from_session($mysqli_accounts, $login_cookie, $SESSION_KEY);
 		set_session_data($mysqli_accounts, $username, $SESSION_KEY);
 	}
-	
+
 	include 'templates/header-member.php';
-	
+
 	/* a) If the user has not already voted display the template for nomination/election period voting */
 	if (!has_voted_all_positions($mysqli_elections, $_SESSION['access_account'], "nomination")
 	//(!has_voted($mysqli_elections, $_SESSION['access_account'], "nomination")
@@ -394,7 +394,7 @@ elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 	{
 		/* Get the nominees needed to populate the nomination voting form */
 		$nominees = get_nominees($mysqli_elections);
-		include 'templates/nomination-form.php';	
+		include 'templates/nomination-form.php';
 	}
 	elseif (!has_voted($mysqli_elections, $_SESSION['access_account'], "election")
 			&& is_election($mysqli_elections))
@@ -406,7 +406,7 @@ elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 	}
 	/*	b) 	If the user has already voted then display the thank you for voting page with
 	 * 		election results/information if applicable
-	 */ 
+	 */
 	elseif (has_voted($mysqli_elections, $_SESSION['access_account'], "nomination")
 			|| has_voted($mysqli_elections, $_SESSION['access_account'], "election"))
 	{
