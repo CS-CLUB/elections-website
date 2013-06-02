@@ -27,17 +27,6 @@ IMPORTANT TODOS
 	themselves, this avoids situations where you have someone running against
 	themselves!
 
-
-3.	Need to add a check for new login members that they have been a member for
-	at least 1 semester (3/4 months)...
-
-	-> This prevents new club members from screwing around with the election
-
-
-4.	Add to election_date.php the number of days the nomination/election period
-	is open for as the daemon has hardcoded in seconds for sleeping the # of
-	days for the nomination period (14 days)
-
 5.	Have to MANUALLY make the table this year for the incumbents, call in
 	winners_elect_2011 and put in the 4 positions from this year.
 
