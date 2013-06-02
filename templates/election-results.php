@@ -49,7 +49,7 @@
 ?>
 <div class="hero-unit">
   <div class="page-header">
-	<h1>Election Results</h1>
+	  <h1>Election Results</h1>
   </div>
   <h2>Elected Executives</h2>
   <div class="row">
@@ -58,42 +58,32 @@
       <thead>
         <tr>
         <th>Position</th>
-        <th>First Name</th>
-        <th>Last Name</th>
+        <th>Name</th>
         <th>Username</th>
         </tr>
       </thead>
       <tbody>
         <?php
-            foreach ($winners as $position => $winner)
-            {
-              echo '<tr>';
-              echo '<td>' . $position . '</td>';
-              echo '<td>' . $winner['first_name'] . '</td>';
-              echo '<td>' . $winner['last_name'] . '</td>';
-              echo '<td>' . $winner['username'] . '</td>';
-              echo '</tr>';
-            }
-          ?>
+          foreach ($winners as $position => $winner)
+          {
+            echo '<tr>';
+            echo '<td>' . $position . '</td>';
+            echo '<td>' . $winner['first_name'] . ' ' . $winner['last_name'] . '</td>';
+            echo '<td>' . $winner['username'] . '</td>';
+            echo '</tr>';
+          }
+        ?>
       </tbody>
       </table>
     </div>
   </div>
   <h2>Vote Breakdown</h2>
   <div class="row">
-    <div class="span6 chart">
-   	  <div id="pie_president"></div>
-    </div>
-    <div class="span6 chart">
-      <div id="pie_vicepresident"></div>
-    </div>
+    <div id="pie_president" class="span6 chart"></div>
+    <div id="pie_vicepresident" class="span6 chart"></div>
   </div>
   <div class="row">
-    <div class="span6 chart">
-   	  <div id="pie_coordinator"></div>
-    </div>
-    <div class="span6 chart">
-      <div id="pie_treasurer"></div>
-    </div>
+    <div id="pie_coordinator" class="span6 chart"></div>
+    <div id="pie_treasurer" class="span6 chart"></div>
   </div>
 </div>
