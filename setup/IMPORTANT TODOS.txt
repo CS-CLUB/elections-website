@@ -22,12 +22,7 @@ IMPORTANT TODOS
 			  -> During the nomination period enable having some entries blank
 				 so you can submit just nominating yourself for 1 position.
 
-
-2.	Need to add support to prevent someone who is an incumbent from nominating
-	themselves, this avoids situations where you have someone running against
-	themselves!
-
-5.	Have to MANUALLY make the table this year for the incumbents, call in
+2.	Have to MANUALLY make the table this year for the incumbents, call in
 	winners_elect_2011 and put in the 4 positions from this year.
 
 	->	These users should also be in members_2012 as well, they would have been
