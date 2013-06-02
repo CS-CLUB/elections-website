@@ -48,38 +48,52 @@
  */
 ?>
 <div class="hero-unit">
+  <div class="page-header">
 	<h1>Election Results</h1>
-	<br />
-	<div class="row">
-		<div class="span8">	
-	      <table class="table">
-	        <thead>
-	          <tr>
-	            <th>Position</th>
-	            <th>First Name</th>
-	            <th>Last Name</th>
-	            <th>Username</th>
-	          </tr>
-	        </thead>
-	        <tbody>
-        		<?php
-      				foreach ($winners as $position => $winner)
-      				{
-      					echo '<tr>';
-      					echo '<td>' . $position . '</td>';
-      					echo '<td>' . $winner['first_name'] . '</td>';
-      					echo '<td>' . $winner['last_name'] . '</td>';
-      					echo '<td>' . $winner['username'] . '</td>';
-      					echo '</tr>';
-      				}
-      			?>
-	        </tbody>
-	      </table>
-		</div>
-	</div>
-	<div class="row">
-	<div class="span6">
-		
-	</div>
-	</div>
+  </div>
+  <h2>Elected Executives</h2>
+  <div class="row">
+    <div class="span8">  
+      <table class="table">
+      <thead>
+        <tr>
+        <th>Position</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+            foreach ($winners as $position => $winner)
+            {
+              echo '<tr>';
+              echo '<td>' . $position . '</td>';
+              echo '<td>' . $winner['first_name'] . '</td>';
+              echo '<td>' . $winner['last_name'] . '</td>';
+              echo '<td>' . $winner['username'] . '</td>';
+              echo '</tr>';
+            }
+          ?>
+      </tbody>
+      </table>
+    </div>
+  </div>
+  <h2>Vote Breakdown</h2>
+  <div class="row">
+    <div class="span6 chart">
+   	  <div id="pie_president"></div>
+    </div>
+    <div class="span6 chart">
+      <div id="pie_vicepresident"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6 chart">
+   	  <div id="pie_coordinator"></div>
+    </div>
+    <div class="span6 chart">
+      <div id="pie_treasurer"></div>
+    </div>
+  </div>
 </div>

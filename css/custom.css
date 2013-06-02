@@ -59,6 +59,12 @@ form.well.form-horizontal {
 	padding-bottom: 25px; 
 }
 
+/* Remove margins and resize span6 in order to fit two highcharts plots */
+.span6.chart {
+	margin-left: 0px; 
+	width: 540px;
+}
+
 /* Some additional styling for the footer */
 .footer {
     border-top: 1px solid #E5E5E5;
