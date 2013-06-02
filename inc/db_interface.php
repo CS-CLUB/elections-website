@@ -687,20 +687,32 @@ function get_incumbents($mysqli_elections)
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param string $vote_type The type of vote they are casting, a "nomination" or
  * "election" vote
+ * @param string $position The position to get the results for (President, Vice President,
+ * Coordinator, Treasurer). The default if no argument is provided is to get all positions.
+ * 
  * @return An array containing the positions and the names of the individuals and the
  * number of votes they received
  */
-function get_results($mysqli_elections, $vote_type)
+function get_results($mysqli_elections, $vote_type, $position = 'all')
 {
 	$current_year = date('Y');
 	$positions_tbl = '';
 	$members_tbl = 'members_' . $current_year;
 	
-	$results = array(	'President'         => array(),
-						'Vice President'    => array(),
-						'Coordinator'       => array(),
-						'Treasurer'         => array()
-					);
+	$results = array();
+	
+	if ($position === 'all')
+	{
+		$results = array(	'President'         => array(),
+							'Vice President'    => array(),
+							'Coordinator'       => array(),
+							'Treasurer'         => array()
+						);
+	}
+	else
+	{
+		$results = array($position => array());
+	}
 	
 	/* Set the table to check their voting record based on the type of vote being cast */
 	if (strcasecmp($vote_type, 'nomination') === 0)
