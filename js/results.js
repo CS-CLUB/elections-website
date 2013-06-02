@@ -33,20 +33,21 @@ $(document).ready(function () {
 /* Get the postfix identifier based on the position */
 function getId(prefix, position) {
     /* Get the name of the id based on position */
-    switch (position) {
-        case 'President':
+    switch (position.toLowerCase()) {
+        case 'president':
             prefix += 'president';
             break;
-        case 'Vice President':
+        case 'vice president':
             prefix += 'vicepresident';
             break;
-        case 'Coordinator':
+        case 'coordinator':
             prefix += 'coordinator';
             break;
-        case 'Treasurer':
+        case 'treasurer':
             prefix += 'treasurer';
             break;
         default:
+            console.log('No matching position for: ' + position);
             prefix = '';
             break;
     }
@@ -55,7 +56,6 @@ function getId(prefix, position) {
 
 /* Get the vote breakdown for an election for all positions */
 function voteBreakdownAll() {
-    console.log('voteBreakdownAll');
     $.ajax({
         type: 'GET',
         url: rootURL + '/results/election',
@@ -66,8 +66,6 @@ function voteBreakdownAll() {
 
 /* Creates a pie chart for the vote break down of each position */
 function plotVoteBreakdown(data) {
-    console.log('plotVoteBreakdown');
-    console.log(data);
     var idPrefix = 'pie_';
 
     /* Create a separate pie chart for each position */
@@ -102,10 +100,6 @@ function plotPieChart(id, title, results) {
                 }
                 return s;
             }
-            /*
-            pointFormat: '{series.name}: <b>{point.percentage}%</b>',
-            percentageDecimals: 1
-            */
         },
         plotOptions: {
             pie: {
@@ -115,22 +109,9 @@ function plotPieChart(id, title, results) {
                     enabled: true,
                     color: '#000000',
                     connectorColor: '#000000',
-                    
-                    
                     formatter: function() {
                         return '<b>' + this.point.name +'</b><br />' + '<b>' + this.percentage +' %</b>';
                     }
-                    /*
-                    formatter: function() {
-                        var s;
-                        if (this.point.name) { // the pie chart
-                            s = this.point.name + ': <b>' + this.y + '</b> Votes';
-                        } 
-                        else {
-                            s = this.x  + ': ' + this.y;
-                        }
-                        return s;
-                    }*/
                 }
             }
         },
@@ -141,19 +122,12 @@ function plotPieChart(id, title, results) {
         }]
     };
 
-    /* Get the enrollment data from the REST api using AJAX and add it to the series */
-    console.log('plotPieChart');
-    console.log(id);
-    console.log(title);
-    console.log(results);
     /* Sort the results based on the number of votes */
     results = results.sort(function(a, b) {
         return b.value - a.value;
     });
 
-    /* Add the name and votes to the data series */
     var first = true;
-
     $.each(results, function(index, candidate) {
         /* Add a cut-out in the pie chart for the first entry */
         if (first) {
@@ -168,8 +142,6 @@ function plotPieChart(id, title, results) {
         else {
             options.series[0].data.push([candidate.name, candidate.votes]);
         }
-        console.log([candidate.name, candidate.votes]);
-
     });
 
     chart = new Highcharts.Chart(options);
