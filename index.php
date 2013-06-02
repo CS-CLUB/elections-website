@@ -394,6 +394,8 @@ elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 	{
 		/* Get the nominees needed to populate the nomination voting form */
 		$nominees = get_nominees($mysqli_elections);
+		/* Get the incumbents to ensure an incumbent cannot nominate themself */
+		$incumbents = get_incumbents($mysqli_elections);
 		include 'templates/nomination-form.php';
 	}
 	elseif (!has_voted($mysqli_elections, $_SESSION['access_account'], "election")
