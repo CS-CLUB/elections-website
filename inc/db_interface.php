@@ -744,10 +744,13 @@ function get_results($mysqli_elections, $vote_type, $position = 'all')
 			$stmt->bind_result($first_name, $last_name, $votes);
 	
 			/* fetch each individual that ran for the position */
+			$i = 0;
 			while ($stmt->fetch())
 			{
 				/* TODO This is not valid if two people have the exact same name! */
-				$results[$position][$first_name.' '.$last_name] = $votes;
+				$results[$position][$i]['name'] = $first_name.' '.$last_name;
+				$results[$position][$i]['votes'] = $votes;
+				$i++;
 			}
 	
 			/* close statement */
