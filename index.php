@@ -120,8 +120,10 @@ if (mysqli_connect_errno()) {
  * 		a) If the user has not already voted display the template for nomination/election
  * 			 period voting
  *
- * 		b) If the user has already voted then dislplay the thank you for voting page with
- * 			 election results/information if applicable
+ * 		b) If the user has already voted then dislplay the thank you for voting page
+ * 
+ * 		c) If the user has already voted and the election period is over, display the
+ * 		   election results page. 
  *
  * 8. Display the footer template at the bottom of the page regardless
  */
@@ -409,9 +411,10 @@ elseif (verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 	/*	b) 	If the user has already voted then display the thank you for voting page with
 	 * 		election results/information if applicable
 	 */
-	elseif (has_voted($mysqli_elections, $_SESSION['access_account'], "nomination")
+	elseif ((has_voted($mysqli_elections, $_SESSION['access_account'], "nomination")
 			|| has_voted($mysqli_elections, $_SESSION['access_account'], "election"))
-	{
+			&& (is_nomination($mysqli_elections) || is_election($mysqli_elections)))
+	{	
 		include 'templates/already-voted.php';
 	}
 	else
