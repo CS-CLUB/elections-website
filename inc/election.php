@@ -53,7 +53,7 @@ function is_nomination($mysqli_elections)
 	 * If the current date is within the nomination period, and the election tables exist
 	 * then it is the nomination period
 	 */
-	if ($cur_date > $nomination_start && $cur_date < $nomination_end 
+	if ($cur_date >= $nomination_start && $cur_date <= $nomination_end 
 		&& election_tables_exist($mysqli_elections))
 	{
 		return true;
@@ -82,7 +82,7 @@ function is_nomination_closed($mysqli_elections)
 	$nomination_end = DateTime::createFromFormat('m-d-H-i', $nomination_end_date); 
 	
 	/* Election start day, first weekday after September 14 at 11:59pm */
-	$election_start = DateTime::createFromFormat('Y-m-d-H-i', $election_start_date . '-00-00');
+	$election_start = DateTime::createFromFormat('Y-m-d-H-i', $election_start_date);
 
 	/*
 	 * If the current date is after the nomination period, before the election period,
@@ -115,7 +115,7 @@ function is_election($mysqli_elections)
 	$nomination_end = DateTime::createFromFormat('m-d-H-i', $nomination_end_date);
 	
 	/* Election start day, first weekday after September 14 at 11:59pm */
-	$election_start = DateTime::createFromFormat('Y-m-d-H-i', $election_start_date . '-00-00');
+	$election_start = DateTime::createFromFormat('Y-m-d-H-i', $election_start_date);
 
 	/* End of the first week day (11:59pm) after September 14th */
 	$election_end = DateTime::createFromFormat('Y-m-d-H-i', $election_end_date);
@@ -124,7 +124,7 @@ function is_election($mysqli_elections)
 	 * If the current date is within the nomination period, and the election tables exist
 	* then it is the nomination period
 	*/
-	if ($cur_date > $election_start && $cur_date < $election_end
+	if ($cur_date >= $election_start && $cur_date <= $election_end
 			&& election_tables_exist($mysqli_elections))
 	{
 		return true;
