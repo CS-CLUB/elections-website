@@ -20,6 +20,7 @@
 <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
+<li><a href="../packages/api.html"><i class="icon-folder-open"></i> api</a></li>
 <li><a href="../packages/dbinterface.html"><i class="icon-folder-open"></i> dbinterface</a></li>
 <li><a href="../packages/election.html"><i class="icon-folder-open"></i> election</a></li>
 <li><a href="../packages/utility.html"><i class="icon-folder-open"></i> utility</a></li>
@@ -35,7 +36,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">34</span></a></li>
+                <span class="label label-info">18</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
@@ -93,11 +94,6 @@ exists in the elections database members table.</span><pre>get_member</pre></a><
 <li class="function  "><a href="#function_get_results" title="get_results :: A function which gets the voting results for the current election for the
 election type specified."><span class="description">A function which gets the voting results for the current election for the
 election type specified.</span><pre>get_results</pre></a></li>
-<li class="function  "><a href="#function_get_top_three_candidates" title="get_top_three_candidates :: A function which gets the top three nominees for the candidate positions, the function
-returns an array of the positions and the first, second, and third place nominees
-as well as the number of votes they received."><span class="description">A function which gets the top three nominees for the candidate positions, the function
-returns an array of the positions and the first, second, and third place nominees
-as well as the number of votes they received.</span><pre>get_top_three_candidates</pre></a></li>
 <li class="function  "><a href="#function_get_winners" title="get_winners :: A function which gets the winners of the election for the current year"><span class="description">A function which gets the winners of the election for the current year</span><pre>get_winners</pre></a></li>
 <li class="function  "><a href="#function_has_voted" title="has_voted :: A function which verifies that a user has not already voted for a position before."><span class="description">A function which verifies that a user has not already voted for a position before.</span><pre>has_voted</pre></a></li>
 <li class="function  "><a href="#function_has_voted_all_positions" title="has_voted_all_positions :: Checks if the user has voted for each position"><span class="description">Checks if the user has voted for each position</span><pre>has_voted_all_positions</pre></a></li>
@@ -333,7 +329,7 @@ for a position they don't want to fulfill.</p></div>
 <a id="function_get_results"></a><div class="element clickable function  function_get_results" data-toggle="collapse" data-target=".function_get_results .collapse">
 <h2>A function which gets the voting results for the current election for the
 election type specified.</h2>
-<pre>get_results(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections, string $vote_type) : \An</pre>
+<pre>get_results(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections, string $vote_type, string $position) : \An</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>Use this function to get the vote breakdown after the
@@ -351,33 +347,15 @@ nomination/election.</p></div>
 <code>string</code><p>The type of vote they are casting, a "nomination" or
 "election" vote</p>
 </div>
+<div class="subelement argument">
+<h4>$position</h4>
+<code>string</code><p>The position to get the results for (President, Vice President,
+Coordinator, Treasurer). The default if no argument is provided is to get all positions.</p>
+</div>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>\An</code>array containing the positions and the names of the individuals and the
 number of votes they received</div>
-</div></div>
-</div>
-<a id="function_get_top_three_candidates"></a><div class="element clickable function  function_get_top_three_candidates" data-toggle="collapse" data-target=".function_get_top_three_candidates .collapse">
-<h2>A function which gets the top three nominees for the candidate positions, the function
-returns an array of the positions and the first, second, and third place nominees
-as well as the number of votes they received.</h2>
-<pre>get_top_three_candidates(<a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a> $mysqli_elections) : \A</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>TODO Finish the get_top_three_candidates method and add support to also get the
-top three winners of the election, this can be done in one method</p></div>
-<table class="table table-bordered"><tr>
-<th>package</th>
-<td><a href="../packages/dbinterface.html">dbinterface</a></td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$mysqli_elections</h4>
-<code><a href="http://php.net/manual/en/class.mysqli.php">\mysqli</a></code><p>The mysqli connection object for the ucsc elections DB</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>\A</code>multi-dimensional array of the candidate positions and the first, second,
-and third place nominees and the number of votes they received.</div>
 </div></div>
 </div>
 <a id="function_get_winners"></a><div class="element clickable function  function_get_winners" data-toggle="collapse" data-target=".function_get_winners .collapse">
@@ -761,7 +739,7 @@ of the winning candidate for the position</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-05-30T23:23:37-04:00.<br></footer></div>
+            generated on 2013-06-03T01:53:45-04:00.<br></footer></div>
 </div>
 </body>
 </html>

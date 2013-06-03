@@ -32,81 +32,97 @@
  * and the nominee for each position
  * 
  * An array mapping the positions to the incumbent
- * $candidates = array(	'President'         => '',
- *						'Vice President'    => '',
- *						'Coordinator'       => '',
- *						'Treasurer'         => ''
- *					   );
- *	
+ * $candidates = array( 'President'       => '',
+ *      				'Vice President'  => '',
+ *      				'Coordinator'     => '',
+ *      				'Treasurer'       => ''
+ *       			  );
+ *  
  * An array mapping the positions to the incumbent
- * $incumbents = array( 'President'         => '',
- *						'Vice President'    => '',
- *						'Coordinator'       => '',
- *						'Treasurer'         => ''
- *						);
+ * $incumbents = array( 'President'       => '',
+ *      				'Vice President'  => '',
+ *      				'Coordinator'     => '',
+ *      				'Treasurer'       => ''
+ *      			  );
  */
 ?>
 <section id="election-form">
-	<div class="page-header">
-		<h1>Election Period Voting</h1>
-	</div>
-	<div class="row">
-		<div class="span8">
-			<form class="well form-horizontal" action="index.php" method="post" accept-charset="UTF-8">
-				<fieldset>
-					<div class="control-group">
-			      		<label for="president_elect" class="control-label">President</label>
-				      	<div class="controls">
-				      		<select id="president_elect" name="president_elect" class="input-xlarge">
-				      			<option></option>
-				      			<?php 
-		      						echo '<option>' . $candidates['President'][0] . ' (Candidate)' . '</option>';
-		      						echo '<option>' . $incumbents['President'][0] . ' (Incumbent)' . '</option>';
-				      			?>
-				      		</select>
-				      	</div>
-		      		</div>
-		      		<div class="control-group">
-			      		<label for="vicepresident_elect" class="control-label">Vice President</label>
-				      	<div class="controls">
-				      		<select id="vicepresident_elect" name="vicepresident_elect" class="input-xlarge">
-				      			<option></option>
-				      			<?php 
-		      						echo '<option>' . $candidates['Vice President'][0] . ' (Candidate)' . '</option>';
-		      						echo '<option>' . $incumbents['Vice President'][0] . ' (Incumbent)' . '</option>';
-				      			?>
-				      		</select>
-				      	</div>
-		      		</div>
-		      		<div class="control-group">
-			      		<label for="coordinator_elect" class="control-label">Coordinator</label>
-				      	<div class="controls">
-				      		<select id="coordinator_elect" name="coordinator_elect" class="input-xlarge">
-				      			<option></option>
-				      			<?php 
-		      						echo '<option>' . $candidates['Coordinator'][0] . ' (Candidate)' . '</option>';
-		      						echo '<option>' . $incumbents['Coordinator'][0] . ' (Incumbent)' . '</option>';
-				      			?>
-				      		</select>
-				      	</div>
-		      		</div>
-		      					<div class="control-group">
-			      		<label for="treasurer_elect" class="control-label">Treasurer</label>
-				      	<div class="controls">
-				      		<select id="treasurer_elect" name="treasurer_elect" class="input-xlarge">
-				      			<option></option>
-				      			<?php 
-		      						echo '<option>' . $candidates['Treasurer'][0] . ' (Candidate)' . '</option>';
-		      						echo '<option>' . $incumbents['Treasurer'][0] . ' (Incumbent)' . '</option>';
-				      			?>
-				      		</select>
-				      	</div>
-		      		</div>
-		      		<div class="form-actions">
-		            	<button class="btn btn-primary" type="submit" name="election_vote" value="Submit Vote">Submit Vote</button>
-		          </div>
-				</fieldset>
-			</form>
-		</div>
-	</div>
+  <div class="page-header">
+  <h1>Election Period Voting</h1>
+  </div>
+  <div class="row">
+  <div class="span8">
+    <form class="well form-horizontal" action="index.php" method="post" accept-charset="UTF-8">
+    <fieldset>
+      <div class="control-group">
+        <label for="president_elect" class="control-label">President</label>
+        <div class="controls">
+          <select id="president_elect" name="president_elect" class="input-xlarge">
+          <option></option>
+          <?php 
+            echo '<option>' . $candidates['President'][0] . ' (Candidate)' . '</option>';
+            /* Display the incumbent if there is one */
+            if (strlen($incumbents['President'][0]) > 1)
+            {
+              echo '<option>' . $incumbents['President'][0] . ' (Incumbent)' . '</option>';
+            }
+          ?>
+          </select>
+        </div>
+        </div>
+        <div class="control-group">
+        <label for="vicepresident_elect" class="control-label">Vice President</label>
+        <div class="controls">
+          <select id="vicepresident_elect" name="vicepresident_elect" class="input-xlarge">
+          <option></option>
+          <?php 
+            echo '<option>' . $candidates['Vice President'][0] . ' (Candidate)' . '</option>';
+            /* Display the incumbent if there is one */
+            if (strlen($incumbents['Vice President'][0]) > 1)
+            {
+              echo '<option>' . $incumbents['Vice President'][0] . ' (Incumbent)' . '</option>';
+            }
+          ?>
+          </select>
+        </div>
+        </div>
+        <div class="control-group">
+        <label for="coordinator_elect" class="control-label">Coordinator</label>
+        <div class="controls">
+          <select id="coordinator_elect" name="coordinator_elect" class="input-xlarge">
+          <option></option>
+          <?php 
+            echo '<option>' . $candidates['Coordinator'][0] . ' (Candidate)' . '</option>';
+            /* Display the incumbent if there is one */
+            if (strlen($incumbents['Coordinator'][0]) > 1)
+            {
+              echo '<option>' . $incumbents['Coordinator'][0] . ' (Incumbent)' . '</option>';
+            }
+          ?>
+          </select>
+        </div>
+        </div>
+          <div class="control-group">
+        <label for="treasurer_elect" class="control-label">Treasurer</label>
+        <div class="controls">
+          <select id="treasurer_elect" name="treasurer_elect" class="input-xlarge">
+          <option></option>
+          <?php 
+            echo '<option>' . $candidates['Treasurer'][0] . ' (Candidate)' . '</option>';
+            /* Display the incumbent if there is one */
+            if (strlen($incumbents['Treasurer'][0]) > 1)
+            {
+              echo '<option>' . $incumbents['Treasurer'][0] . ' (Incumbent)' . '</option>';
+            }
+          ?>
+          </select>
+        </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit" name="election_vote" value="Submit Vote">Submit Vote</button>
+        </div>
+    </fieldset>
+    </form>
+  </div>
+  </div>
 </section>

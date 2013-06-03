@@ -1,0 +1,702 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elections Website » \Slim\Http\Request</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Elections Website</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/Slim.html"><i class="icon-th"></i> Slim</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Slim.html"><i class="icon-folder-open"></i> Slim</a></li>
+<li><a href="../packages/Slim%0AMIT%20LICENSE%0APermission%20is%20hereby%20granted,%20free%20of%20charge,%20to%20any%20person%20obtaining%0Aa%20copy%20of%20this%20software%20and%20associated%20documentation%20files%20(the%0A%22Software%22),%20to%20deal%20in%20the%20Software%20without%20restriction,%20including%0Awithout%20limitation%20the%20rights%20to%20use,%20copy,%20modify,%20merge,%20publish,%0Adistribute,%20sublicense,%20and.or%20sell%20copies%20of%20the%20Software,%20and%20to%0Apermit%20persons%20to%20whom%20the%20Software%20is%20furnished%20to%20do%20so,%20subject%20to%0Athe%20following%20conditions:%0AThe%20above%20copyright%20notice%20and%20this%20permission%20notice%20shall%20be%0Aincluded%20in%20all%20copies%20or%20substantial%20portions%20of%20the%20Software.html"><i class="icon-folder-open"></i> Slim
+MIT LICENSE
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software</a></li>
+<li><a href="../packages/dbinterface.html"><i class="icon-folder-open"></i> dbinterface</a></li>
+<li><a href="../packages/election.html"><i class="icon-folder-open"></i> election</a></li>
+<li><a href="../packages/utility.html"><i class="icon-folder-open"></i> utility</a></li>
+<li><a href="../packages/validate.html"><i class="icon-folder-open"></i> validate</a></li>
+<li><a href="../packages/verify.html"><i class="icon-folder-open"></i> verify</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">114</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct :: Constructor"><span class="description">Constructor</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_cookies" title="cookies :: Fetch COOKIE data"><span class="description">Fetch COOKIE data</span><pre>cookies()</pre></a></li>
+<li class="method public "><a href="#method_delete" title="delete :: Fetch DELETE data (alias for \Slim\Http\Request::post)"><span class="description">Fetch DELETE data (alias for \Slim\Http\Request::post)</span><pre>delete()</pre></a></li>
+<li class="method public "><a href="#method_get" title="get :: Fetch GET data"><span class="description">Fetch GET data</span><pre>get()</pre></a></li>
+<li class="method public "><a href="#method_getBody" title="getBody :: Get Body"><span class="description">Get Body</span><pre>getBody()</pre></a></li>
+<li class="method public "><a href="#method_getContentCharset" title="getContentCharset :: Get Content Charset"><span class="description">Get Content Charset</span><pre>getContentCharset()</pre></a></li>
+<li class="method public "><a href="#method_getContentLength" title="getContentLength :: Get Content-Length"><span class="description">Get Content-Length</span><pre>getContentLength()</pre></a></li>
+<li class="method public "><a href="#method_getContentType" title="getContentType :: Get Content Type"><span class="description">Get Content Type</span><pre>getContentType()</pre></a></li>
+<li class="method public "><a href="#method_getHost" title="getHost :: Get Host"><span class="description">Get Host</span><pre>getHost()</pre></a></li>
+<li class="method public "><a href="#method_getHostWithPort" title="getHostWithPort :: Get Host with Port"><span class="description">Get Host with Port</span><pre>getHostWithPort()</pre></a></li>
+<li class="method public "><a href="#method_getIp" title="getIp :: Get IP"><span class="description">Get IP</span><pre>getIp()</pre></a></li>
+<li class="method public "><a href="#method_getMediaType" title="getMediaType :: Get Media Type (type/subtype within Content Type header)"><span class="description">Get Media Type (type/subtype within Content Type header)</span><pre>getMediaType()</pre></a></li>
+<li class="method public "><a href="#method_getMediaTypeParams" title="getMediaTypeParams :: Get Media Type Params"><span class="description">Get Media Type Params</span><pre>getMediaTypeParams()</pre></a></li>
+<li class="method public "><a href="#method_getMethod" title="getMethod :: Get HTTP method"><span class="description">Get HTTP method</span><pre>getMethod()</pre></a></li>
+<li class="method public "><a href="#method_getPath" title="getPath :: Get Path (physical path + virtual path)"><span class="description">Get Path (physical path + virtual path)</span><pre>getPath()</pre></a></li>
+<li class="method public "><a href="#method_getPathInfo" title="getPathInfo :: Get Path Info (virtual path)"><span class="description">Get Path Info (virtual path)</span><pre>getPathInfo()</pre></a></li>
+<li class="method public "><a href="#method_getPort" title="getPort :: Get Port"><span class="description">Get Port</span><pre>getPort()</pre></a></li>
+<li class="method public "><a href="#method_getReferer" title="getReferer :: Get Referer (for those who can't spell)"><span class="description">Get Referer (for those who can't spell)</span><pre>getReferer()</pre></a></li>
+<li class="method public "><a href="#method_getReferrer" title="getReferrer :: Get Referrer"><span class="description">Get Referrer</span><pre>getReferrer()</pre></a></li>
+<li class="method public "><a href="#method_getResourceUri" title="getResourceUri :: LEGACY: Get Resource URI (alias for Slim_Http_Request::getPathInfo)"><span class="description">LEGACY: Get Resource URI (alias for Slim_Http_Request::getPathInfo)</span><pre>getResourceUri()</pre></a></li>
+<li class="method public "><a href="#method_getRootUri" title="getRootUri :: LEGACY: Get Root URI (alias for Slim_Http_Request::getScriptName)"><span class="description">LEGACY: Get Root URI (alias for Slim_Http_Request::getScriptName)</span><pre>getRootUri()</pre></a></li>
+<li class="method public "><a href="#method_getScheme" title="getScheme :: Get Scheme (https or http)"><span class="description">Get Scheme (https or http)</span><pre>getScheme()</pre></a></li>
+<li class="method public "><a href="#method_getScriptName" title="getScriptName :: Get Script Name (physical path)"><span class="description">Get Script Name (physical path)</span><pre>getScriptName()</pre></a></li>
+<li class="method public "><a href="#method_getUrl" title="getUrl :: Get URL (scheme + host [ + port if non-standard ])"><span class="description">Get URL (scheme + host [ + port if non-standard ])</span><pre>getUrl()</pre></a></li>
+<li class="method public "><a href="#method_getUserAgent" title="getUserAgent :: Get User Agent"><span class="description">Get User Agent</span><pre>getUserAgent()</pre></a></li>
+<li class="method public "><a href="#method_headers" title="headers :: Get Headers"><span class="description">Get Headers</span><pre>headers()</pre></a></li>
+<li class="method public "><a href="#method_isAjax" title="isAjax :: Is this an AJAX request?"><span class="description">Is this an AJAX request?</span><pre>isAjax()</pre></a></li>
+<li class="method public "><a href="#method_isDelete" title="isDelete :: Is this a DELETE request?"><span class="description">Is this a DELETE request?</span><pre>isDelete()</pre></a></li>
+<li class="method public "><a href="#method_isFormData" title="isFormData :: Does the Request body contain parseable form data?"><span class="description">Does the Request body contain parseable form data?</span><pre>isFormData()</pre></a></li>
+<li class="method public "><a href="#method_isGet" title="isGet :: Is this a GET request?"><span class="description">Is this a GET request?</span><pre>isGet()</pre></a></li>
+<li class="method public "><a href="#method_isHead" title="isHead :: Is this a HEAD request?"><span class="description">Is this a HEAD request?</span><pre>isHead()</pre></a></li>
+<li class="method public "><a href="#method_isOptions" title="isOptions :: Is this a OPTIONS request?"><span class="description">Is this a OPTIONS request?</span><pre>isOptions()</pre></a></li>
+<li class="method public "><a href="#method_isPost" title="isPost :: Is this a POST request?"><span class="description">Is this a POST request?</span><pre>isPost()</pre></a></li>
+<li class="method public "><a href="#method_isPut" title="isPut :: Is this a PUT request?"><span class="description">Is this a PUT request?</span><pre>isPut()</pre></a></li>
+<li class="method public "><a href="#method_isXhr" title="isXhr :: Is this an XHR request? (alias of Slim_Http_Request::isAjax)"><span class="description">Is this an XHR request? (alias of Slim_Http_Request::isAjax)</span><pre>isXhr()</pre></a></li>
+<li class="method public "><a href="#method_params" title="params :: Fetch GET and POST data"><span class="description">Fetch GET and POST data</span><pre>params()</pre></a></li>
+<li class="method public "><a href="#method_post" title="post :: Fetch POST data"><span class="description">Fetch POST data</span><pre>post()</pre></a></li>
+<li class="method public "><a href="#method_put" title="put :: Fetch PUT data (alias for \Slim\Http\Request::post)"><span class="description">Fetch PUT data (alias for \Slim\Http\Request::post)</span><pre>put()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected "><a href="#property_env" title="$env :: "><span class="description"></span><pre>$env</pre></a></li>
+<li class="property protected "><a href="#property_formDataMediaTypes" title="$formDataMediaTypes :: "><span class="description"></span><pre>$formDataMediaTypes</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants
+                    <ul>
+<li class="constant  "><a href="#constant_METHOD_DELETE" title="METHOD_DELETE :: "><span class="description">METHOD_DELETE</span><pre>METHOD_DELETE</pre></a></li>
+<li class="constant  "><a href="#constant_METHOD_GET" title="METHOD_GET :: "><span class="description">METHOD_GET</span><pre>METHOD_GET</pre></a></li>
+<li class="constant  "><a href="#constant_METHOD_HEAD" title="METHOD_HEAD :: "><span class="description">METHOD_HEAD</span><pre>METHOD_HEAD</pre></a></li>
+<li class="constant  "><a href="#constant_METHOD_OPTIONS" title="METHOD_OPTIONS :: "><span class="description">METHOD_OPTIONS</span><pre>METHOD_OPTIONS</pre></a></li>
+<li class="constant  "><a href="#constant_METHOD_OVERRIDE" title="METHOD_OVERRIDE :: "><span class="description">METHOD_OVERRIDE</span><pre>METHOD_OVERRIDE</pre></a></li>
+<li class="constant  "><a href="#constant_METHOD_POST" title="METHOD_POST :: "><span class="description">METHOD_POST</span><pre>METHOD_POST</pre></a></li>
+<li class="constant  "><a href="#constant_METHOD_PUT" title="METHOD_PUT :: "><span class="description">METHOD_PUT</span><pre>METHOD_PUT</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\Slim\Http\Request"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/Slim.html">Slim</a></li>
+<li>
+<span class="divider">\</span><a href="../namespaces/Slim.Http.html">Http</a>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Slim.Http.Request.html">Request</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Slim HTTP Request</p>
+<div class="details">
+<div class="long_description"><p>This class provides a human-friendly interface to the Slim environment variables;
+environment variables are passed by reference and will be modified directly.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Slim.html">Slim</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="">Josh Lockhart</a></td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Constructor</h2>
+<pre>__construct(array $env) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="api.Slim.Environment.html#%5CSlim%5CEnvironment">\Slim\Environment</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$env</h4>
+<code>array</code>
+</div>
+</div></div>
+</div>
+<a id="method_cookies"></a><div class="element clickable method public method_cookies" data-toggle="collapse" data-target=".method_cookies .collapse">
+<h2>Fetch COOKIE data</h2>
+<pre>cookies(string $key) : array | string | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method returns a key-value array of Cookie data sent in the HTTP request, or
+the value of a array key if requested; if the array key does not exist, NULL is returned.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>string</code><code>null</code>
+</div>
+</div></div>
+</div>
+<a id="method_delete"></a><div class="element clickable method public method_delete" data-toggle="collapse" data-target=".method_delete .collapse">
+<h2>Fetch DELETE data (alias for \Slim\Http\Request::post)</h2>
+<pre>delete(string $key) : array | mixed | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>mixed</code><code>null</code>
+</div>
+</div></div>
+</div>
+<a id="method_get"></a><div class="element clickable method public method_get" data-toggle="collapse" data-target=".method_get .collapse">
+<h2>Fetch GET data</h2>
+<pre>get(string $key) : array | mixed | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method returns a key-value array of data sent in the HTTP request query string, or
+the value of the array key if requested; if the array key does not exist, NULL is returned.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>mixed</code><code>null</code>
+</div>
+</div></div>
+</div>
+<a id="method_getBody"></a><div class="element clickable method public method_getBody" data-toggle="collapse" data-target=".method_getBody .collapse">
+<h2>Get Body</h2>
+<pre>getBody() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getContentCharset"></a><div class="element clickable method public method_getContentCharset" data-toggle="collapse" data-target=".method_getContentCharset .collapse">
+<h2>Get Content Charset</h2>
+<pre>getContentCharset() : string | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code><code>null</code>
+</div>
+</div></div>
+</div>
+<a id="method_getContentLength"></a><div class="element clickable method public method_getContentLength" data-toggle="collapse" data-target=".method_getContentLength .collapse">
+<h2>Get Content-Length</h2>
+<pre>getContentLength() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_getContentType"></a><div class="element clickable method public method_getContentType" data-toggle="collapse" data-target=".method_getContentType .collapse">
+<h2>Get Content Type</h2>
+<pre>getContentType() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getHost"></a><div class="element clickable method public method_getHost" data-toggle="collapse" data-target=".method_getHost .collapse">
+<h2>Get Host</h2>
+<pre>getHost() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getHostWithPort"></a><div class="element clickable method public method_getHostWithPort" data-toggle="collapse" data-target=".method_getHostWithPort .collapse">
+<h2>Get Host with Port</h2>
+<pre>getHostWithPort() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getIp"></a><div class="element clickable method public method_getIp" data-toggle="collapse" data-target=".method_getIp .collapse">
+<h2>Get IP</h2>
+<pre>getIp() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getMediaType"></a><div class="element clickable method public method_getMediaType" data-toggle="collapse" data-target=".method_getMediaType .collapse">
+<h2>Get Media Type (type/subtype within Content Type header)</h2>
+<pre>getMediaType() : string | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code><code>null</code>
+</div>
+</div></div>
+</div>
+<a id="method_getMediaTypeParams"></a><div class="element clickable method public method_getMediaTypeParams" data-toggle="collapse" data-target=".method_getMediaTypeParams .collapse">
+<h2>Get Media Type Params</h2>
+<pre>getMediaTypeParams() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getMethod"></a><div class="element clickable method public method_getMethod" data-toggle="collapse" data-target=".method_getMethod .collapse">
+<h2>Get HTTP method</h2>
+<pre>getMethod() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getPath"></a><div class="element clickable method public method_getPath" data-toggle="collapse" data-target=".method_getPath .collapse">
+<h2>Get Path (physical path + virtual path)</h2>
+<pre>getPath() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getPathInfo"></a><div class="element clickable method public method_getPathInfo" data-toggle="collapse" data-target=".method_getPathInfo .collapse">
+<h2>Get Path Info (virtual path)</h2>
+<pre>getPathInfo() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getPort"></a><div class="element clickable method public method_getPort" data-toggle="collapse" data-target=".method_getPort .collapse">
+<h2>Get Port</h2>
+<pre>getPort() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_getReferer"></a><div class="element clickable method public method_getReferer" data-toggle="collapse" data-target=".method_getReferer .collapse">
+<h2>Get Referer (for those who can't spell)</h2>
+<pre>getReferer() : string | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code><code>null</code>
+</div>
+</div></div>
+</div>
+<a id="method_getReferrer"></a><div class="element clickable method public method_getReferrer" data-toggle="collapse" data-target=".method_getReferrer .collapse">
+<h2>Get Referrer</h2>
+<pre>getReferrer() : string | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code><code>null</code>
+</div>
+</div></div>
+</div>
+<a id="method_getResourceUri"></a><div class="element clickable method public method_getResourceUri" data-toggle="collapse" data-target=".method_getResourceUri .collapse">
+<h2>LEGACY: Get Resource URI (alias for Slim_Http_Request::getPathInfo)</h2>
+<pre>getResourceUri() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getRootUri"></a><div class="element clickable method public method_getRootUri" data-toggle="collapse" data-target=".method_getRootUri .collapse">
+<h2>LEGACY: Get Root URI (alias for Slim_Http_Request::getScriptName)</h2>
+<pre>getRootUri() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getScheme"></a><div class="element clickable method public method_getScheme" data-toggle="collapse" data-target=".method_getScheme .collapse">
+<h2>Get Scheme (https or http)</h2>
+<pre>getScheme() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getScriptName"></a><div class="element clickable method public method_getScriptName" data-toggle="collapse" data-target=".method_getScriptName .collapse">
+<h2>Get Script Name (physical path)</h2>
+<pre>getScriptName() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getUrl"></a><div class="element clickable method public method_getUrl" data-toggle="collapse" data-target=".method_getUrl .collapse">
+<h2>Get URL (scheme + host [ + port if non-standard ])</h2>
+<pre>getUrl() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getUserAgent"></a><div class="element clickable method public method_getUserAgent" data-toggle="collapse" data-target=".method_getUserAgent .collapse">
+<h2>Get User Agent</h2>
+<pre>getUserAgent() : string | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code><code>null</code>
+</div>
+</div></div>
+</div>
+<a id="method_headers"></a><div class="element clickable method public method_headers" data-toggle="collapse" data-target=".method_headers .collapse">
+<h2>Get Headers</h2>
+<pre>headers(string $key, mixed $default) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method returns a key-value array of headers sent in the HTTP request, or
+the value of a hash key if requested; if the array key does not exist, NULL is returned.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$default</h4>
+<code>mixed</code><p>The default value returned if the requested header is not available</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_isAjax"></a><div class="element clickable method public method_isAjax" data-toggle="collapse" data-target=".method_isAjax .collapse">
+<h2>Is this an AJAX request?</h2>
+<pre>isAjax() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isDelete"></a><div class="element clickable method public method_isDelete" data-toggle="collapse" data-target=".method_isDelete .collapse">
+<h2>Is this a DELETE request?</h2>
+<pre>isDelete() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isFormData"></a><div class="element clickable method public method_isFormData" data-toggle="collapse" data-target=".method_isFormData .collapse">
+<h2>Does the Request body contain parseable form data?</h2>
+<pre>isFormData() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isGet"></a><div class="element clickable method public method_isGet" data-toggle="collapse" data-target=".method_isGet .collapse">
+<h2>Is this a GET request?</h2>
+<pre>isGet() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isHead"></a><div class="element clickable method public method_isHead" data-toggle="collapse" data-target=".method_isHead .collapse">
+<h2>Is this a HEAD request?</h2>
+<pre>isHead() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isOptions"></a><div class="element clickable method public method_isOptions" data-toggle="collapse" data-target=".method_isOptions .collapse">
+<h2>Is this a OPTIONS request?</h2>
+<pre>isOptions() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isPost"></a><div class="element clickable method public method_isPost" data-toggle="collapse" data-target=".method_isPost .collapse">
+<h2>Is this a POST request?</h2>
+<pre>isPost() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isPut"></a><div class="element clickable method public method_isPut" data-toggle="collapse" data-target=".method_isPut .collapse">
+<h2>Is this a PUT request?</h2>
+<pre>isPut() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isXhr"></a><div class="element clickable method public method_isXhr" data-toggle="collapse" data-target=".method_isXhr .collapse">
+<h2>Is this an XHR request? (alias of Slim_Http_Request::isAjax)</h2>
+<pre>isXhr() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_params"></a><div class="element clickable method public method_params" data-toggle="collapse" data-target=".method_params .collapse">
+<h2>Fetch GET and POST data</h2>
+<pre>params(string $key) : array | mixed | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method returns a union of GET and POST data as a key-value array, or the value
+of the array key if requested; if the array key does not exist, NULL is returned.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>mixed</code><code>null</code>
+</div>
+</div></div>
+</div>
+<a id="method_post"></a><div class="element clickable method public method_post" data-toggle="collapse" data-target=".method_post .collapse">
+<h2>Fetch POST data</h2>
+<pre>post(string $key) : array | mixed | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method returns a key-value array of data sent in the HTTP request body, or
+the value of a hash key if requested; if the array key does not exist, NULL is returned.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.runtimeexception.php">\RuntimeException</a></code></th>
+<td>If environment input is not available</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>mixed</code><code>null</code>
+</div>
+</div></div>
+</div>
+<a id="method_put"></a><div class="element clickable method public method_put" data-toggle="collapse" data-target=".method_put .collapse">
+<h2>Fetch PUT data (alias for \Slim\Http\Request::post)</h2>
+<pre>put(string $key) : array | mixed | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>mixed</code><code>null</code>
+</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_env"> </a><div class="element clickable property protected property_env" data-toggle="collapse" data-target=".property_env .collapse">
+<h2></h2>
+<pre>$env : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_formDataMediaTypes"> </a><div class="element clickable property protected property_formDataMediaTypes" data-toggle="collapse" data-target=".property_formDataMediaTypes .collapse">
+<h2></h2>
+<pre>$formDataMediaTypes : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_METHOD_DELETE"> </a><div class="element clickable constant  constant_METHOD_DELETE" data-toggle="collapse" data-target=".constant_METHOD_DELETE .collapse">
+<h2>METHOD_DELETE</h2>
+<pre>METHOD_DELETE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_METHOD_GET"> </a><div class="element clickable constant  constant_METHOD_GET" data-toggle="collapse" data-target=".constant_METHOD_GET .collapse">
+<h2>METHOD_GET</h2>
+<pre>METHOD_GET </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_METHOD_HEAD"> </a><div class="element clickable constant  constant_METHOD_HEAD" data-toggle="collapse" data-target=".constant_METHOD_HEAD .collapse">
+<h2>METHOD_HEAD</h2>
+<pre>METHOD_HEAD </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_METHOD_OPTIONS"> </a><div class="element clickable constant  constant_METHOD_OPTIONS" data-toggle="collapse" data-target=".constant_METHOD_OPTIONS .collapse">
+<h2>METHOD_OPTIONS</h2>
+<pre>METHOD_OPTIONS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_METHOD_OVERRIDE"> </a><div class="element clickable constant  constant_METHOD_OVERRIDE" data-toggle="collapse" data-target=".constant_METHOD_OVERRIDE .collapse">
+<h2>METHOD_OVERRIDE</h2>
+<pre>METHOD_OVERRIDE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_METHOD_POST"> </a><div class="element clickable constant  constant_METHOD_POST" data-toggle="collapse" data-target=".constant_METHOD_POST .collapse">
+<h2>METHOD_POST</h2>
+<pre>METHOD_POST </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_METHOD_PUT"> </a><div class="element clickable constant  constant_METHOD_PUT" data-toggle="collapse" data-target=".constant_METHOD_PUT .collapse">
+<h2>METHOD_PUT</h2>
+<pre>METHOD_PUT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-06-03T01:50:26-04:00.<br></footer></div>
+</div>
+</body>
+</html>

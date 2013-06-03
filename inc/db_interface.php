@@ -687,20 +687,32 @@ function get_incumbents($mysqli_elections)
  * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
  * @param string $vote_type The type of vote they are casting, a "nomination" or
  * "election" vote
+ * @param string $position The position to get the results for (President, Vice President,
+ * Coordinator, Treasurer). The default if no argument is provided is to get all positions.
+ * 
  * @return An array containing the positions and the names of the individuals and the
  * number of votes they received
  */
-function get_results($mysqli_elections, $vote_type)
+function get_results($mysqli_elections, $vote_type, $position = 'all')
 {
 	$current_year = date('Y');
 	$positions_tbl = '';
 	$members_tbl = 'members_' . $current_year;
 	
-	$results = array(	'President'         => array(),
-						'Vice President'    => array(),
-						'Coordinator'       => array(),
-						'Treasurer'         => array()
-					);
+	$results = array();
+	
+	if ($position === 'all')
+	{
+		$results = array(	'President'         => array(),
+							'Vice President'    => array(),
+							'Coordinator'       => array(),
+							'Treasurer'         => array()
+						);
+	}
+	else
+	{
+		$results = array($position => array());
+	}
 	
 	/* Set the table to check their voting record based on the type of vote being cast */
 	if (strcasecmp($vote_type, 'nomination') === 0)
@@ -732,10 +744,13 @@ function get_results($mysqli_elections, $vote_type)
 			$stmt->bind_result($first_name, $last_name, $votes);
 	
 			/* fetch each individual that ran for the position */
+			$i = 0;
 			while ($stmt->fetch())
 			{
 				/* TODO This is not valid if two people have the exact same name! */
-				$results[$position][$first_name.' '.$last_name] = $votes;
+				$results[$position][$i]['name'] = $first_name.' '.$last_name;
+				$results[$position][$i]['votes'] = $votes;
+				$i++;
 			}
 	
 			/* close statement */
@@ -756,6 +771,9 @@ function get_results($mysqli_elections, $vote_type)
  */
 function get_winners($mysqli_elections)
 {
+	/* Access the global for the accounts database */
+	global $db_acc_name;
+	
 	/* An array mapping the position to the winner */
 	$winners = array('President'         => array('first_name' => '',
   										  		  'last_name' => '', 												 
@@ -774,7 +792,7 @@ function get_winners($mysqli_elections)
 	$current_year = date('Y');
 	$winners_table = "winners_elect_" . $current_year;
 	$members_table = "members_" . $current_year;
-	$ucsc_members_table = "ucsc_accounts.ucsc_members";
+	$ucsc_members_table = $db_acc_name.".ucsc_members";
 	
 	/* Get the winner for each position */
 	foreach ($winners as $position => $winner)
@@ -1503,30 +1521,5 @@ function determine_winners($mysqli_elections, $election_type)
 
 	/* Finally, record the winners in election DB */
 	record_winners($mysqli_elections, $winners, $election_type);
-}
-
-
-/**
- * A function which gets the top three nominees for the candidate positions, the function
- * returns an array of the positions and the first, second, and third place nominees
- * as well as the number of votes they received.
- *
- * TODO Finish the get_top_three_candidates method and add support to also get the
- * top three winners of the election, this can be done in one method
- * 
- * @package dbinterface
- *
- * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
- * @return A multi-dimensional array of the candidate positions and the first, second,
- * and third place nominees and the number of votes they received.
- */
-function get_top_three_candidates($mysqli_elections)
-{
-	/* An array mapping the nominated position to the nominees */
-	$candidates = array('President'         => array(),
-						'Vice President'    => array(),
-						'Coordinator'       => array(),
-						'Treasurer'         => array()
-	);
 }
 ?>

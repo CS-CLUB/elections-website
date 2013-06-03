@@ -23,16 +23,16 @@ require_once 'utility.php';
 
 date_default_timezone_set('America/Toronto');
 
-/* September 1, 12:00 am */
+/* Start of nomination period, usually Sept. 1, 12:00 am */
 $nomination_start_date = '09-01-00-00';
 
-/* September 14th (11:59pm) */
+/* The end of the nomination period, usually Sept. 14, 11:59pm */
 $nomination_end_date = '09-14-23-59';
 
-/* Election start day, first weekday after September 14, at 12:00am */
-$election_start_date =  get_next_weekday(DateTime::createFromFormat('Y-m-d-H-i', date('Y').'-'.$nomination_end_date));
+/* Election start day, first weekday after nomination end date at 12:00am */
+$election_start_date =  get_next_weekday(DateTime::createFromFormat('Y-m-d-H-i', date('Y').'-'.$nomination_end_date)) . '-00-00';
 
-/* End of the first week day (11:59pm) after September 14th */
-$election_end_date = DateTime::createFromFormat('Y-m-d-H-i', $election_start_date . '-00-00')->format('Y-m-d') . '-23-59';
+/* Election ends on the same day as the election start at 11:59pm */
+$election_end_date = DateTime::createFromFormat('Y-m-d-H-i', $election_start_date)->format('Y-m-d') . '-23-59';
 
 ?>

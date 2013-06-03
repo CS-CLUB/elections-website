@@ -42,7 +42,7 @@
   </p>
   <p>
   		As well, don't forget to click below to view the election results and become familiar with your 
-  		new/current club executives.
+  		club executives.
   </p>
   <p><a href="http://cs-club.ca" class="btn btn-primary btn-large">Learn more »</a>
   	 <a href="results.php" class="btn btn-primary btn-large">View Results</a></p>

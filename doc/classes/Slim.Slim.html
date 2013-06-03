@@ -1,0 +1,1275 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elections Website » \Slim\Slim</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Elections Website</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/Slim.html"><i class="icon-th"></i> Slim</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Slim.html"><i class="icon-folder-open"></i> Slim</a></li>
+<li><a href="../packages/Slim%0AMIT%20LICENSE%0APermission%20is%20hereby%20granted,%20free%20of%20charge,%20to%20any%20person%20obtaining%0Aa%20copy%20of%20this%20software%20and%20associated%20documentation%20files%20(the%0A%22Software%22),%20to%20deal%20in%20the%20Software%20without%20restriction,%20including%0Awithout%20limitation%20the%20rights%20to%20use,%20copy,%20modify,%20merge,%20publish,%0Adistribute,%20sublicense,%20and.or%20sell%20copies%20of%20the%20Software,%20and%20to%0Apermit%20persons%20to%20whom%20the%20Software%20is%20furnished%20to%20do%20so,%20subject%20to%0Athe%20following%20conditions:%0AThe%20above%20copyright%20notice%20and%20this%20permission%20notice%20shall%20be%0Aincluded%20in%20all%20copies%20or%20substantial%20portions%20of%20the%20Software.html"><i class="icon-folder-open"></i> Slim
+MIT LICENSE
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software</a></li>
+<li><a href="../packages/dbinterface.html"><i class="icon-folder-open"></i> dbinterface</a></li>
+<li><a href="../packages/election.html"><i class="icon-folder-open"></i> election</a></li>
+<li><a href="../packages/utility.html"><i class="icon-folder-open"></i> utility</a></li>
+<li><a href="../packages/validate.html"><i class="icon-folder-open"></i> validate</a></li>
+<li><a href="../packages/verify.html"><i class="icon-folder-open"></i> verify</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">114</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct :: Constructor"><span class="description">Constructor</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_add" title="add :: Add middleware"><span class="description">Add middleware</span><pre>add()</pre></a></li>
+<li class="method public "><a href="#method_applyHook" title="applyHook :: Invoke hook"><span class="description">Invoke hook</span><pre>applyHook()</pre></a></li>
+<li class="method public "><a href="#method_autoload" title="autoload :: Slim PSR-0 autoloader"><span class="description">Slim PSR-0 autoloader</span><pre>autoload()</pre></a></li>
+<li class="method public "><a href="#method_call" title="call :: Call"><span class="description">Call</span><pre>call()</pre></a></li>
+<li class="method public "><a href="#method_clearHooks" title="clearHooks :: Clear hook listeners"><span class="description">Clear hook listeners</span><pre>clearHooks()</pre></a></li>
+<li class="method public "><a href="#method_config" title="config :: Configure Slim Settings"><span class="description">Configure Slim Settings</span><pre>config()</pre></a></li>
+<li class="method public "><a href="#method_configureMode" title="configureMode :: Configure Slim for a given mode"><span class="description">Configure Slim for a given mode</span><pre>configureMode()</pre></a></li>
+<li class="method public "><a href="#method_contentType" title="contentType :: Set the HTTP response Content-Type"><span class="description">Set the HTTP response Content-Type</span><pre>contentType()</pre></a></li>
+<li class="method public "><a href="#method_delete" title="delete :: Add DELETE route"><span class="description">Add DELETE route</span><pre>delete()</pre></a></li>
+<li class="method public "><a href="#method_deleteCookie" title="deleteCookie :: Delete HTTP cookie (encrypted or unencrypted)"><span class="description">Delete HTTP cookie (encrypted or unencrypted)</span><pre>deleteCookie()</pre></a></li>
+<li class="method public "><a href="#method_environment" title="environment :: Get a reference to the Environment object"><span class="description">Get a reference to the Environment object</span><pre>environment()</pre></a></li>
+<li class="method public "><a href="#method_error" title="error :: Error Handler"><span class="description">Error Handler</span><pre>error()</pre></a></li>
+<li class="method public "><a href="#method_etag" title="etag :: Set ETag HTTP Response Header"><span class="description">Set ETag HTTP Response Header</span><pre>etag()</pre></a></li>
+<li class="method public "><a href="#method_expires" title="expires :: Set Expires HTTP response header"><span class="description">Set Expires HTTP response header</span><pre>expires()</pre></a></li>
+<li class="method public "><a href="#method_flash" title="flash :: Set flash message for subsequent request"><span class="description">Set flash message for subsequent request</span><pre>flash()</pre></a></li>
+<li class="method public "><a href="#method_flashKeep" title="flashKeep :: Keep flash messages from previous request for subsequent request"><span class="description">Keep flash messages from previous request for subsequent request</span><pre>flashKeep()</pre></a></li>
+<li class="method public "><a href="#method_flashNow" title="flashNow :: Set flash message for current request"><span class="description">Set flash message for current request</span><pre>flashNow()</pre></a></li>
+<li class="method public "><a href="#method_get" title="get :: Add GET route"><span class="description">Add GET route</span><pre>get()</pre></a></li>
+<li class="method public "><a href="#method_getCookie" title="getCookie :: Get value of unencrypted HTTP cookie"><span class="description">Get value of unencrypted HTTP cookie</span><pre>getCookie()</pre></a></li>
+<li class="method public "><a href="#method_getDefaultSettings" title="getDefaultSettings :: Get default application settings"><span class="description">Get default application settings</span><pre>getDefaultSettings()</pre></a></li>
+<li class="method public "><a href="#method_getEncryptedCookie" title="getEncryptedCookie :: Get value of encrypted HTTP cookie"><span class="description">Get value of encrypted HTTP cookie</span><pre>getEncryptedCookie()</pre></a></li>
+<li class="method public "><a href="#method_getHooks" title="getHooks :: Get hook listeners"><span class="description">Get hook listeners</span><pre>getHooks()</pre></a></li>
+<li class="method public "><a href="#method_getInstance" title="getInstance :: Get application instance by name"><span class="description">Get application instance by name</span><pre>getInstance()</pre></a></li>
+<li class="method public "><a href="#method_getLog" title="getLog :: Get application log"><span class="description">Get application log</span><pre>getLog()</pre></a></li>
+<li class="method public "><a href="#method_getMode" title="getMode :: Get application mode"><span class="description">Get application mode</span><pre>getMode()</pre></a></li>
+<li class="method public "><a href="#method_getName" title="getName :: Get Slim application name"><span class="description">Get Slim application name</span><pre>getName()</pre></a></li>
+<li class="method public "><a href="#method_halt" title="halt :: Halt"><span class="description">Halt</span><pre>halt()</pre></a></li>
+<li class="method public "><a href="#method_handleErrors" title="handleErrors :: Convert errors into ErrorException objects"><span class="description">Convert errors into ErrorException objects</span><pre>handleErrors()</pre></a></li>
+<li class="method public "><a href="#method_hook" title="hook :: Assign hook"><span class="description">Assign hook</span><pre>hook()</pre></a></li>
+<li class="method public "><a href="#method_lastModified" title="lastModified :: Set Last-Modified HTTP Response Header"><span class="description">Set Last-Modified HTTP Response Header</span><pre>lastModified()</pre></a></li>
+<li class="method public "><a href="#method_map" title="map :: Add generic route without associated HTTP method"><span class="description">Add generic route without associated HTTP method</span><pre>map()</pre></a></li>
+<li class="method public "><a href="#method_notFound" title="notFound :: Not Found Handler"><span class="description">Not Found Handler</span><pre>notFound()</pre></a></li>
+<li class="method public "><a href="#method_options" title="options :: Add OPTIONS route"><span class="description">Add OPTIONS route</span><pre>options()</pre></a></li>
+<li class="method public "><a href="#method_pass" title="pass :: Pass"><span class="description">Pass</span><pre>pass()</pre></a></li>
+<li class="method public "><a href="#method_post" title="post :: Add POST route"><span class="description">Add POST route</span><pre>post()</pre></a></li>
+<li class="method public "><a href="#method_put" title="put :: Add PUT route"><span class="description">Add PUT route</span><pre>put()</pre></a></li>
+<li class="method public "><a href="#method_redirect" title="redirect :: Redirect"><span class="description">Redirect</span><pre>redirect()</pre></a></li>
+<li class="method public "><a href="#method_registerAutoloader" title="registerAutoloader :: Register Slim's PSR-0 autoloader"><span class="description">Register Slim's PSR-0 autoloader</span><pre>registerAutoloader()</pre></a></li>
+<li class="method public "><a href="#method_render" title="render :: Render a template"><span class="description">Render a template</span><pre>render()</pre></a></li>
+<li class="method public "><a href="#method_request" title="request :: Get the Request object"><span class="description">Get the Request object</span><pre>request()</pre></a></li>
+<li class="method public "><a href="#method_response" title="response :: Get the Response object"><span class="description">Get the Response object</span><pre>response()</pre></a></li>
+<li class="method public "><a href="#method_root" title="root :: Get the absolute path to this Slim application's root directory"><span class="description">Get the absolute path to this Slim application's root directory</span><pre>root()</pre></a></li>
+<li class="method public "><a href="#method_router" title="router :: Get the Router object"><span class="description">Get the Router object</span><pre>router()</pre></a></li>
+<li class="method public "><a href="#method_run" title="run :: Run"><span class="description">Run</span><pre>run()</pre></a></li>
+<li class="method public "><a href="#method_setCookie" title="setCookie :: Set unencrypted HTTP cookie"><span class="description">Set unencrypted HTTP cookie</span><pre>setCookie()</pre></a></li>
+<li class="method public "><a href="#method_setEncryptedCookie" title="setEncryptedCookie :: Set encrypted HTTP cookie"><span class="description">Set encrypted HTTP cookie</span><pre>setEncryptedCookie()</pre></a></li>
+<li class="method public "><a href="#method_setName" title="setName :: Set Slim application name"><span class="description">Set Slim application name</span><pre>setName()</pre></a></li>
+<li class="method public "><a href="#method_status" title="status :: Set the HTTP response status code"><span class="description">Set the HTTP response status code</span><pre>status()</pre></a></li>
+<li class="method public "><a href="#method_stop" title="stop :: Stop"><span class="description">Stop</span><pre>stop()</pre></a></li>
+<li class="method public "><a href="#method_urlFor" title="urlFor :: Get the URL for a named route"><span class="description">Get the URL for a named route</span><pre>urlFor()</pre></a></li>
+<li class="method public "><a href="#method_view" title="view :: Get and/or set the View"><span class="description">Get and/or set the View</span><pre>view()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="method protected "><a href="#method_callErrorHandler" title="callErrorHandler :: Call error handler"><span class="description">Call error handler</span><pre>callErrorHandler()</pre></a></li>
+<li class="method protected "><a href="#method_cleanBuffer" title="cleanBuffer :: Clean current output buffer"><span class="description">Clean current output buffer</span><pre>cleanBuffer()</pre></a></li>
+<li class="method protected "><a href="#method_defaultError" title="defaultError :: Default Error handler"><span class="description">Default Error handler</span><pre>defaultError()</pre></a></li>
+<li class="method protected "><a href="#method_defaultNotFound" title="defaultNotFound :: Default Not Found handler"><span class="description">Default Not Found handler</span><pre>defaultNotFound()</pre></a></li>
+<li class="method protected "><a href="#method_generateTemplateMarkup" title="generateTemplateMarkup :: Generate diagnostic template markup"><span class="description">Generate diagnostic template markup</span><pre>generateTemplateMarkup()</pre></a></li>
+<li class="method protected "><a href="#method_mapRoute" title="mapRoute :: Add GET|POST|PUT|DELETE route"><span class="description">Add GET|POST|PUT|DELETE route</span><pre>mapRoute()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected "><a href="#property_apps" title="$apps :: "><span class="description"></span><pre>$apps</pre></a></li>
+<li class="property protected "><a href="#property_environment" title="$environment :: "><span class="description"></span><pre>$environment</pre></a></li>
+<li class="property protected "><a href="#property_error" title="$error :: "><span class="description">Callable to be invoked if application error</span><pre>$error</pre></a></li>
+<li class="property protected "><a href="#property_hooks" title="$hooks :: "><span class="description"></span><pre>$hooks</pre></a></li>
+<li class="property protected "><a href="#property_middleware" title="$middleware :: "><span class="description"></span><pre>$middleware</pre></a></li>
+<li class="property protected "><a href="#property_mode" title="$mode :: "><span class="description"></span><pre>$mode</pre></a></li>
+<li class="property protected "><a href="#property_name" title="$name :: "><span class="description"></span><pre>$name</pre></a></li>
+<li class="property protected "><a href="#property_notFound" title="$notFound :: "><span class="description">Callable to be invoked if no matching routes are found</span><pre>$notFound</pre></a></li>
+<li class="property protected "><a href="#property_request" title="$request :: "><span class="description"></span><pre>$request</pre></a></li>
+<li class="property protected "><a href="#property_response" title="$response :: "><span class="description"></span><pre>$response</pre></a></li>
+<li class="property protected "><a href="#property_router" title="$router :: "><span class="description"></span><pre>$router</pre></a></li>
+<li class="property protected "><a href="#property_settings" title="$settings :: "><span class="description"></span><pre>$settings</pre></a></li>
+<li class="property protected "><a href="#property_view" title="$view :: "><span class="description"></span><pre>$view</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants
+                    <ul><li class="constant  "><a href="#constant_VERSION" title="VERSION :: "><span class="description">VERSION</span><pre>VERSION</pre></a></li></ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\Slim\Slim"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/Slim.html">Slim</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Slim.Slim.html">Slim</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Slim</p>
+<div class="details">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Slim.html">Slim</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="">Josh Lockhart</a></td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Constructor</h2>
+<pre>__construct(array $userSettings) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$userSettings</h4>
+<code>array</code><p>Associative array of application settings</p></div>
+</div></div>
+</div>
+<a id="method_add"></a><div class="element clickable method public method_add" data-toggle="collapse" data-target=".method_add .collapse">
+<h2>Add middleware</h2>
+<pre>add(\Slim\Middleware $newMiddleware) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method prepends new middleware to the application middleware stack.
+The argument must be an instance that subclasses Slim_Middleware.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$newMiddleware</h4>
+<code><a href="../classes/Slim.Middleware.html">\Slim\Middleware</a></code>
+</div>
+</div></div>
+</div>
+<a id="method_applyHook"></a><div class="element clickable method public method_applyHook" data-toggle="collapse" data-target=".method_applyHook .collapse">
+<h2>Invoke hook</h2>
+<pre>applyHook(string $name, $hookArg) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The hook name</p></div>
+<div class="subelement argument"><h4>$hookArg</h4></div>
+</div></div>
+</div>
+<a id="method_autoload"></a><div class="element clickable method public method_autoload" data-toggle="collapse" data-target=".method_autoload .collapse">
+<h2>Slim PSR-0 autoloader</h2>
+<pre>autoload($className) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$className</h4></div>
+</div></div>
+</div>
+<a id="method_call"></a><div class="element clickable method public method_call" data-toggle="collapse" data-target=".method_call .collapse">
+<h2>Call</h2>
+<pre>call() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>This method finds and iterates all route objects that match the current request URI.</p></div></div></div>
+</div>
+<a id="method_clearHooks"></a><div class="element clickable method public method_clearHooks" data-toggle="collapse" data-target=".method_clearHooks .collapse">
+<h2>Clear hook listeners</h2>
+<pre>clearHooks(string $name) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Clear all listeners for all hooks. If <code>$name</code> is
+a valid hook name, only the listeners attached
+to that hook will be cleared.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>A hook name (Optional)</p>
+</div>
+</div></div>
+</div>
+<a id="method_config"></a><div class="element clickable method public method_config" data-toggle="collapse" data-target=".method_config .collapse">
+<h2>Configure Slim Settings</h2>
+<pre>config(string | array $name, mixed $value) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method defines application settings and acts as a setter and a getter.</p>
+
+<p>If only one argument is specified and that argument is a string, the value
+of the setting identified by the first argument will be returned, or NULL if
+that setting does not exist.</p>
+
+<p>If only one argument is specified and that argument is an associative array,
+the array will be merged into the existing application settings.</p>
+
+<p>If two arguments are provided, the first argument is the name of the setting
+to be created or updated, and the second argument is the setting value.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><code>array</code><p>If a string, the name of the setting to set or retrieve. Else an associated array of setting names and values</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>If name is a string, the value of the setting identified by $name</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>The value of a setting if only one argument is a string</div>
+</div></div>
+</div>
+<a id="method_configureMode"></a><div class="element clickable method public method_configureMode" data-toggle="collapse" data-target=".method_configureMode .collapse">
+<h2>Configure Slim for a given mode</h2>
+<pre>configureMode(string $mode, mixed $callable) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method will immediately invoke the callable if
+the specified mode matches the current application mode.
+Otherwise, the callable is ignored. This should be called
+only <em>after</em> you initialize your Slim app.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mode</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$callable</h4>
+<code>mixed</code>
+</div>
+</div></div>
+</div>
+<a id="method_contentType"></a><div class="element clickable method public method_contentType" data-toggle="collapse" data-target=".method_contentType .collapse">
+<h2>Set the HTTP response Content-Type</h2>
+<pre>contentType(string $type) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>The Content-Type for the Response (ie. text/html)</p>
+</div>
+</div></div>
+</div>
+<a id="method_delete"></a><div class="element clickable method public method_delete" data-toggle="collapse" data-target=".method_delete .collapse">
+<h2>Add DELETE route</h2>
+<pre>delete() : <a href="../classes/Slim.Route.html">\Slim\Route</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="">\Slim\mapRoute()</a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.Route.html">\Slim\Route</a></code></div>
+</div></div>
+</div>
+<a id="method_deleteCookie"></a><div class="element clickable method public method_deleteCookie" data-toggle="collapse" data-target=".method_deleteCookie .collapse">
+<h2>Delete HTTP cookie (encrypted or unencrypted)</h2>
+<pre>deleteCookie(string $name, string $path, string $domain, bool $secure, bool $httponly) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Remove a Cookie from the client. This method will overwrite an existing Cookie
+with a new, empty, auto-expiring Cookie. This method's arguments must match
+the original Cookie's respective arguments for the original Cookie to be
+removed. If any of this method's arguments are omitted or set to NULL, the
+default Cookie setting values (set during Slim::init) will be used instead.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The cookie name</p></div>
+<div class="subelement argument">
+<h4>$path</h4>
+<code>string</code><p>The path on the server in which the cookie will be available on</p></div>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>string</code><p>The domain that the cookie is available to</p></div>
+<div class="subelement argument">
+<h4>$secure</h4>
+<code>bool</code><p>Indicates that the cookie should only be transmitted over a secure
+                             HTTPS connection from the client</p></div>
+<div class="subelement argument">
+<h4>$httponly</h4>
+<code>bool</code><p>When TRUE the cookie will be made accessible only through the HTTP protocol</p></div>
+</div></div>
+</div>
+<a id="method_environment"></a><div class="element clickable method public method_environment" data-toggle="collapse" data-target=".method_environment .collapse">
+<h2>Get a reference to the Environment object</h2>
+<pre>environment() : <a href="../classes/Slim.Environment.html">\Slim\Environment</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.Environment.html">\Slim\Environment</a></code></div>
+</div></div>
+</div>
+<a id="method_error"></a><div class="element clickable method public method_error" data-toggle="collapse" data-target=".method_error .collapse">
+<h2>Error Handler</h2>
+<pre>error(mixed $argument) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method defines or invokes the application-wide Error handler.
+There are two contexts in which this method may be invoked:</p>
+
+<ol>
+<li>When declaring the handler:</li>
+</ol>
+
+<p>If the $argument parameter is callable, this
+method will register the callable to be invoked when an uncaught
+Exception is detected, or when otherwise explicitly invoked.
+The handler WILL NOT be invoked in this context.</p>
+
+<ol>
+<li>When invoking the handler:</li>
+</ol>
+
+<p>If the $argument parameter is not callable, Slim assumes you want
+to invoke an already-registered handler. If the handler has been
+registered and is callable, it is invoked and passed the caught Exception
+as its one and only argument. The error handler's output is captured
+into an output buffer and sent as the body of a 500 HTTP Response.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$argument</h4>
+<code>mixed</code><p>Callable|\Exception</p>
+</div>
+</div></div>
+</div>
+<a id="method_etag"></a><div class="element clickable method public method_etag" data-toggle="collapse" data-target=".method_etag .collapse">
+<h2>Set ETag HTTP Response Header</h2>
+<pre>etag(string $value, string $type) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Set the etag header and stop if the conditional GET request matches.
+The <code>value</code> argument is a unique identifier for the current resource.
+The <code>type</code> argument indicates whether the etag should be used as a strong or
+weak cache validator.</p>
+
+<p>When the current request includes an 'If-None-Match' header with
+a matching etag, execution is immediately stopped. If the request
+method is GET or HEAD, a '304 Not Modified' response is sent.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>The etag value</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>The type of etag to create; either "strong" or "weak"</p>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.invalidargumentexception.php">\InvalidArgumentException</a></code></th>
+<td>If provided type is invalid</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_expires"></a><div class="element clickable method public method_expires" data-toggle="collapse" data-target=".method_expires .collapse">
+<h2>Set Expires HTTP response header</h2>
+<pre>expires(string | int $time) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>The <code>Expires</code> header tells the HTTP client the time at which
+the current resource should be considered stale. At that time the HTTP
+client will send a conditional GET request to the server; the server
+may return a 200 OK if the resource has changed, else a 304 Not Modified
+if the resource has not changed. The <code>Expires</code> header should be used in
+conjunction with the <code>etag()</code> or <code>lastModified()</code> methods above.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$time</h4>
+<code>string</code><code>int</code><p>If string, a time to be parsed by <code>strtotime()</code>;
+                             If int, a UNIX timestamp;</p>
+</div>
+</div></div>
+</div>
+<a id="method_flash"></a><div class="element clickable method public method_flash" data-toggle="collapse" data-target=".method_flash .collapse">
+<h2>Set flash message for subsequent request</h2>
+<pre>flash(string $key, mixed $value) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code>
+</div>
+</div></div>
+</div>
+<a id="method_flashKeep"></a><div class="element clickable method public method_flashKeep" data-toggle="collapse" data-target=".method_flashKeep .collapse">
+<h2>Keep flash messages from previous request for subsequent request</h2>
+<pre>flashKeep() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_flashNow"></a><div class="element clickable method public method_flashNow" data-toggle="collapse" data-target=".method_flashNow .collapse">
+<h2>Set flash message for current request</h2>
+<pre>flashNow(string $key, mixed $value) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code>
+</div>
+</div></div>
+</div>
+<a id="method_get"></a><div class="element clickable method public method_get" data-toggle="collapse" data-target=".method_get .collapse">
+<h2>Add GET route</h2>
+<pre>get() : <a href="../classes/Slim.Route.html">\Slim\Route</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="">\Slim\mapRoute()</a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.Route.html">\Slim\Route</a></code></div>
+</div></div>
+</div>
+<a id="method_getCookie"></a><div class="element clickable method public method_getCookie" data-toggle="collapse" data-target=".method_getCookie .collapse">
+<h2>Get value of unencrypted HTTP cookie</h2>
+<pre>getCookie(string $name) : string | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Return the value of a cookie from the current HTTP request,
+or return NULL if cookie does not exist. Cookies created during
+the current request will not be available until the next request.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code><code>null</code>
+</div>
+</div></div>
+</div>
+<a id="method_getDefaultSettings"></a><div class="element clickable method public method_getDefaultSettings" data-toggle="collapse" data-target=".method_getDefaultSettings .collapse">
+<h2>Get default application settings</h2>
+<pre>getDefaultSettings() : array</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getEncryptedCookie"></a><div class="element clickable method public method_getEncryptedCookie" data-toggle="collapse" data-target=".method_getEncryptedCookie .collapse">
+<h2>Get value of encrypted HTTP cookie</h2>
+<pre>getEncryptedCookie(string $name, $deleteIfInvalid) : string | false</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Return the value of an encrypted cookie from the current HTTP request,
+or return NULL if cookie does not exist. Encrypted cookies created during
+the current request will not be available until the next request.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code>
+</div>
+<div class="subelement argument"><h4>$deleteIfInvalid</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code><code>false</code>
+</div>
+</div></div>
+</div>
+<a id="method_getHooks"></a><div class="element clickable method public method_getHooks" data-toggle="collapse" data-target=".method_getHooks .collapse">
+<h2>Get hook listeners</h2>
+<pre>getHooks(string $name) : array | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Return an array of registered hooks. If <code>$name</code> is a valid
+hook name, only the listeners attached to that hook are returned.
+Else, all listeners are returned as an associative array whose
+keys are hook names and whose values are arrays of listeners.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>A hook name (Optional)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>null</code>
+</div>
+</div></div>
+</div>
+<a id="method_getInstance"></a><div class="element clickable method public method_getInstance" data-toggle="collapse" data-target=".method_getInstance .collapse">
+<h2>Get application instance by name</h2>
+<pre>getInstance(string $name) : \Slim | null</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The name of the Slim application</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\Slim</code><code>null</code>
+</div>
+</div></div>
+</div>
+<a id="method_getLog"></a><div class="element clickable method public method_getLog" data-toggle="collapse" data-target=".method_getLog .collapse">
+<h2>Get application log</h2>
+<pre>getLog() : <a href="../classes/Slim.Log.html">\Slim\Log</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.Log.html">\Slim\Log</a></code></div>
+</div></div>
+</div>
+<a id="method_getMode"></a><div class="element clickable method public method_getMode" data-toggle="collapse" data-target=".method_getMode .collapse">
+<h2>Get application mode</h2>
+<pre>getMode() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method determines the application mode. It first inspects the $_ENV
+superglobal for key <code>SLIM_MODE</code>. If that is not found, it queries
+the <code>getenv</code> function. Else, it uses the application <code>mode</code> setting.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getName"></a><div class="element clickable method public method_getName" data-toggle="collapse" data-target=".method_getName .collapse">
+<h2>Get Slim application name</h2>
+<pre>getName() : string | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code><code>null</code>
+</div>
+</div></div>
+</div>
+<a id="method_halt"></a><div class="element clickable method public method_halt" data-toggle="collapse" data-target=".method_halt .collapse">
+<h2>Halt</h2>
+<pre>halt(int $status, string $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Stop the application and immediately send the response with a
+specific status and body to the HTTP client. This may send any
+type of response: info, success, redirect, client error, or server error.
+If you need to render a template AND customize the response status,
+use the application's <code>render()</code> method instead.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$status</h4>
+<code>int</code><p>The HTTP response status</p></div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>The HTTP response body</p></div>
+</div></div>
+</div>
+<a id="method_handleErrors"></a><div class="element clickable method public method_handleErrors" data-toggle="collapse" data-target=".method_handleErrors .collapse">
+<h2>Convert errors into ErrorException objects</h2>
+<pre>handleErrors(int $errno, string $errstr, string $errfile, int $errline) : true</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method catches PHP errors and converts them into \ErrorException objects;
+these \ErrorException objects are then thrown and caught by Slim's
+built-in or custom error handlers.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$errno</h4>
+<code>int</code><p>The numeric type of the Error</p></div>
+<div class="subelement argument">
+<h4>$errstr</h4>
+<code>string</code><p>The error message</p></div>
+<div class="subelement argument">
+<h4>$errfile</h4>
+<code>string</code><p>The absolute path to the affected file</p></div>
+<div class="subelement argument">
+<h4>$errline</h4>
+<code>int</code><p>The line number of the error in the affected file</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.errorexception.php">\ErrorException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>true</code></div>
+</div></div>
+</div>
+<a id="method_hook"></a><div class="element clickable method public method_hook" data-toggle="collapse" data-target=".method_hook .collapse">
+<h2>Assign hook</h2>
+<pre>hook(string $name, mixed $callable, int $priority) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The hook name</p></div>
+<div class="subelement argument">
+<h4>$callable</h4>
+<code>mixed</code><p>A callable object</p></div>
+<div class="subelement argument">
+<h4>$priority</h4>
+<code>int</code><p>The hook priority; 0 = high, 10 = low</p>
+</div>
+</div></div>
+</div>
+<a id="method_lastModified"></a><div class="element clickable method public method_lastModified" data-toggle="collapse" data-target=".method_lastModified .collapse">
+<h2>Set Last-Modified HTTP Response Header</h2>
+<pre>lastModified(int $time) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Set the HTTP 'Last-Modified' header and stop if a conditional
+GET request's <code>If-Modified-Since</code> header matches the last modified time
+of the resource. The <code>time</code> argument is a UNIX timestamp integer value.
+When the current request includes an 'If-Modified-Since' header that
+matches the specified last modified time, the application will stop
+and send a '304 Not Modified' response to the client.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$time</h4>
+<code>int</code><p>The last modified UNIX timestamp</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.invalidargumentexception.php">\InvalidArgumentException</a></code></th>
+<td>If provided timestamp is not an integer</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_map"></a><div class="element clickable method public method_map" data-toggle="collapse" data-target=".method_map .collapse">
+<h2>Add generic route without associated HTTP method</h2>
+<pre>map() : <a href="../classes/Slim.Route.html">\Slim\Route</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="">\Slim\mapRoute()</a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.Route.html">\Slim\Route</a></code></div>
+</div></div>
+</div>
+<a id="method_notFound"></a><div class="element clickable method public method_notFound" data-toggle="collapse" data-target=".method_notFound .collapse">
+<h2>Not Found Handler</h2>
+<pre>notFound(mixed $callable) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method defines or invokes the application-wide Not Found handler.
+There are two contexts in which this method may be invoked:</p>
+
+<ol>
+<li>When declaring the handler:</li>
+</ol>
+
+<p>If the $callable parameter is not null and is callable, this
+method will register the callable to be invoked when no
+routes match the current HTTP request. It WILL NOT invoke the callable.</p>
+
+<ol>
+<li>When invoking the handler:</li>
+</ol>
+
+<p>If the $callable parameter is null, Slim assumes you want
+to invoke an already-registered handler. If the handler has been
+registered and is callable, it is invoked and sends a 404 HTTP Response
+whose body is the output of the Not Found handler.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$callable</h4>
+<code>mixed</code><p>Anything that returns true for is_callable()</p>
+</div>
+</div></div>
+</div>
+<a id="method_options"></a><div class="element clickable method public method_options" data-toggle="collapse" data-target=".method_options .collapse">
+<h2>Add OPTIONS route</h2>
+<pre>options() : <a href="../classes/Slim.Route.html">\Slim\Route</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="">\Slim\mapRoute()</a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.Route.html">\Slim\Route</a></code></div>
+</div></div>
+</div>
+<a id="method_pass"></a><div class="element clickable method public method_pass" data-toggle="collapse" data-target=".method_pass .collapse">
+<h2>Pass</h2>
+<pre>pass() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>The thrown exception is caught in the application's <code>call()</code> method causing
+the router's current iteration to stop and continue to the subsequent route if available.
+If no subsequent matching routes are found, a 404 response will be sent to the client.</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/Slim.Exception.Pass.html">\Slim\Exception\Pass</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_post"></a><div class="element clickable method public method_post" data-toggle="collapse" data-target=".method_post .collapse">
+<h2>Add POST route</h2>
+<pre>post() : <a href="../classes/Slim.Route.html">\Slim\Route</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="">\Slim\mapRoute()</a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.Route.html">\Slim\Route</a></code></div>
+</div></div>
+</div>
+<a id="method_put"></a><div class="element clickable method public method_put" data-toggle="collapse" data-target=".method_put .collapse">
+<h2>Add PUT route</h2>
+<pre>put() : <a href="../classes/Slim.Route.html">\Slim\Route</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="">\Slim\mapRoute()</a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.Route.html">\Slim\Route</a></code></div>
+</div></div>
+</div>
+<a id="method_redirect"></a><div class="element clickable method public method_redirect" data-toggle="collapse" data-target=".method_redirect .collapse">
+<h2>Redirect</h2>
+<pre>redirect(string $url, int $status) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method immediately redirects to a new URL. By default,
+this issues a 302 Found response; this is considered the default
+generic redirect response. You may also specify another valid
+3xx status code if you want. This method will automatically set the
+HTTP Location header for you using the URL parameter.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$url</h4>
+<code>string</code><p>The destination URL</p></div>
+<div class="subelement argument">
+<h4>$status</h4>
+<code>int</code><p>The HTTP redirect status code (optional)</p>
+</div>
+</div></div>
+</div>
+<a id="method_registerAutoloader"></a><div class="element clickable method public method_registerAutoloader" data-toggle="collapse" data-target=".method_registerAutoloader .collapse">
+<h2>Register Slim's PSR-0 autoloader</h2>
+<pre>registerAutoloader() </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_render"></a><div class="element clickable method public method_render" data-toggle="collapse" data-target=".method_render .collapse">
+<h2>Render a template</h2>
+<pre>render(string $template, array $data, int $status) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Call this method within a GET, POST, PUT, DELETE, NOT FOUND, or ERROR
+callable to render a template whose output is appended to the
+current HTTP response body. How the template is rendered is
+delegated to the current View.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$template</h4>
+<code>string</code><p>The name of the template passed into the view's render() method</p>
+</div>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>array</code><p>Associative array of data made available to the view</p></div>
+<div class="subelement argument">
+<h4>$status</h4>
+<code>int</code><p>The HTTP response status code to use (optional)</p>
+</div>
+</div></div>
+</div>
+<a id="method_request"></a><div class="element clickable method public method_request" data-toggle="collapse" data-target=".method_request .collapse">
+<h2>Get the Request object</h2>
+<pre>request() : <a href="../classes/Slim.Http.Request.html">\Slim\Http\Request</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.Http.Request.html">\Slim\Http\Request</a></code></div>
+</div></div>
+</div>
+<a id="method_response"></a><div class="element clickable method public method_response" data-toggle="collapse" data-target=".method_response .collapse">
+<h2>Get the Response object</h2>
+<pre>response() : <a href="../classes/Slim.Http.Response.html">\Slim\Http\Response</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.Http.Response.html">\Slim\Http\Response</a></code></div>
+</div></div>
+</div>
+<a id="method_root"></a><div class="element clickable method public method_root" data-toggle="collapse" data-target=".method_root .collapse">
+<h2>Get the absolute path to this Slim application's root directory</h2>
+<pre>root() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method returns the absolute path to the Slim application's
+directory. If the Slim application is installed in a public-accessible
+sub-directory, the sub-directory path will be included. This method
+will always return an absolute path WITH a trailing slash.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_router"></a><div class="element clickable method public method_router" data-toggle="collapse" data-target=".method_router .collapse">
+<h2>Get the Router object</h2>
+<pre>router() : <a href="../classes/Slim.Router.html">\Slim\Router</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.Router.html">\Slim\Router</a></code></div>
+</div></div>
+</div>
+<a id="method_run"></a><div class="element clickable method public method_run" data-toggle="collapse" data-target=".method_run .collapse">
+<h2>Run</h2>
+<pre>run() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>This method invokes the middleware stack, including the core Slim application;
+the result is an array of HTTP status, header, and body. These three items
+are returned to the HTTP client.</p></div></div></div>
+</div>
+<a id="method_setCookie"></a><div class="element clickable method public method_setCookie" data-toggle="collapse" data-target=".method_setCookie .collapse">
+<h2>Set unencrypted HTTP cookie</h2>
+<pre>setCookie(string $name, string $value, int | string $time, string $path, string $domain, bool $secure, bool $httponly) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The cookie name</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>The cookie value</p></div>
+<div class="subelement argument">
+<h4>$time</h4>
+<code>int</code><code>string</code><p>The duration of the cookie;
+                                 If integer, should be UNIX timestamp;
+                                 If string, converted to UNIX timestamp with <code>strtotime</code>;</p>
+</div>
+<div class="subelement argument">
+<h4>$path</h4>
+<code>string</code><p>The path on the server in which the cookie will be available on</p></div>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>string</code><p>The domain that the cookie is available to</p></div>
+<div class="subelement argument">
+<h4>$secure</h4>
+<code>bool</code><p>Indicates that the cookie should only be transmitted over a secure
+                             HTTPS connection to/from the client</p>
+</div>
+<div class="subelement argument">
+<h4>$httponly</h4>
+<code>bool</code><p>When TRUE the cookie will be made accessible only through the HTTP protocol</p></div>
+</div></div>
+</div>
+<a id="method_setEncryptedCookie"></a><div class="element clickable method public method_setEncryptedCookie" data-toggle="collapse" data-target=".method_setEncryptedCookie .collapse">
+<h2>Set encrypted HTTP cookie</h2>
+<pre>setEncryptedCookie(string $name, mixed $value, mixed $expires, string $path, string $domain, bool $secure, bool $httponly) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The cookie name</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>The cookie value</p></div>
+<div class="subelement argument">
+<h4>$expires</h4>
+<code>mixed</code><p>The duration of the cookie;
+                                 If integer, should be UNIX timestamp;
+                                 If string, converted to UNIX timestamp with <code>strtotime</code>;</p>
+</div>
+<div class="subelement argument">
+<h4>$path</h4>
+<code>string</code><p>The path on the server in which the cookie will be available on</p></div>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>string</code><p>The domain that the cookie is available to</p></div>
+<div class="subelement argument">
+<h4>$secure</h4>
+<code>bool</code><p>Indicates that the cookie should only be transmitted over a secure
+                             HTTPS connection from the client</p></div>
+<div class="subelement argument">
+<h4>$httponly</h4>
+<code>bool</code><p>When TRUE the cookie will be made accessible only through the HTTP protocol</p></div>
+</div></div>
+</div>
+<a id="method_setName"></a><div class="element clickable method public method_setName" data-toggle="collapse" data-target=".method_setName .collapse">
+<h2>Set Slim application name</h2>
+<pre>setName(string $name) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The name of this Slim application</p></div>
+</div></div>
+</div>
+<a id="method_status"></a><div class="element clickable method public method_status" data-toggle="collapse" data-target=".method_status .collapse">
+<h2>Set the HTTP response status code</h2>
+<pre>status($code) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$code</h4></div>
+</div></div>
+</div>
+<a id="method_stop"></a><div class="element clickable method public method_stop" data-toggle="collapse" data-target=".method_stop .collapse">
+<h2>Stop</h2>
+<pre>stop() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>The thrown exception will be caught in application's <code>call()</code> method
+and the response will be sent as is to the HTTP client.</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/Slim.Exception.Stop.html">\Slim\Exception\Stop</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_urlFor"></a><div class="element clickable method public method_urlFor" data-toggle="collapse" data-target=".method_urlFor .collapse">
+<h2>Get the URL for a named route</h2>
+<pre>urlFor(string $name, array $params) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The route name</p></div>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>array</code><p>Associative array of URL parameters and replacement values</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.runtimeexception.php">\RuntimeException</a></code></th>
+<td>If named route does not exist</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_view"></a><div class="element clickable method public method_view" data-toggle="collapse" data-target=".method_view .collapse">
+<h2>Get and/or set the View</h2>
+<pre>view(string | <a href="../classes/Slim.View.html">\Slim\View</a> $viewClass) : <a href="../classes/Slim.View.html">\Slim\View</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method declares the View to be used by the Slim application.
+If the argument is a string, Slim will instantiate a new object
+of the same class. If the argument is an instance of View or a subclass
+of View, Slim will use the argument as the View.</p>
+
+<p>If a View already exists and this method is called to create a
+new View, data already set in the existing View will be
+transferred to the new View.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$viewClass</h4>
+<code>string</code><code><a href="../classes/Slim.View.html">\Slim\View</a></code><p>The name or instance of a \Slim\View subclass</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.View.html">\Slim\View</a></code></div>
+</div></div>
+</div>
+<a id="method_callErrorHandler"></a><div class="element clickable method protected method_callErrorHandler" data-toggle="collapse" data-target=".method_callErrorHandler .collapse">
+<h2>Call error handler</h2>
+<pre>callErrorHandler(<a href="http://php.net/manual/en/class.exception.php">\Exception</a> | null $argument) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This will invoke the custom or default error handler
+and RETURN its output.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$argument</h4>
+<code><a href="http://php.net/manual/en/class.exception.php">\Exception</a></code><code>null</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_cleanBuffer"></a><div class="element clickable method protected method_cleanBuffer" data-toggle="collapse" data-target=".method_cleanBuffer .collapse">
+<h2>Clean current output buffer</h2>
+<pre>cleanBuffer() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_defaultError"></a><div class="element clickable method protected method_defaultError" data-toggle="collapse" data-target=".method_defaultError .collapse">
+<h2>Default Error handler</h2>
+<pre>defaultError($e) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$e</h4></div>
+</div></div>
+</div>
+<a id="method_defaultNotFound"></a><div class="element clickable method protected method_defaultNotFound" data-toggle="collapse" data-target=".method_defaultNotFound .collapse">
+<h2>Default Not Found handler</h2>
+<pre>defaultNotFound() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_generateTemplateMarkup"></a><div class="element clickable method protected method_generateTemplateMarkup" data-toggle="collapse" data-target=".method_generateTemplateMarkup .collapse">
+<h2>Generate diagnostic template markup</h2>
+<pre>generateTemplateMarkup(string $title, string $body) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method accepts a title and body content to generate an HTML document layout.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$title</h4>
+<code>string</code><p>The title of the HTML template</p></div>
+<div class="subelement argument">
+<h4>$body</h4>
+<code>string</code><p>The body content of the HTML template</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_mapRoute"></a><div class="element clickable method protected method_mapRoute" data-toggle="collapse" data-target=".method_mapRoute .collapse">
+<h2>Add GET|POST|PUT|DELETE route</h2>
+<pre>mapRoute(array $args) : <a href="../classes/Slim.Route.html">\Slim\Route</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Adds a new route to the router with associated callable. This
+route will only be invoked when the HTTP request's method matches
+this route's method.</p>
+
+<p>ARGUMENTS:</p>
+
+<p>First:       string  The URL pattern (REQUIRED)
+In-Between:  mixed   Anything that returns TRUE for <code>is_callable</code> (OPTIONAL)
+Last:        mixed   Anything that returns TRUE for <code>is_callable</code> (REQUIRED)</p>
+
+<p>The first argument is required and must always be the
+route pattern (ie. '/books/:id').</p>
+
+<p>The last argument is required and must always be the callable object
+to be invoked when the route matches an HTTP request.</p>
+
+<p>You may also provide an unlimited number of in-between arguments;
+each interior argument must be callable and will be invoked in the
+order specified before the route's callable is invoked.</p>
+
+<p>USAGE:</p>
+
+<p>Slim::get('/foo'[, middleware, middleware, ...], callable);</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$args</h4>
+<code>array</code><p>(See notes above)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.Route.html">\Slim\Route</a></code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_apps"> </a><div class="element clickable property protected property_apps" data-toggle="collapse" data-target=".property_apps .collapse">
+<h2></h2>
+<pre>$apps : \Slim\array[\Slim]</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_environment"> </a><div class="element clickable property protected property_environment" data-toggle="collapse" data-target=".property_environment .collapse">
+<h2></h2>
+<pre>$environment : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_error"> </a><div class="element clickable property protected property_error" data-toggle="collapse" data-target=".property_error .collapse">
+<h2>Callable to be invoked if application error</h2>
+<pre>$error : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_hooks"> </a><div class="element clickable property protected property_hooks" data-toggle="collapse" data-target=".property_hooks .collapse">
+<h2></h2>
+<pre>$hooks : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_middleware"> </a><div class="element clickable property protected property_middleware" data-toggle="collapse" data-target=".property_middleware .collapse">
+<h2></h2>
+<pre>$middleware : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_mode"> </a><div class="element clickable property protected property_mode" data-toggle="collapse" data-target=".property_mode .collapse">
+<h2></h2>
+<pre>$mode : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_name"> </a><div class="element clickable property protected property_name" data-toggle="collapse" data-target=".property_name .collapse">
+<h2></h2>
+<pre>$name : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_notFound"> </a><div class="element clickable property protected property_notFound" data-toggle="collapse" data-target=".property_notFound .collapse">
+<h2>Callable to be invoked if no matching routes are found</h2>
+<pre>$notFound : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_request"> </a><div class="element clickable property protected property_request" data-toggle="collapse" data-target=".property_request .collapse">
+<h2></h2>
+<pre>$request : <a href="../classes/Slim.Http.Request.html">\Slim\Http\Request</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_response"> </a><div class="element clickable property protected property_response" data-toggle="collapse" data-target=".property_response .collapse">
+<h2></h2>
+<pre>$response : <a href="../classes/Slim.Http.Response.html">\Slim\Http\Response</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_router"> </a><div class="element clickable property protected property_router" data-toggle="collapse" data-target=".property_router .collapse">
+<h2></h2>
+<pre>$router : <a href="../classes/Slim.Router.html">\Slim\Router</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_settings"> </a><div class="element clickable property protected property_settings" data-toggle="collapse" data-target=".property_settings .collapse">
+<h2></h2>
+<pre>$settings : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_view"> </a><div class="element clickable property protected property_view" data-toggle="collapse" data-target=".property_view .collapse">
+<h2></h2>
+<pre>$view : <a href="../classes/Slim.View.html">\Slim\View</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_VERSION"> </a><div class="element clickable constant  constant_VERSION" data-toggle="collapse" data-target=".constant_VERSION .collapse">
+<h2>VERSION</h2>
+<pre>VERSION </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>const</th>
+<td>string</td>
+</tr></table>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-06-03T01:50:27-04:00.<br></footer></div>
+</div>
+</body>
+</html>

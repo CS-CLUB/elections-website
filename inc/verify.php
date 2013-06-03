@@ -155,6 +155,8 @@ function verify_login($mysqli_accounts, $username, $password, $AES_KEY)
 {
     $user_match = '';
     $pass_match = '';
+    $cur_date = date(strtotime(date('Y-m-d')));
+    $join_date;
     
     /* Get the username from the database if it exists */
 	if ($stmt = $mysqli_accounts->prepare("SELECT username FROM ucsc_members WHERE username LIKE ?"))
@@ -178,6 +180,34 @@ function verify_login($mysqli_accounts, $username, $password, $AES_KEY)
 	/* If username found, verify the password provided for that username */
 	if (strcasecmp($username, $user_match) === 0)
 	{
+        /* Get the date the user joined the club */
+        if ($stmt = $mysqli_accounts->prepare("SELECT join_date FROM ucsc_members WHERE username LIKE ?"))
+        {
+            /* bind parameters for markers */
+            $stmt->bind_param('s', $username);
+    
+            /* execute query */
+            $stmt->execute();
+    
+            /* bind result variables */
+            $stmt->bind_result($join_date);
+    
+            /* fetch value */
+            $stmt->fetch();
+    
+            /* close statement */
+            $stmt->close();
+        }
+
+        /* Verify that the user has been a member for at least 1 semester */
+        $join_date = date(strtotime($join_date));
+        $months = floor(($cur_date - $join_date) / 86400 / 30 );
+
+        if (intval($months) < 4)
+        {
+            return false;
+        }
+
 	    if ($stmt = $mysqli_accounts->prepare("SELECT AES_DECRYPT(password, ?) FROM ucsc_members WHERE username LIKE ?"))
         {
             /* bind parameters for markers */
@@ -195,11 +225,12 @@ function verify_login($mysqli_accounts, $username, $password, $AES_KEY)
             /* close statement */
             $stmt->close();
         }
+
         /* Verify the password, remove the salt from password stored in DB */
-       if (strcmp($password, substr($pass_match, 8)) === 0)
-       {
-           return true;
-       }
+        if (strcmp($password, substr($pass_match, 8)) === 0)
+        {
+            return true;
+        }
 	}
   
   /* Invalid username or password or both */

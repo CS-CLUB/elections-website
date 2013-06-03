@@ -81,11 +81,7 @@ $options = array(
 System_Daemon::setOptions($options);
 
 /* Write start/stop scripts to manage the Daemon if option specified by the user */
-if (!$runmode['write-initd'])
-{
-	System_Daemon::info('not writing an init.d script this time');
-} 
-else 
+if ($runmode['write-initd'])
 {
 	if (($initd_location = System_Daemon::writeAutoRun()) === false)
 	{
@@ -121,23 +117,22 @@ if (mysqli_connect_errno()) {
 /** 
  * Run in the background infinitely and do the following election operations
  * 
- *	1. At the start of a new year on September 1st (12:00 am) intiate a new
- *     election by creating new election tables and initiate the nomination period
+ *	1. At the start of a new election period initiate a new election by creating 
+ *     new election tables and initiate the nomination period
  *
- *	2. At the end of the nomination period September 14th (11:59pm) close the
- *	   nomination period and tally the votes to determine the candidates
+ *	2. At the end of the nomination period close the nomination period and tally 
+ *	   the votes to determine the candidates
  *
- *	3. On the first day after September 14th that lands on a weekday open
+ *	3. On the first day after end of the nomination period that lands on a weekday open
  *	   the election period for a full 24-hours (12:00am - 11:59pm)
  *
  *	4. At the end of the 24 hour election period (11:59pm) close the election 
  *	   and determine the winners of the election	 	
  */
-//$next_weekday = '';
 
 while (true)
 {
-	/* September 1, 12:00 am */
+	/* The start of the nomination period */
 	if (strcmp(date('m-d-H-i'), $nomination_start_date) === 0)
 	{
 		/* Create the tables for the start of a new election year */
@@ -145,12 +140,9 @@ while (true)
 		
 		System_Daemon::log(System_Daemon::LOG_INFO, date('Y-m-d H:i:s') . " Initiated a new election and created " . 
 				"the tables for the start of the " . date('Y') . " election");
-		
-		/* Instead of constantly iterating, can sleep for the next 14 days */
-		System_Daemon::iterate(60*60*24*14);
 	}
 	
-	/* September 14th (11:59pm) */
+	/* End of the nomination period */
 	if (strcmp(date('m-d-H-i'), $nomination_end_date) === 0)
 	{
 		/* Close the nomination period and tally the votes to determine the candidates 
@@ -160,15 +152,9 @@ while (true)
 		
 		System_Daemon::log(System_Daemon::LOG_INFO, date('Y-m-d H:i:s') . " Closed the nomination period " .
 				"and recorded the candidates in the database for the " . date('Y') . " election");
-		
-		/* Determine the next week day after September 14th to host the election */
-		//$next_weekday = get_next_weekday(DateTime::createFromFormat('Y-m-d-H-i', date('Y-m-d-H-i')));
-		
-		System_Daemon::iterate(60);
 	}
 	
-	
-	/* First weekday after September 14 start election period for 24-hours (12:00am - 11:59pm) */
+	/* First weekday after the nomination period ends start election period for 24-hours (12:00am - 11:59pm) */
 	if (strcmp(date('Y-m-d-H-i'), $election_start_date) === 0)
 	{
 		/* Initiate the final election, populate the table with the candidates and incumbents */
@@ -176,13 +162,9 @@ while (true)
 		
 		System_Daemon::log(System_Daemon::LOG_INFO, date('Y-m-d H:i:s') . " Initiated the election period, " .
 				"with the candidates and incumbents for the " . date('Y') . " election");
-		
-		/* Sleep until the end of the 24 hour election period */
-		System_Daemon::iterate((60*60*24) - 120);
-		
 	}
 	
-	/* End of the 24 hour election period on the first week day after September 14 */
+	/* End of the 24 hour election period */
 	if (strcmp(date('Y-m-d-H-i'), $election_end_date) === 0)
 	{
 		/* Close the election period and tally the votes to determine the winners
@@ -192,9 +174,6 @@ while (true)
 		
 		System_Daemon::log(System_Daemon::LOG_INFO, date('Y-m-d H:i:s') . " Closed the election period " .
 				"and recorded the election winners in the database for the " . date('Y') . " election");
-		
-		/* Instead of constantly iterating, can sleep until the next election */
-		System_Daemon::iterate(60*60*24*345);
 	}
 	
 	System_Daemon::iterate(60);

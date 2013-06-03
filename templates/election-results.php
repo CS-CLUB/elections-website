@@ -48,38 +48,51 @@
  */
 ?>
 <div class="hero-unit">
-	<h1>Election Results</h1>
-	<br />
-	<div class="row">
-		<div class="span8">	
-	      <table class="table">
-	        <thead>
-	          <tr>
-	            <th>Position</th>
-	            <th>First Name</th>
-	            <th>Last Name</th>
-	            <th>Username</th>
-	          </tr>
-	        </thead>
-	        <tbody>
-        		<?php
-      				foreach ($winners as $position => $winner)
-      				{
-      					echo '<tr>';
-      					echo '<td>' . $position . '</td>';
-      					echo '<td>' . $winner['first_name'] . '</td>';
-      					echo '<td>' . $winner['last_name'] . '</td>';
-      					echo '<td>' . $winner['username'] . '</td>';
-      					echo '</tr>';
-      				}
-      			?>
-	        </tbody>
-	      </table>
-		</div>
-	</div>
-	<div class="row">
-	<div class="span6">
-		
-	</div>
-	</div>
+  <div class="page-header">
+	  <h1>Election Results</h1>
+  </div>
+  <h2>Elected Executives</h2>
+  <div class="row">
+    <div class="span8">  
+      <table class="table">
+      <thead>
+        <tr>
+        <th>Position</th>
+        <th>Name</th>
+        <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+          foreach ($winners as $position => $winner)
+          {
+            echo '<tr>';
+            echo '<td>' . $position . '</td>';
+            echo '<td>' . $winner['first_name'] . ' ' . $winner['last_name'] . '</td>';
+            echo '<td>' . $winner['username'] . '</td>';
+            echo '</tr>';
+          }
+        ?>
+      </tbody>
+      </table>
+    </div>
+  </div>
+  <h2>Election Vote Breakdown</h2>
+  <div class="row">
+    <div id="pie_elec_president" class="span6 chart"></div>
+    <div id="pie_elec_vicepresident" class="span6 chart"></div>
+  </div>
+  <div class="row">
+    <div id="pie_elec_coordinator" class="span6 chart"></div>
+    <div id="pie_elec_treasurer" class="span6 chart"></div>
+  </div>
+  <h2>Nomination Vote Breakdown</h2>
+  <div class="row">
+    <div id="pie_nom_president" class="span6 chart"></div>
+    <div id="pie_nom_vicepresident" class="span6 chart"></div>
+  </div>
+  <div class="row">
+    <div id="pie_nom_coordinator" class="span6 chart"></div>
+    <div id="pie_nom_treasurer" class="span6 chart"></div>
+  </div>
 </div>
