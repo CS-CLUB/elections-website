@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title>Elections Website » Default</title>
+<title>Elections Website » api</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -61,11 +61,71 @@
 <li class="nav-header">
 <i class="icon-map-marker"></i> Packages</li>
 <li>
-<span class="empty-package"><i class="icon-folder-close"></i>Default</span><ul class="nav nav-list nav-packages"></ul>
+<a href="../packages/api.html" title="api"><i class="icon-folder-open"></i>api</a><ul class="nav nav-list nav-packages"></ul>
 </li>
+<li class="nav-header">
+<i class="icon-custom icon-function"></i> Functions</li>
+<li class="function  "><a href="#function_getResults" title="getResults :: Get the results of a nomination or election period."><span class="description">Get the results of a nomination or election period.</span><pre>getResults</pre></a></li>
+<li class="function  "><a href="#function_getResultsAll" title="getResultsAll :: Get the results of a nomination or election period."><span class="description">Get the results of a nomination or election period.</span><pre>getResultsAll</pre></a></li>
 </ul>
 </div>
-<div class="span8 package-contents"></div>
+<div class="span8 package-contents">
+<ul class="breadcrumb"><li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li class="active"><a href="../packages/api.html">api</a></li>
+</li></ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-function"></i> Functions</h3>
+<a id="function_getResults"></a><div class="element clickable function  function_getResults" data-toggle="collapse" data-target=".function_getResults .collapse">
+<h2>Get the results of a nomination or election period.</h2>
+<pre>getResults(string $type, string $position) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Use this function
+to get the vote breakdown after the nomination/election for the
+specified position only.</p>
+
+<p>Displays the results as a JSON encoded array of the positions and the
+names of the individuals and the number of votes they received.</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/api.html">api</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>The type of election period ("nomination" or "election")</p>
+</div>
+<div class="subelement argument">
+<h4>$position</h4>
+<code>string</code><p>The position to get the results for (President, Vice President,
+Coordinator, Treasurer). The default if no argument is provided is to get all positions.</p>
+</div>
+</div></div>
+</div>
+<a id="function_getResultsAll"></a><div class="element clickable function  function_getResultsAll" data-toggle="collapse" data-target=".function_getResultsAll .collapse">
+<h2>Get the results of a nomination or election period.</h2>
+<pre>getResultsAll(string $type) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Use this function
+to get the vote breakdown after the nomination/election for ALL positions.</p>
+
+<p>Displays the results as a JSON encoded array of the positions and the
+names of the individuals and the number of votes they received.</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/api.html">api</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>The type of election period ("nomination" or "election")</p>
+</div>
+</div></div>
+</div>
+</div>
+</div>
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>

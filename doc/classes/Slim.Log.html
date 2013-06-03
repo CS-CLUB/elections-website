@@ -1,0 +1,428 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elections Website » \Slim\Log</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Elections Website</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/Slim.html"><i class="icon-th"></i> Slim</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Slim.html"><i class="icon-folder-open"></i> Slim</a></li>
+<li><a href="../packages/Slim%0AMIT%20LICENSE%0APermission%20is%20hereby%20granted,%20free%20of%20charge,%20to%20any%20person%20obtaining%0Aa%20copy%20of%20this%20software%20and%20associated%20documentation%20files%20(the%0A%22Software%22),%20to%20deal%20in%20the%20Software%20without%20restriction,%20including%0Awithout%20limitation%20the%20rights%20to%20use,%20copy,%20modify,%20merge,%20publish,%0Adistribute,%20sublicense,%20and.or%20sell%20copies%20of%20the%20Software,%20and%20to%0Apermit%20persons%20to%20whom%20the%20Software%20is%20furnished%20to%20do%20so,%20subject%20to%0Athe%20following%20conditions:%0AThe%20above%20copyright%20notice%20and%20this%20permission%20notice%20shall%20be%0Aincluded%20in%20all%20copies%20or%20substantial%20portions%20of%20the%20Software.html"><i class="icon-folder-open"></i> Slim
+MIT LICENSE
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software</a></li>
+<li><a href="../packages/dbinterface.html"><i class="icon-folder-open"></i> dbinterface</a></li>
+<li><a href="../packages/election.html"><i class="icon-folder-open"></i> election</a></li>
+<li><a href="../packages/utility.html"><i class="icon-folder-open"></i> utility</a></li>
+<li><a href="../packages/validate.html"><i class="icon-folder-open"></i> validate</a></li>
+<li><a href="../packages/verify.html"><i class="icon-folder-open"></i> verify</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">114</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct :: Constructor"><span class="description">Constructor</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_debug" title="debug :: Log debug message"><span class="description">Log debug message</span><pre>debug()</pre></a></li>
+<li class="method public "><a href="#method_error" title="error :: Log error message"><span class="description">Log error message</span><pre>error()</pre></a></li>
+<li class="method public "><a href="#method_fatal" title="fatal :: Log fatal message"><span class="description">Log fatal message</span><pre>fatal()</pre></a></li>
+<li class="method public "><a href="#method_getEnabled" title="getEnabled :: Is logging enabled?"><span class="description">Is logging enabled?</span><pre>getEnabled()</pre></a></li>
+<li class="method public "><a href="#method_getLevel" title="getLevel :: Get level"><span class="description">Get level</span><pre>getLevel()</pre></a></li>
+<li class="method public "><a href="#method_getWriter" title="getWriter :: Get writer"><span class="description">Get writer</span><pre>getWriter()</pre></a></li>
+<li class="method public "><a href="#method_info" title="info :: Log info message"><span class="description">Log info message</span><pre>info()</pre></a></li>
+<li class="method public "><a href="#method_isEnabled" title="isEnabled :: Is logging enabled?"><span class="description">Is logging enabled?</span><pre>isEnabled()</pre></a></li>
+<li class="method public "><a href="#method_setEnabled" title="setEnabled :: Enable or disable logging"><span class="description">Enable or disable logging</span><pre>setEnabled()</pre></a></li>
+<li class="method public "><a href="#method_setLevel" title="setLevel :: Set level"><span class="description">Set level</span><pre>setLevel()</pre></a></li>
+<li class="method public "><a href="#method_setWriter" title="setWriter :: Set writer"><span class="description">Set writer</span><pre>setWriter()</pre></a></li>
+<li class="method public "><a href="#method_warn" title="warn :: Log warn message"><span class="description">Log warn message</span><pre>warn()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul><li class="method protected "><a href="#method_write" title="write :: Log message"><span class="description">Log message</span><pre>write()</pre></a></li></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected "><a href="#property_enabled" title="$enabled :: "><span class="description"></span><pre>$enabled</pre></a></li>
+<li class="property protected "><a href="#property_level" title="$level :: "><span class="description"></span><pre>$level</pre></a></li>
+<li class="property protected "><a href="#property_levels" title="$levels :: "><span class="description"></span><pre>$levels</pre></a></li>
+<li class="property protected "><a href="#property_writer" title="$writer :: "><span class="description"></span><pre>$writer</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants
+                    <ul>
+<li class="constant  "><a href="#constant_DEBUG" title="DEBUG :: "><span class="description">DEBUG</span><pre>DEBUG</pre></a></li>
+<li class="constant  "><a href="#constant_ERROR" title="ERROR :: "><span class="description">ERROR</span><pre>ERROR</pre></a></li>
+<li class="constant  "><a href="#constant_FATAL" title="FATAL :: "><span class="description">FATAL</span><pre>FATAL</pre></a></li>
+<li class="constant  "><a href="#constant_INFO" title="INFO :: "><span class="description">INFO</span><pre>INFO</pre></a></li>
+<li class="constant  "><a href="#constant_WARN" title="WARN :: "><span class="description">WARN</span><pre>WARN</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\Slim\Log"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/Slim.html">Slim</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Slim.Log.html">Log</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Log</p>
+<div class="details">
+<div class="long_description"><p>This is the primary logger for a Slim application. You may provide
+a Log Writer in conjunction with this Log to write to various output
+destinations (e.g. a file). This class provides this interface:</p>
+
+<p>debug( mixed $object )
+info( mixed $object )
+warn( mixed $object )
+error( mixed $object )
+fatal( mixed $object )</p>
+
+<p>This class assumes only that your Log Writer has a public <code>write()</code> method
+that accepts any object as its one and only argument. The Log Writer
+class may write or send its argument anywhere: a file, STDERR,
+a remote web API, etc. The possibilities are endless.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Slim.html">Slim</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="">Josh Lockhart</a></td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Constructor</h2>
+<pre>__construct(mixed $writer) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$writer</h4>
+<code>mixed</code>
+</div>
+</div></div>
+</div>
+<a id="method_debug"></a><div class="element clickable method public method_debug" data-toggle="collapse" data-target=".method_debug .collapse">
+<h2>Log debug message</h2>
+<pre>debug(mixed $object) : mixed | false</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$object</h4>
+<code>mixed</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code><code>false</code>What the Logger returns, or false if Logger not set or not enabled</div>
+</div></div>
+</div>
+<a id="method_error"></a><div class="element clickable method public method_error" data-toggle="collapse" data-target=".method_error .collapse">
+<h2>Log error message</h2>
+<pre>error(mixed $object) : mixed | false</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$object</h4>
+<code>mixed</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code><code>false</code>What the Logger returns, or false if Logger not set or not enabled</div>
+</div></div>
+</div>
+<a id="method_fatal"></a><div class="element clickable method public method_fatal" data-toggle="collapse" data-target=".method_fatal .collapse">
+<h2>Log fatal message</h2>
+<pre>fatal(mixed $object) : mixed | false</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$object</h4>
+<code>mixed</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code><code>false</code>What the Logger returns, or false if Logger not set or not enabled</div>
+</div></div>
+</div>
+<a id="method_getEnabled"></a><div class="element clickable method public method_getEnabled" data-toggle="collapse" data-target=".method_getEnabled .collapse">
+<h2>Is logging enabled?</h2>
+<pre>getEnabled() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_getLevel"></a><div class="element clickable method public method_getLevel" data-toggle="collapse" data-target=".method_getLevel .collapse">
+<h2>Get level</h2>
+<pre>getLevel() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_getWriter"></a><div class="element clickable method public method_getWriter" data-toggle="collapse" data-target=".method_getWriter .collapse">
+<h2>Get writer</h2>
+<pre>getWriter() : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_info"></a><div class="element clickable method public method_info" data-toggle="collapse" data-target=".method_info .collapse">
+<h2>Log info message</h2>
+<pre>info(mixed $object) : mixed | false</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$object</h4>
+<code>mixed</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code><code>false</code>What the Logger returns, or false if Logger not set or not enabled</div>
+</div></div>
+</div>
+<a id="method_isEnabled"></a><div class="element clickable method public method_isEnabled" data-toggle="collapse" data-target=".method_isEnabled .collapse">
+<h2>Is logging enabled?</h2>
+<pre>isEnabled() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_setEnabled"></a><div class="element clickable method public method_setEnabled" data-toggle="collapse" data-target=".method_setEnabled .collapse">
+<h2>Enable or disable logging</h2>
+<pre>setEnabled(bool $enabled) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$enabled</h4>
+<code>bool</code>
+</div>
+</div></div>
+</div>
+<a id="method_setLevel"></a><div class="element clickable method public method_setLevel" data-toggle="collapse" data-target=".method_setLevel .collapse">
+<h2>Set level</h2>
+<pre>setLevel(int $level) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$level</h4>
+<code>int</code>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.invalidargumentexception.php">\InvalidArgumentException</a></code></th>
+<td>If invalid log level specified</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_setWriter"></a><div class="element clickable method public method_setWriter" data-toggle="collapse" data-target=".method_setWriter .collapse">
+<h2>Set writer</h2>
+<pre>setWriter(mixed $writer) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$writer</h4>
+<code>mixed</code>
+</div>
+</div></div>
+</div>
+<a id="method_warn"></a><div class="element clickable method public method_warn" data-toggle="collapse" data-target=".method_warn .collapse">
+<h2>Log warn message</h2>
+<pre>warn(mixed $object) : mixed | false</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$object</h4>
+<code>mixed</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code><code>false</code>What the Logger returns, or false if Logger not set or not enabled</div>
+</div></div>
+</div>
+<a id="method_write"></a><div class="element clickable method protected method_write" data-toggle="collapse" data-target=".method_write .collapse">
+<h2>Log message</h2>
+<pre>write(mixed $object, int $level) : int | false</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$object</h4>
+<code>mixed</code><p>The object to log</p></div>
+<div class="subelement argument">
+<h4>$level</h4>
+<code>int</code><p>The message level</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code><code>false</code>
+</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_enabled"> </a><div class="element clickable property protected property_enabled" data-toggle="collapse" data-target=".property_enabled .collapse">
+<h2></h2>
+<pre>$enabled : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_level"> </a><div class="element clickable property protected property_level" data-toggle="collapse" data-target=".property_level .collapse">
+<h2></h2>
+<pre>$level : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_levels"> </a><div class="element clickable property protected property_levels" data-toggle="collapse" data-target=".property_levels .collapse">
+<h2></h2>
+<pre>$levels : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_writer"> </a><div class="element clickable property protected property_writer" data-toggle="collapse" data-target=".property_writer .collapse">
+<h2></h2>
+<pre>$writer : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_DEBUG"> </a><div class="element clickable constant  constant_DEBUG" data-toggle="collapse" data-target=".constant_DEBUG .collapse">
+<h2>DEBUG</h2>
+<pre>DEBUG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_ERROR"> </a><div class="element clickable constant  constant_ERROR" data-toggle="collapse" data-target=".constant_ERROR .collapse">
+<h2>ERROR</h2>
+<pre>ERROR </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_FATAL"> </a><div class="element clickable constant  constant_FATAL" data-toggle="collapse" data-target=".constant_FATAL .collapse">
+<h2>FATAL</h2>
+<pre>FATAL </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_INFO"> </a><div class="element clickable constant  constant_INFO" data-toggle="collapse" data-target=".constant_INFO .collapse">
+<h2>INFO</h2>
+<pre>INFO </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_WARN"> </a><div class="element clickable constant  constant_WARN" data-toggle="collapse" data-target=".constant_WARN .collapse">
+<h2>WARN</h2>
+<pre>WARN </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-06-03T01:50:27-04:00.<br></footer></div>
+</div>
+</body>
+</html>

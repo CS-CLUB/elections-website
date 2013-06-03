@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title>Elections Website » Default</title>
+<title>Elections Website » \Slim\Exception\Pass</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -19,8 +19,23 @@
 <li class="dropdown">
 <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/Slim.html"><i class="icon-th"></i> Slim</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
 <li><a>Packages</a></li>
-<li><a href="../packages/api.html"><i class="icon-folder-open"></i> api</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Slim.html"><i class="icon-folder-open"></i> Slim</a></li>
+<li><a href="../packages/Slim%0AMIT%20LICENSE%0APermission%20is%20hereby%20granted,%20free%20of%20charge,%20to%20any%20person%20obtaining%0Aa%20copy%20of%20this%20software%20and%20associated%20documentation%20files%20(the%0A%22Software%22),%20to%20deal%20in%20the%20Software%20without%20restriction,%20including%0Awithout%20limitation%20the%20rights%20to%20use,%20copy,%20modify,%20merge,%20publish,%0Adistribute,%20sublicense,%20and.or%20sell%20copies%20of%20the%20Software,%20and%20to%0Apermit%20persons%20to%20whom%20the%20Software%20is%20furnished%20to%20do%20so,%20subject%20to%0Athe%20following%20conditions:%0AThe%20above%20copyright%20notice%20and%20this%20permission%20notice%20shall%20be%0Aincluded%20in%20all%20copies%20or%20substantial%20portions%20of%20the%20Software.html"><i class="icon-folder-open"></i> Slim
+MIT LICENSE
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software</a></li>
 <li><a href="../packages/dbinterface.html"><i class="icon-folder-open"></i> dbinterface</a></li>
 <li><a href="../packages/election.html"><i class="icon-folder-open"></i> election</a></li>
 <li><a href="../packages/utility.html"><i class="icon-folder-open"></i> utility</a></li>
@@ -36,7 +51,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">18</span></a></li>
+                <span class="label label-info">114</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
@@ -54,23 +69,53 @@
                         </div></noscript>
 <div class="row">
 <div class="span4">
-<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
 <button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
 </div>
-<ul class="side-nav nav nav-list">
-<li class="nav-header">
-<i class="icon-map-marker"></i> Packages</li>
+<ul class="side-nav nav nav-list"></ul>
+</div>
+<div class="span8">
+<a id="\Slim\Exception\Pass"></a><ul class="breadcrumb">
 <li>
-<span class="empty-package"><i class="icon-folder-close"></i>Default</span><ul class="nav nav-list nav-packages"></ul>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/Slim.html">Slim</a></li>
+<li>
+<span class="divider">\</span><a href="../namespaces/Slim.Exception.html">Exception</a>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Slim.Exception.Pass.html">Pass</a>
 </li>
 </ul>
+<div class="element class">
+<p class="short_description">Pass Exception</p>
+<div class="details">
+<div class="long_description"><p>This Exception will cause the Router::dispatch method
+to skip the current matching route and continue to the next
+matching route. If no subsequent routes are found, a
+HTTP 404 Not Found response will be sent to the client.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Slim.html">Slim</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="">Josh Lockhart</a></td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr>
+</table>
 </div>
-<div class="span8 package-contents"></div>
+</div>
+</div>
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-06-03T01:53:45-04:00.<br></footer></div>
+            generated on 2013-06-03T01:50:26-04:00.<br></footer></div>
 </div>
 </body>
 </html>

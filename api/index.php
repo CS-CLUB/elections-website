@@ -38,7 +38,8 @@ $app->get('/results/:type', 'getResultsAll');
 $app->run();
 
 
-/* Get the results of a nomination or election period. Use this function
+/** 
+ * Get the results of a nomination or election period. Use this function
  * to get the vote breakdown after the nomination/election for the 
  * specified position only.
  * 
@@ -72,7 +73,8 @@ function getResults($type, $position)
 	}
 }
 
-/* Get the results of a nomination or election period. Use this function
+/** 
+ * Get the results of a nomination or election period. Use this function
  * to get the vote breakdown after the nomination/election for ALL positions.
  *
  * Displays the results as a JSON encoded array of the positions and the

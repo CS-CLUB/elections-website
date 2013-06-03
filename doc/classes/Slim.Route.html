@@ -1,0 +1,572 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elections Website » \Slim\Route</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Elections Website</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/Slim.html"><i class="icon-th"></i> Slim</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Slim.html"><i class="icon-folder-open"></i> Slim</a></li>
+<li><a href="../packages/Slim%0AMIT%20LICENSE%0APermission%20is%20hereby%20granted,%20free%20of%20charge,%20to%20any%20person%20obtaining%0Aa%20copy%20of%20this%20software%20and%20associated%20documentation%20files%20(the%0A%22Software%22),%20to%20deal%20in%20the%20Software%20without%20restriction,%20including%0Awithout%20limitation%20the%20rights%20to%20use,%20copy,%20modify,%20merge,%20publish,%0Adistribute,%20sublicense,%20and.or%20sell%20copies%20of%20the%20Software,%20and%20to%0Apermit%20persons%20to%20whom%20the%20Software%20is%20furnished%20to%20do%20so,%20subject%20to%0Athe%20following%20conditions:%0AThe%20above%20copyright%20notice%20and%20this%20permission%20notice%20shall%20be%0Aincluded%20in%20all%20copies%20or%20substantial%20portions%20of%20the%20Software.html"><i class="icon-folder-open"></i> Slim
+MIT LICENSE
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software</a></li>
+<li><a href="../packages/dbinterface.html"><i class="icon-folder-open"></i> dbinterface</a></li>
+<li><a href="../packages/election.html"><i class="icon-folder-open"></i> election</a></li>
+<li><a href="../packages/utility.html"><i class="icon-folder-open"></i> utility</a></li>
+<li><a href="../packages/validate.html"><i class="icon-folder-open"></i> validate</a></li>
+<li><a href="../packages/verify.html"><i class="icon-folder-open"></i> verify</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">114</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct :: Constructor"><span class="description">Constructor</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_appendHttpMethods" title="appendHttpMethods :: Append supported HTTP methods"><span class="description">Append supported HTTP methods</span><pre>appendHttpMethods()</pre></a></li>
+<li class="method public "><a href="#method_conditions" title="conditions :: Merge route conditions"><span class="description">Merge route conditions</span><pre>conditions()</pre></a></li>
+<li class="method public "><a href="#method_getCallable" title="getCallable :: Get route callable"><span class="description">Get route callable</span><pre>getCallable()</pre></a></li>
+<li class="method public "><a href="#method_getConditions" title="getConditions :: Get route conditions"><span class="description">Get route conditions</span><pre>getConditions()</pre></a></li>
+<li class="method public "><a href="#method_getDefaultConditions" title="getDefaultConditions :: Get default route conditions for all instances"><span class="description">Get default route conditions for all instances</span><pre>getDefaultConditions()</pre></a></li>
+<li class="method public "><a href="#method_getHttpMethods" title="getHttpMethods :: Get supported HTTP methods"><span class="description">Get supported HTTP methods</span><pre>getHttpMethods()</pre></a></li>
+<li class="method public "><a href="#method_getMiddleware" title="getMiddleware :: Get middleware"><span class="description">Get middleware</span><pre>getMiddleware()</pre></a></li>
+<li class="method public "><a href="#method_getName" title="getName :: Get route name"><span class="description">Get route name</span><pre>getName()</pre></a></li>
+<li class="method public "><a href="#method_getParam" title="getParam :: Get route parameter value"><span class="description">Get route parameter value</span><pre>getParam()</pre></a></li>
+<li class="method public "><a href="#method_getParams" title="getParams :: Get route parameters"><span class="description">Get route parameters</span><pre>getParams()</pre></a></li>
+<li class="method public "><a href="#method_getPattern" title="getPattern :: Get route pattern"><span class="description">Get route pattern</span><pre>getPattern()</pre></a></li>
+<li class="method public "><a href="#method_matches" title="matches :: Matches URI?"><span class="description">Matches URI?</span><pre>matches()</pre></a></li>
+<li class="method public "><a href="#method_name" title="name :: Set route name"><span class="description">Set route name</span><pre>name()</pre></a></li>
+<li class="method public "><a href="#method_setCallable" title="setCallable :: Set route callable"><span class="description">Set route callable</span><pre>setCallable()</pre></a></li>
+<li class="method public "><a href="#method_setConditions" title="setConditions :: Set route conditions"><span class="description">Set route conditions</span><pre>setConditions()</pre></a></li>
+<li class="method public "><a href="#method_setDefaultConditions" title="setDefaultConditions :: Set default route conditions for all instances"><span class="description">Set default route conditions for all instances</span><pre>setDefaultConditions()</pre></a></li>
+<li class="method public "><a href="#method_setHttpMethods" title="setHttpMethods :: Add supported HTTP method(s)"><span class="description">Add supported HTTP method(s)</span><pre>setHttpMethods()</pre></a></li>
+<li class="method public "><a href="#method_setMiddleware" title="setMiddleware :: Set middleware"><span class="description">Set middleware</span><pre>setMiddleware()</pre></a></li>
+<li class="method public "><a href="#method_setName" title="setName :: Set route name"><span class="description">Set route name</span><pre>setName()</pre></a></li>
+<li class="method public "><a href="#method_setParam" title="setParam :: Set route parameter value"><span class="description">Set route parameter value</span><pre>setParam()</pre></a></li>
+<li class="method public "><a href="#method_setParams" title="setParams :: Set route parameters"><span class="description">Set route parameters</span><pre>setParams()</pre></a></li>
+<li class="method public "><a href="#method_setPattern" title="setPattern :: Set route pattern"><span class="description">Set route pattern</span><pre>setPattern()</pre></a></li>
+<li class="method public "><a href="#method_supportsHttpMethod" title="supportsHttpMethod :: Detect support for an HTTP method"><span class="description">Detect support for an HTTP method</span><pre>supportsHttpMethod()</pre></a></li>
+<li class="method public "><a href="#method_via" title="via :: Append supported HTTP methods (alias for Route::appendHttpMethods)"><span class="description">Append supported HTTP methods (alias for Route::appendHttpMethods)</span><pre>via()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul><li class="method protected "><a href="#method_matchesCallback" title="matchesCallback :: Convert a URL parameter (e.g."><span class="description">Convert a URL parameter (e.g.</span><pre>matchesCallback()</pre></a></li></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected "><a href="#property_callable" title="$callable :: "><span class="description">The route callable</span><pre>$callable</pre></a></li>
+<li class="property protected "><a href="#property_conditions" title="$conditions :: "><span class="description">Conditions for this route's URL parameters</span><pre>$conditions</pre></a></li>
+<li class="property protected "><a href="#property_defaultConditions" title="$defaultConditions :: "><span class="description">Default conditions applied to all route instances</span><pre>$defaultConditions</pre></a></li>
+<li class="property protected "><a href="#property_methods" title="$methods :: "><span class="description">HTTP methods supported by this Route</span><pre>$methods</pre></a></li>
+<li class="property protected "><a href="#property_middleware" title="$middleware :: "><span class="description">Middleware to be run before only this route instance</span><pre>$middleware</pre></a></li>
+<li class="property protected "><a href="#property_name" title="$name :: "><span class="description">The name of this route (optional)</span><pre>$name</pre></a></li>
+<li class="property protected "><a href="#property_paramNames" title="$paramNames :: "><span class="description">value array of URL parameter names</span><pre>$paramNames</pre></a></li>
+<li class="property protected "><a href="#property_paramNamesPath" title="$paramNamesPath :: "><span class="description">key array of URL parameter names with + at the end</span><pre>$paramNamesPath</pre></a></li>
+<li class="property protected "><a href="#property_params" title="$params :: "><span class="description">Key-value array of URL parameters</span><pre>$params</pre></a></li>
+<li class="property protected "><a href="#property_pattern" title="$pattern :: "><span class="description">The route pattern (e.g. "/books/:id")</span><pre>$pattern</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\Slim\Route"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/Slim.html">Slim</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Slim.Route.html">Route</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Route</p>
+<div class="details">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Slim.html">Slim</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="">Josh Lockhart, Thomas Bley</a></td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Constructor</h2>
+<pre>__construct(string $pattern, mixed $callable) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$pattern</h4>
+<code>string</code><p>The URL pattern (e.g. "/books/:id")</p>
+</div>
+<div class="subelement argument">
+<h4>$callable</h4>
+<code>mixed</code><p>Anything that returns TRUE for is_callable()</p>
+</div>
+</div></div>
+</div>
+<a id="method_appendHttpMethods"></a><div class="element clickable method public method_appendHttpMethods" data-toggle="collapse" data-target=".method_appendHttpMethods .collapse">
+<h2>Append supported HTTP methods</h2>
+<pre>appendHttpMethods() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_conditions"></a><div class="element clickable method public method_conditions" data-toggle="collapse" data-target=".method_conditions .collapse">
+<h2>Merge route conditions</h2>
+<pre>conditions(array $conditions) : <a href="../classes/Slim.Route.html">\Slim\Route</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$conditions</h4>
+<code>array</code><p>Key-value array of URL parameter conditions</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.Route.html">\Slim\Route</a></code></div>
+</div></div>
+</div>
+<a id="method_getCallable"></a><div class="element clickable method public method_getCallable" data-toggle="collapse" data-target=".method_getCallable .collapse">
+<h2>Get route callable</h2>
+<pre>getCallable() : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_getConditions"></a><div class="element clickable method public method_getConditions" data-toggle="collapse" data-target=".method_getConditions .collapse">
+<h2>Get route conditions</h2>
+<pre>getConditions() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getDefaultConditions"></a><div class="element clickable method public method_getDefaultConditions" data-toggle="collapse" data-target=".method_getDefaultConditions .collapse">
+<h2>Get default route conditions for all instances</h2>
+<pre>getDefaultConditions() : array</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getHttpMethods"></a><div class="element clickable method public method_getHttpMethods" data-toggle="collapse" data-target=".method_getHttpMethods .collapse">
+<h2>Get supported HTTP methods</h2>
+<pre>getHttpMethods() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getMiddleware"></a><div class="element clickable method public method_getMiddleware" data-toggle="collapse" data-target=".method_getMiddleware .collapse">
+<h2>Get middleware</h2>
+<pre>getMiddleware() : \Slim\array[Callable]</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Slim\array[Callable]</code></div>
+</div></div>
+</div>
+<a id="method_getName"></a><div class="element clickable method public method_getName" data-toggle="collapse" data-target=".method_getName .collapse">
+<h2>Get route name</h2>
+<pre>getName() : string | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code><code>null</code>
+</div>
+</div></div>
+</div>
+<a id="method_getParam"></a><div class="element clickable method public method_getParam" data-toggle="collapse" data-target=".method_getParam .collapse">
+<h2>Get route parameter value</h2>
+<pre>getParam(string $index) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$index</h4>
+<code>string</code><p>Name of URL parameter</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.invalidargumentexception.php">\InvalidArgumentException</a></code></th>
+<td>If route parameter does not exist at index</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getParams"></a><div class="element clickable method public method_getParams" data-toggle="collapse" data-target=".method_getParams .collapse">
+<h2>Get route parameters</h2>
+<pre>getParams() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getPattern"></a><div class="element clickable method public method_getPattern" data-toggle="collapse" data-target=".method_getPattern .collapse">
+<h2>Get route pattern</h2>
+<pre>getPattern() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_matches"></a><div class="element clickable method public method_matches" data-toggle="collapse" data-target=".method_matches .collapse">
+<h2>Matches URI?</h2>
+<pre>matches(string $resourceUri) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Parse this route's pattern, and then compare it to an HTTP resource URI
+This method was modeled after the techniques demonstrated by Dan Sosedoff at:</p>
+
+<p>http://blog.sosedoff.com/2009/09/20/rails-like-php-url-router/</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$resourceUri</h4>
+<code>string</code><p>A Request URI</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_name"></a><div class="element clickable method public method_name" data-toggle="collapse" data-target=".method_name .collapse">
+<h2>Set route name</h2>
+<pre>name(string $name) : <a href="../classes/Slim.Route.html">\Slim\Route</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The name of the route</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.Route.html">\Slim\Route</a></code></div>
+</div></div>
+</div>
+<a id="method_setCallable"></a><div class="element clickable method public method_setCallable" data-toggle="collapse" data-target=".method_setCallable .collapse">
+<h2>Set route callable</h2>
+<pre>setCallable(mixed $callable) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$callable</h4>
+<code>mixed</code>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.invalidargumentexception.php">\InvalidArgumentException</a></code></th>
+<td>If argument is not callable</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_setConditions"></a><div class="element clickable method public method_setConditions" data-toggle="collapse" data-target=".method_setConditions .collapse">
+<h2>Set route conditions</h2>
+<pre>setConditions(array $conditions) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$conditions</h4>
+<code>array</code>
+</div>
+</div></div>
+</div>
+<a id="method_setDefaultConditions"></a><div class="element clickable method public method_setDefaultConditions" data-toggle="collapse" data-target=".method_setDefaultConditions .collapse">
+<h2>Set default route conditions for all instances</h2>
+<pre>setDefaultConditions(array $defaultConditions) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$defaultConditions</h4>
+<code>array</code>
+</div>
+</div></div>
+</div>
+<a id="method_setHttpMethods"></a><div class="element clickable method public method_setHttpMethods" data-toggle="collapse" data-target=".method_setHttpMethods .collapse">
+<h2>Add supported HTTP method(s)</h2>
+<pre>setHttpMethods() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_setMiddleware"></a><div class="element clickable method public method_setMiddleware" data-toggle="collapse" data-target=".method_setMiddleware .collapse">
+<h2>Set middleware</h2>
+<pre>setMiddleware(Callable | \Slim\array[Callable] $middleware) : <a href="../classes/Slim.Route.html">\Slim\Route</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method allows middleware to be assigned to a specific Route.
+If the method argument <code>is_callable</code> (including callable arrays!),
+we directly append the argument to <code>$this-&gt;middleware</code>. Else, we
+assume the argument is an array of callables and merge the array
+with <code>$this-&gt;middleware</code>.  Each middleware is checked for is_callable()
+and an InvalidArgumentException is thrown immediately if it isn't.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$middleware</h4>
+<code>Callable</code><code>\Slim\array[Callable]</code>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.invalidargumentexception.php">\InvalidArgumentException</a></code></th>
+<td>If argument is not callable or not an array of callables.</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.Route.html">\Slim\Route</a></code></div>
+</div></div>
+</div>
+<a id="method_setName"></a><div class="element clickable method public method_setName" data-toggle="collapse" data-target=".method_setName .collapse">
+<h2>Set route name</h2>
+<pre>setName(string $name) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code>
+</div>
+</div></div>
+</div>
+<a id="method_setParam"></a><div class="element clickable method public method_setParam" data-toggle="collapse" data-target=".method_setParam .collapse">
+<h2>Set route parameter value</h2>
+<pre>setParam(string $index, mixed $value) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$index</h4>
+<code>string</code><p>Name of URL parameter</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>The new parameter value</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.invalidargumentexception.php">\InvalidArgumentException</a></code></th>
+<td>If route parameter does not exist at index</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_setParams"></a><div class="element clickable method public method_setParams" data-toggle="collapse" data-target=".method_setParams .collapse">
+<h2>Set route parameters</h2>
+<pre>setParams(array $params) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>array</code>
+</div>
+</div></div>
+</div>
+<a id="method_setPattern"></a><div class="element clickable method public method_setPattern" data-toggle="collapse" data-target=".method_setPattern .collapse">
+<h2>Set route pattern</h2>
+<pre>setPattern(string $pattern) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$pattern</h4>
+<code>string</code>
+</div>
+</div></div>
+</div>
+<a id="method_supportsHttpMethod"></a><div class="element clickable method public method_supportsHttpMethod" data-toggle="collapse" data-target=".method_supportsHttpMethod .collapse">
+<h2>Detect support for an HTTP method</h2>
+<pre>supportsHttpMethod($method) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$method</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_via"></a><div class="element clickable method public method_via" data-toggle="collapse" data-target=".method_via .collapse">
+<h2>Append supported HTTP methods (alias for Route::appendHttpMethods)</h2>
+<pre>via() : <a href="../classes/Slim.Route.html">\Slim\Route</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.Route.html">\Slim\Route</a></code></div>
+</div></div>
+</div>
+<a id="method_matchesCallback"></a><div class="element clickable method protected method_matchesCallback" data-toggle="collapse" data-target=".method_matchesCallback .collapse">
+<h2>Convert a URL parameter (e.g.</h2>
+<pre>matchesCallback(array $m) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>":id", ":id+") into a regular expression</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$m</h4>
+<code>array</code><p>URL parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Regular expression for URL parameter</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_callable"> </a><div class="element clickable property protected property_callable" data-toggle="collapse" data-target=".property_callable .collapse">
+<h2>The route callable</h2>
+<pre>$callable : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_conditions"> </a><div class="element clickable property protected property_conditions" data-toggle="collapse" data-target=".property_conditions .collapse">
+<h2>Conditions for this route's URL parameters</h2>
+<pre>$conditions : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_defaultConditions"> </a><div class="element clickable property protected property_defaultConditions" data-toggle="collapse" data-target=".property_defaultConditions .collapse">
+<h2>Default conditions applied to all route instances</h2>
+<pre>$defaultConditions : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_methods"> </a><div class="element clickable property protected property_methods" data-toggle="collapse" data-target=".property_methods .collapse">
+<h2>HTTP methods supported by this Route</h2>
+<pre>$methods : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_middleware"> </a><div class="element clickable property protected property_middleware" data-toggle="collapse" data-target=".property_middleware .collapse">
+<h2>Middleware to be run before only this route instance</h2>
+<pre>$middleware : \Slim\array[Callable]</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_name"> </a><div class="element clickable property protected property_name" data-toggle="collapse" data-target=".property_name .collapse">
+<h2>The name of this route (optional)</h2>
+<pre>$name : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_paramNames"> </a><div class="element clickable property protected property_paramNames" data-toggle="collapse" data-target=".property_paramNames .collapse">
+<h2>value array of URL parameter names</h2>
+<pre>$paramNames : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_paramNamesPath"> </a><div class="element clickable property protected property_paramNamesPath" data-toggle="collapse" data-target=".property_paramNamesPath .collapse">
+<h2>key array of URL parameter names with + at the end</h2>
+<pre>$paramNamesPath : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_params"> </a><div class="element clickable property protected property_params" data-toggle="collapse" data-target=".property_params .collapse">
+<h2>Key-value array of URL parameters</h2>
+<pre>$params : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_pattern"> </a><div class="element clickable property protected property_pattern" data-toggle="collapse" data-target=".property_pattern .collapse">
+<h2>The route pattern (e.g. "/books/:id")</h2>
+<pre>$pattern : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-06-03T01:50:27-04:00.<br></footer></div>
+</div>
+</body>
+</html>

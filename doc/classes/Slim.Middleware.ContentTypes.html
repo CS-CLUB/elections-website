@@ -1,0 +1,350 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elections Website » \Slim\Middleware\ContentTypes</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Elections Website</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/Slim.html"><i class="icon-th"></i> Slim</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Slim.html"><i class="icon-folder-open"></i> Slim</a></li>
+<li><a href="../packages/Slim%0AMIT%20LICENSE%0APermission%20is%20hereby%20granted,%20free%20of%20charge,%20to%20any%20person%20obtaining%0Aa%20copy%20of%20this%20software%20and%20associated%20documentation%20files%20(the%0A%22Software%22),%20to%20deal%20in%20the%20Software%20without%20restriction,%20including%0Awithout%20limitation%20the%20rights%20to%20use,%20copy,%20modify,%20merge,%20publish,%0Adistribute,%20sublicense,%20and.or%20sell%20copies%20of%20the%20Software,%20and%20to%0Apermit%20persons%20to%20whom%20the%20Software%20is%20furnished%20to%20do%20so,%20subject%20to%0Athe%20following%20conditions:%0AThe%20above%20copyright%20notice%20and%20this%20permission%20notice%20shall%20be%0Aincluded%20in%20all%20copies%20or%20substantial%20portions%20of%20the%20Software.html"><i class="icon-folder-open"></i> Slim
+MIT LICENSE
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software</a></li>
+<li><a href="../packages/dbinterface.html"><i class="icon-folder-open"></i> dbinterface</a></li>
+<li><a href="../packages/election.html"><i class="icon-folder-open"></i> election</a></li>
+<li><a href="../packages/utility.html"><i class="icon-folder-open"></i> utility</a></li>
+<li><a href="../packages/validate.html"><i class="icon-folder-open"></i> validate</a></li>
+<li><a href="../packages/verify.html"><i class="icon-folder-open"></i> verify</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">114</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct :: Constructor"><span class="description">Constructor</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_call" title="call :: Call"><span class="description">Call</span><pre>call()</pre></a></li>
+<li class="method public inherited"><a href="#method_getApplication" title="getApplication :: Get application"><span class="description">Get application</span><pre>getApplication()</pre></a></li>
+<li class="method public inherited"><a href="#method_getNextMiddleware" title="getNextMiddleware :: Get next middleware"><span class="description">Get next middleware</span><pre>getNextMiddleware()</pre></a></li>
+<li class="method public inherited"><a href="#method_setApplication" title="setApplication :: Set application"><span class="description">Set application</span><pre>setApplication()</pre></a></li>
+<li class="method public inherited"><a href="#method_setNextMiddleware" title="setNextMiddleware :: Set next middleware"><span class="description">Set next middleware</span><pre>setNextMiddleware()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="method protected "><a href="#method_parse" title="parse :: Parse input"><span class="description">Parse input</span><pre>parse()</pre></a></li>
+<li class="method protected "><a href="#method_parseCsv" title="parseCsv :: Parse CSV"><span class="description">Parse CSV</span><pre>parseCsv()</pre></a></li>
+<li class="method protected "><a href="#method_parseJson" title="parseJson :: Parse JSON"><span class="description">Parse JSON</span><pre>parseJson()</pre></a></li>
+<li class="method protected "><a href="#method_parseXml" title="parseXml :: Parse XML"><span class="description">Parse XML</span><pre>parseXml()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected inherited"><a href="#property_app" title="$app :: "><span class="description">Reference to the primary application instance</span><pre>$app</pre></a></li>
+<li class="property protected "><a href="#property_contentTypes" title="$contentTypes :: "><span class="description"></span><pre>$contentTypes</pre></a></li>
+<li class="property protected inherited"><a href="#property_next" title="$next :: "><span class="description">Reference to the next downstream middleware</span><pre>$next</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\Slim\Middleware\ContentTypes"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/Slim.html">Slim</a></li>
+<li>
+<span class="divider">\</span><a href="../namespaces/Slim.Middleware.html">Middleware</a>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Slim.Middleware.ContentTypes.html">ContentTypes</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Content Types</p>
+<div class="details">
+<div class="long_description"><p>This is middleware for a Slim application that intercepts
+the HTTP request body and parses it into the appropriate
+PHP data structure if possible; else it returns the HTTP
+request body unchanged. This is particularly useful
+for preparing the HTTP request body for an XML or JSON API.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Slim.html">Slim</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="">Josh Lockhart</a></td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.6.0</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Constructor</h2>
+<pre>__construct(array $settings) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$settings</h4>
+<code>array</code>
+</div>
+</div></div>
+</div>
+<a id="method_call"></a><div class="element clickable method public method_call" data-toggle="collapse" data-target=".method_call .collapse">
+<h2>Call</h2>
+<pre>call() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Perform actions specific to this middleware and optionally
+call the next downstream middleware.</p></div></div></div>
+</div>
+<a id="method_getApplication"></a><div class="element clickable method public method_getApplication" data-toggle="collapse" data-target=".method_getApplication .collapse">
+<h2>Get application</h2>
+<pre>getApplication() : \Slim</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method retrieves the application previously injected
+into this middleware.</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Slim\Middleware::getApplication()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Slim</code></div>
+</div></div>
+</div>
+<a id="method_getNextMiddleware"></a><div class="element clickable method public method_getNextMiddleware" data-toggle="collapse" data-target=".method_getNextMiddleware .collapse">
+<h2>Get next middleware</h2>
+<pre>getNextMiddleware() : \Slim | <a href="../classes/Slim.Middleware.html">\Slim\Middleware</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method retrieves the next downstream middleware
+previously injected into this middleware.</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Slim\Middleware::getNextMiddleware()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\Slim</code><code><a href="../classes/Slim.Middleware.html">\Slim\Middleware</a></code>
+</div>
+</div></div>
+</div>
+<a id="method_setApplication"></a><div class="element clickable method public method_setApplication" data-toggle="collapse" data-target=".method_setApplication .collapse">
+<h2>Set application</h2>
+<pre>setApplication(\Slim $application) </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method injects the primary Slim application instance into
+this middleware.</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Slim\Middleware::setApplication()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$application</h4>
+<code>\Slim</code>
+</div>
+</div></div>
+</div>
+<a id="method_setNextMiddleware"></a><div class="element clickable method public method_setNextMiddleware" data-toggle="collapse" data-target=".method_setNextMiddleware .collapse">
+<h2>Set next middleware</h2>
+<pre>setNextMiddleware(\Slim | <a href="../classes/Slim.Middleware.html">\Slim\Middleware</a> $nextMiddleware) </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method injects the next downstream middleware into
+this middleware so that it may optionally be called
+when appropriate.</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Slim\Middleware::setNextMiddleware()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$nextMiddleware</h4>
+<code>\Slim</code><code><a href="../classes/Slim.Middleware.html">\Slim\Middleware</a></code>
+</div>
+</div></div>
+</div>
+<a id="method_parse"></a><div class="element clickable method protected method_parse" data-toggle="collapse" data-target=".method_parse .collapse">
+<h2>Parse input</h2>
+<pre>parse(string $input, string $contentType) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method will attempt to parse the request body
+based on its content type if available.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$input</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$contentType</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_parseCsv"></a><div class="element clickable method protected method_parseCsv" data-toggle="collapse" data-target=".method_parseCsv .collapse">
+<h2>Parse CSV</h2>
+<pre>parseCsv(string $input) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method parses CSV content into a numeric array
+containing an array of data for each CSV line.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$input</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_parseJson"></a><div class="element clickable method protected method_parseJson" data-toggle="collapse" data-target=".method_parseJson .collapse">
+<h2>Parse JSON</h2>
+<pre>parseJson(string $input) : array | string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method converts the raw JSON input
+into an associative array.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$input</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>string</code>
+</div>
+</div></div>
+</div>
+<a id="method_parseXml"></a><div class="element clickable method protected method_parseXml" data-toggle="collapse" data-target=".method_parseXml .collapse">
+<h2>Parse XML</h2>
+<pre>parseXml(string $input) : <a href="http://php.net/manual/en/class.simplexmlelement.php">\SimpleXMLElement</a> | string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method creates a SimpleXMLElement
+based upon the XML input. If the SimpleXML
+extension is not available, the raw input
+will be returned unchanged.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$input</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="http://php.net/manual/en/class.simplexmlelement.php">\SimpleXMLElement</a></code><code>string</code>
+</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_app"> </a><div class="element clickable property protected property_app" data-toggle="collapse" data-target=".property_app .collapse">
+<h2>Reference to the primary application instance</h2>
+<pre>$app : \Slim</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Slim\Middleware::$$app</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_contentTypes"> </a><div class="element clickable property protected property_contentTypes" data-toggle="collapse" data-target=".property_contentTypes .collapse">
+<h2></h2>
+<pre>$contentTypes : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_next"> </a><div class="element clickable property protected property_next" data-toggle="collapse" data-target=".property_next .collapse">
+<h2>Reference to the next downstream middleware</h2>
+<pre>$next : mixed</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Slim\Middleware::$$next</td>
+</tr></table>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-06-03T01:50:27-04:00.<br></footer></div>
+</div>
+</body>
+</html>

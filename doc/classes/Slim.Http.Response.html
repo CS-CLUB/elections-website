@@ -1,0 +1,556 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elections Website » \Slim\Http\Response</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Elections Website</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/Slim.html"><i class="icon-th"></i> Slim</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Slim.html"><i class="icon-folder-open"></i> Slim</a></li>
+<li><a href="../packages/Slim%0AMIT%20LICENSE%0APermission%20is%20hereby%20granted,%20free%20of%20charge,%20to%20any%20person%20obtaining%0Aa%20copy%20of%20this%20software%20and%20associated%20documentation%20files%20(the%0A%22Software%22),%20to%20deal%20in%20the%20Software%20without%20restriction,%20including%0Awithout%20limitation%20the%20rights%20to%20use,%20copy,%20modify,%20merge,%20publish,%0Adistribute,%20sublicense,%20and.or%20sell%20copies%20of%20the%20Software,%20and%20to%0Apermit%20persons%20to%20whom%20the%20Software%20is%20furnished%20to%20do%20so,%20subject%20to%0Athe%20following%20conditions:%0AThe%20above%20copyright%20notice%20and%20this%20permission%20notice%20shall%20be%0Aincluded%20in%20all%20copies%20or%20substantial%20portions%20of%20the%20Software.html"><i class="icon-folder-open"></i> Slim
+MIT LICENSE
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software</a></li>
+<li><a href="../packages/dbinterface.html"><i class="icon-folder-open"></i> dbinterface</a></li>
+<li><a href="../packages/election.html"><i class="icon-folder-open"></i> election</a></li>
+<li><a href="../packages/utility.html"><i class="icon-folder-open"></i> utility</a></li>
+<li><a href="../packages/validate.html"><i class="icon-folder-open"></i> validate</a></li>
+<li><a href="../packages/verify.html"><i class="icon-folder-open"></i> verify</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">114</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct :: Constructor"><span class="description">Constructor</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_body" title="body :: Get and set body"><span class="description">Get and set body</span><pre>body()</pre></a></li>
+<li class="method public "><a href="#method_count" title="count :: Countable: Count"><span class="description">Countable: Count</span><pre>count()</pre></a></li>
+<li class="method public "><a href="#method_deleteCookie" title="deleteCookie :: Delete cookie"><span class="description">Delete cookie</span><pre>deleteCookie()</pre></a></li>
+<li class="method public "><a href="#method_finalize" title="finalize :: Finalize"><span class="description">Finalize</span><pre>finalize()</pre></a></li>
+<li class="method public "><a href="#method_getIterator" title="getIterator :: Get Iterator"><span class="description">Get Iterator</span><pre>getIterator()</pre></a></li>
+<li class="method public "><a href="#method_getMessageForCode" title="getMessageForCode :: Get message for HTTP status code"><span class="description">Get message for HTTP status code</span><pre>getMessageForCode()</pre></a></li>
+<li class="method public "><a href="#method_header" title="header :: Get and set header"><span class="description">Get and set header</span><pre>header()</pre></a></li>
+<li class="method public "><a href="#method_headers" title="headers :: Get headers"><span class="description">Get headers</span><pre>headers()</pre></a></li>
+<li class="method public "><a href="#method_isClientError" title="isClientError :: Helpers: Client error?"><span class="description">Helpers: Client error?</span><pre>isClientError()</pre></a></li>
+<li class="method public "><a href="#method_isEmpty" title="isEmpty :: Helpers: Empty?"><span class="description">Helpers: Empty?</span><pre>isEmpty()</pre></a></li>
+<li class="method public "><a href="#method_isForbidden" title="isForbidden :: Helpers: Forbidden?"><span class="description">Helpers: Forbidden?</span><pre>isForbidden()</pre></a></li>
+<li class="method public "><a href="#method_isInformational" title="isInformational :: Helpers: Informational?"><span class="description">Helpers: Informational?</span><pre>isInformational()</pre></a></li>
+<li class="method public "><a href="#method_isNotFound" title="isNotFound :: Helpers: Not Found?"><span class="description">Helpers: Not Found?</span><pre>isNotFound()</pre></a></li>
+<li class="method public "><a href="#method_isOk" title="isOk :: Helpers: OK?"><span class="description">Helpers: OK?</span><pre>isOk()</pre></a></li>
+<li class="method public "><a href="#method_isRedirect" title="isRedirect :: Helpers: Redirect?"><span class="description">Helpers: Redirect?</span><pre>isRedirect()</pre></a></li>
+<li class="method public "><a href="#method_isRedirection" title="isRedirection :: Helpers: Redirection?"><span class="description">Helpers: Redirection?</span><pre>isRedirection()</pre></a></li>
+<li class="method public "><a href="#method_isServerError" title="isServerError :: Helpers: Server Error?"><span class="description">Helpers: Server Error?</span><pre>isServerError()</pre></a></li>
+<li class="method public "><a href="#method_isSuccessful" title="isSuccessful :: Helpers: Successful?"><span class="description">Helpers: Successful?</span><pre>isSuccessful()</pre></a></li>
+<li class="method public "><a href="#method_length" title="length :: Get and set length"><span class="description">Get and set length</span><pre>length()</pre></a></li>
+<li class="method public "><a href="#method_offsetExists" title="offsetExists :: Array Access: Offset Exists"><span class="description">Array Access: Offset Exists</span><pre>offsetExists()</pre></a></li>
+<li class="method public "><a href="#method_offsetGet" title="offsetGet :: Array Access: Offset Get"><span class="description">Array Access: Offset Get</span><pre>offsetGet()</pre></a></li>
+<li class="method public "><a href="#method_offsetSet" title="offsetSet :: Array Access: Offset Set"><span class="description">Array Access: Offset Set</span><pre>offsetSet()</pre></a></li>
+<li class="method public "><a href="#method_offsetUnset" title="offsetUnset :: Array Access: Offset Unset"><span class="description">Array Access: Offset Unset</span><pre>offsetUnset()</pre></a></li>
+<li class="method public "><a href="#method_redirect" title="redirect :: Redirect"><span class="description">Redirect</span><pre>redirect()</pre></a></li>
+<li class="method public "><a href="#method_setCookie" title="setCookie :: Set cookie"><span class="description">Set cookie</span><pre>setCookie()</pre></a></li>
+<li class="method public "><a href="#method_status" title="status :: Get and set status"><span class="description">Get and set status</span><pre>status()</pre></a></li>
+<li class="method public "><a href="#method_write" title="write :: Append HTTP response body"><span class="description">Append HTTP response body</span><pre>write()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected "><a href="#property_body" title="$body :: "><span class="description">HTTP response body</span><pre>$body</pre></a></li>
+<li class="property protected "><a href="#property_header" title="$header :: "><span class="description">List of HTTP response headers</span><pre>$header</pre></a></li>
+<li class="property protected "><a href="#property_length" title="$length :: "><span class="description">Length of HTTP response body</span><pre>$length</pre></a></li>
+<li class="property protected "><a href="#property_messages" title="$messages :: "><span class="description">HTTP response codes and messages</span><pre>$messages</pre></a></li>
+<li class="property protected "><a href="#property_status" title="$status :: "><span class="description">HTTP status code</span><pre>$status</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\Slim\Http\Response"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/Slim.html">Slim</a></li>
+<li>
+<span class="divider">\</span><a href="../namespaces/Slim.Http.html">Http</a>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Slim.Http.Response.html">Response</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Response</p>
+<div class="details">
+<div class="long_description"><p>This is a simple abstraction over top an HTTP response. This
+provides methods to set the HTTP status, the HTTP headers,
+and the HTTP body.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Slim.html">Slim</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="">Josh Lockhart</a></td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Constructor</h2>
+<pre>__construct(string $body, int $status, <a href="../classes/Slim.Http.Headers.html">\Slim\Http\Headers</a> | array $header) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$body</h4>
+<code>string</code><p>The HTTP response body</p></div>
+<div class="subelement argument">
+<h4>$status</h4>
+<code>int</code><p>The HTTP response status</p></div>
+<div class="subelement argument">
+<h4>$header</h4>
+<code><a href="../classes/Slim.Http.Headers.html">\Slim\Http\Headers</a></code><code>array</code><p>The HTTP response headers</p></div>
+</div></div>
+</div>
+<a id="method_body"></a><div class="element clickable method public method_body" data-toggle="collapse" data-target=".method_body .collapse">
+<h2>Get and set body</h2>
+<pre>body(string | null $body) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$body</h4>
+<code>string</code><code>null</code><p>Content of HTTP response body</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_count"></a><div class="element clickable method public method_count" data-toggle="collapse" data-target=".method_count .collapse">
+<h2>Countable: Count</h2>
+<pre>count() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_deleteCookie"></a><div class="element clickable method public method_deleteCookie" data-toggle="collapse" data-target=".method_deleteCookie .collapse">
+<h2>Delete cookie</h2>
+<pre>deleteCookie(string $name, array $value) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Instead of using PHP's <code>setcookie()</code> function, Slim manually constructs the HTTP <code>Set-Cookie</code>
+header on its own and delegates this responsibility to the <code>Slim_Http_Util</code> class. This
+response's header is passed by reference to the utility class and is directly modified. By not
+relying on PHP's native implementation, Slim allows middleware the opportunity to massage or
+analyze the raw header before the response is ultimately delivered to the HTTP client.</p>
+
+<p>This method will set a cookie with the given name that has an expiration time in the past; this will
+prompt the HTTP client to invalidate and remove the client-side cookie. Optionally, you may
+also pass a key/value array as the second argument. If the "domain" key is present in this
+array, only the Cookie with the given name AND domain will be removed. The invalidating cookie
+sent with this response will adopt all properties of the second argument.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The name of the cookie</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>array</code><p>Properties for cookie including: value, expire, path, domain, secure, httponly</p></div>
+</div></div>
+</div>
+<a id="method_finalize"></a><div class="element clickable method public method_finalize" data-toggle="collapse" data-target=".method_finalize .collapse">
+<h2>Finalize</h2>
+<pre>finalize() : \Slim\Http\array[int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This prepares this response and returns an array
+of [status, headers, body]. This array is passed to outer middleware
+if available or directly to the Slim run method.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\Slim\Http\array[int</code>status, array headers, string body]</div>
+</div></div>
+</div>
+<a id="method_getIterator"></a><div class="element clickable method public method_getIterator" data-toggle="collapse" data-target=".method_getIterator .collapse">
+<h2>Get Iterator</h2>
+<pre>getIterator() : <a href="../classes/Slim.Http.Headers.html">\Slim\Http\Headers</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This returns the contained <code>\Slim\Http\Headers</code> instance which
+is itself iterable.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.Http.Headers.html">\Slim\Http\Headers</a></code></div>
+</div></div>
+</div>
+<a id="method_getMessageForCode"></a><div class="element clickable method public method_getMessageForCode" data-toggle="collapse" data-target=".method_getMessageForCode .collapse">
+<h2>Get message for HTTP status code</h2>
+<pre>getMessageForCode($status) : string | null</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$status</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code><code>null</code>
+</div>
+</div></div>
+</div>
+<a id="method_header"></a><div class="element clickable method public method_header" data-toggle="collapse" data-target=".method_header .collapse">
+<h2>Get and set header</h2>
+<pre>header(string $name, string | null $value) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Header name</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><code>null</code><p>Header value</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Header value</div>
+</div></div>
+</div>
+<a id="method_headers"></a><div class="element clickable method public method_headers" data-toggle="collapse" data-target=".method_headers .collapse">
+<h2>Get headers</h2>
+<pre>headers() : <a href="../classes/Slim.Http.Headers.html">\Slim\Http\Headers</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Slim.Http.Headers.html">\Slim\Http\Headers</a></code></div>
+</div></div>
+</div>
+<a id="method_isClientError"></a><div class="element clickable method public method_isClientError" data-toggle="collapse" data-target=".method_isClientError .collapse">
+<h2>Helpers: Client error?</h2>
+<pre>isClientError() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isEmpty"></a><div class="element clickable method public method_isEmpty" data-toggle="collapse" data-target=".method_isEmpty .collapse">
+<h2>Helpers: Empty?</h2>
+<pre>isEmpty() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isForbidden"></a><div class="element clickable method public method_isForbidden" data-toggle="collapse" data-target=".method_isForbidden .collapse">
+<h2>Helpers: Forbidden?</h2>
+<pre>isForbidden() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isInformational"></a><div class="element clickable method public method_isInformational" data-toggle="collapse" data-target=".method_isInformational .collapse">
+<h2>Helpers: Informational?</h2>
+<pre>isInformational() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isNotFound"></a><div class="element clickable method public method_isNotFound" data-toggle="collapse" data-target=".method_isNotFound .collapse">
+<h2>Helpers: Not Found?</h2>
+<pre>isNotFound() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isOk"></a><div class="element clickable method public method_isOk" data-toggle="collapse" data-target=".method_isOk .collapse">
+<h2>Helpers: OK?</h2>
+<pre>isOk() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isRedirect"></a><div class="element clickable method public method_isRedirect" data-toggle="collapse" data-target=".method_isRedirect .collapse">
+<h2>Helpers: Redirect?</h2>
+<pre>isRedirect() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isRedirection"></a><div class="element clickable method public method_isRedirection" data-toggle="collapse" data-target=".method_isRedirection .collapse">
+<h2>Helpers: Redirection?</h2>
+<pre>isRedirection() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isServerError"></a><div class="element clickable method public method_isServerError" data-toggle="collapse" data-target=".method_isServerError .collapse">
+<h2>Helpers: Server Error?</h2>
+<pre>isServerError() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isSuccessful"></a><div class="element clickable method public method_isSuccessful" data-toggle="collapse" data-target=".method_isSuccessful .collapse">
+<h2>Helpers: Successful?</h2>
+<pre>isSuccessful() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_length"></a><div class="element clickable method public method_length" data-toggle="collapse" data-target=".method_length .collapse">
+<h2>Get and set length</h2>
+<pre>length(int | null $length) : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$length</h4>
+<code>int</code><code>null</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_offsetExists"></a><div class="element clickable method public method_offsetExists" data-toggle="collapse" data-target=".method_offsetExists .collapse">
+<h2>Array Access: Offset Exists</h2>
+<pre>offsetExists($offset) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$offset</h4></div>
+</div></div>
+</div>
+<a id="method_offsetGet"></a><div class="element clickable method public method_offsetGet" data-toggle="collapse" data-target=".method_offsetGet .collapse">
+<h2>Array Access: Offset Get</h2>
+<pre>offsetGet($offset) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$offset</h4></div>
+</div></div>
+</div>
+<a id="method_offsetSet"></a><div class="element clickable method public method_offsetSet" data-toggle="collapse" data-target=".method_offsetSet .collapse">
+<h2>Array Access: Offset Set</h2>
+<pre>offsetSet($offset, $value) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$offset</h4></div>
+<div class="subelement argument"><h4>$value</h4></div>
+</div></div>
+</div>
+<a id="method_offsetUnset"></a><div class="element clickable method public method_offsetUnset" data-toggle="collapse" data-target=".method_offsetUnset .collapse">
+<h2>Array Access: Offset Unset</h2>
+<pre>offsetUnset($offset) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$offset</h4></div>
+</div></div>
+</div>
+<a id="method_redirect"></a><div class="element clickable method public method_redirect" data-toggle="collapse" data-target=".method_redirect .collapse">
+<h2>Redirect</h2>
+<pre>redirect(string $url, int $status) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method prepares this response to return an HTTP Redirect response
+to the HTTP client.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$url</h4>
+<code>string</code><p>The redirect destination</p></div>
+<div class="subelement argument">
+<h4>$status</h4>
+<code>int</code><p>The redirect HTTP status code</p></div>
+</div></div>
+</div>
+<a id="method_setCookie"></a><div class="element clickable method public method_setCookie" data-toggle="collapse" data-target=".method_setCookie .collapse">
+<h2>Set cookie</h2>
+<pre>setCookie(string $name, string | array $value) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Instead of using PHP's <code>setcookie()</code> function, Slim manually constructs the HTTP <code>Set-Cookie</code>
+header on its own and delegates this responsibility to the <code>Slim_Http_Util</code> class. This
+response's header is passed by reference to the utility class and is directly modified. By not
+relying on PHP's native implementation, Slim allows middleware the opportunity to massage or
+analyze the raw header before the response is ultimately delivered to the HTTP client.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The name of the cookie</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><code>array</code><p>If string, the value of cookie; if array, properties for
+                              cookie including: value, expire, path, domain, secure, httponly</p></div>
+</div></div>
+</div>
+<a id="method_status"></a><div class="element clickable method public method_status" data-toggle="collapse" data-target=".method_status .collapse">
+<h2>Get and set status</h2>
+<pre>status(int | null $status) : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$status</h4>
+<code>int</code><code>null</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_write"></a><div class="element clickable method public method_write" data-toggle="collapse" data-target=".method_write .collapse">
+<h2>Append HTTP response body</h2>
+<pre>write(string $body, bool $replace) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$body</h4>
+<code>string</code><p>Content to append to the current HTTP response body</p></div>
+<div class="subelement argument">
+<h4>$replace</h4>
+<code>bool</code><p>Overwrite existing response body?</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The updated HTTP response body</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_body"> </a><div class="element clickable property protected property_body" data-toggle="collapse" data-target=".property_body .collapse">
+<h2>HTTP response body</h2>
+<pre>$body : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_header"> </a><div class="element clickable property protected property_header" data-toggle="collapse" data-target=".property_header .collapse">
+<h2>List of HTTP response headers</h2>
+<pre>$header : <a href="../classes/Slim.Http.Headers.html">\Slim\Http\Headers</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_length"> </a><div class="element clickable property protected property_length" data-toggle="collapse" data-target=".property_length .collapse">
+<h2>Length of HTTP response body</h2>
+<pre>$length : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_messages"> </a><div class="element clickable property protected property_messages" data-toggle="collapse" data-target=".property_messages .collapse">
+<h2>HTTP response codes and messages</h2>
+<pre>$messages : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_status"> </a><div class="element clickable property protected property_status" data-toggle="collapse" data-target=".property_status .collapse">
+<h2>HTTP status code</h2>
+<pre>$status : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-06-03T01:50:26-04:00.<br></footer></div>
+</div>
+</body>
+</html>
