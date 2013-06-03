@@ -43,9 +43,9 @@ if (verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 	|| (isset($_SESSION['login']) 
 		&& verify_login_session($mysqli_accounts, $_SESSION['login'], $SESSION_KEY)))
 {
-	/* FIX, forgot to account for when user has login cookie set but there is no session
-	 * data, have to retrieve username from cookie and then set the session data
-	*/
+	/* Check when user has login cookie set but there is no session data, have to 
+	 * retrieve username from cookie and then set the session data
+	 */
 	if (verify_login_cookie($mysqli_accounts, $SESSION_KEY))
 	{
 		/* Get the login cookie data */
