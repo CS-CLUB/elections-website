@@ -61,7 +61,11 @@
           <option></option>
           <?php 
             echo '<option>' . $candidates['President'][0] . ' (Candidate)' . '</option>';
-            echo '<option>' . $incumbents['President'][0] . ' (Incumbent)' . '</option>';
+            /* Display the incumbent if there is one */
+            if (strlen($incumbents['President'][0]) > 1)
+            {
+              echo '<option>' . $incumbents['President'][0] . ' (Incumbent)' . '</option>';
+            }
           ?>
           </select>
         </div>
@@ -73,7 +77,11 @@
           <option></option>
           <?php 
             echo '<option>' . $candidates['Vice President'][0] . ' (Candidate)' . '</option>';
-            echo '<option>' . $incumbents['Vice President'][0] . ' (Incumbent)' . '</option>';
+            /* Display the incumbent if there is one */
+            if (strlen($incumbents['Vice President'][0]) > 1)
+            {
+              echo '<option>' . $incumbents['Vice President'][0] . ' (Incumbent)' . '</option>';
+            }
           ?>
           </select>
         </div>
@@ -85,7 +93,11 @@
           <option></option>
           <?php 
             echo '<option>' . $candidates['Coordinator'][0] . ' (Candidate)' . '</option>';
-            echo '<option>' . $incumbents['Coordinator'][0] . ' (Incumbent)' . '</option>';
+            /* Display the incumbent if there is one */
+            if (strlen($incumbents['Coordinator'][0]) > 1)
+            {
+              echo '<option>' . $incumbents['Coordinator'][0] . ' (Incumbent)' . '</option>';
+            }
           ?>
           </select>
         </div>
@@ -97,7 +109,11 @@
           <option></option>
           <?php 
             echo '<option>' . $candidates['Treasurer'][0] . ' (Candidate)' . '</option>';
-            echo '<option>' . $incumbents['Treasurer'][0] . ' (Incumbent)' . '</option>';
+            /* Display the incumbent if there is one */
+            if (strlen($incumbents['Treasurer'][0]) > 1)
+            {
+              echo '<option>' . $incumbents['Treasurer'][0] . ' (Incumbent)' . '</option>';
+            }
           ?>
           </select>
         </div>
