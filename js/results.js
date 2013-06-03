@@ -23,11 +23,12 @@ var rootURL = "http://election.dom/api";
 
 
 $(document).ready(function () {
-	/* Display the election results when page is loaded */
-	if (window.location.pathname.match(/results\.php/))
-	{
-		voteBreakdownAll();
-	}
+    /* Display the election results when page is loaded */
+    if (window.location.pathname.match(/results\.php/))
+    {
+        voteBreakdownAll('election');
+        voteBreakdownAll('nomination');
+    }
 });
 
 /* Get the postfix identifier based on the position */
@@ -55,23 +56,41 @@ function getId(prefix, position) {
 }
 
 /* Get the vote breakdown for an election for all positions */
-function voteBreakdownAll() {
+function voteBreakdownAll(type) {
     $.ajax({
         type: 'GET',
-        url: rootURL + '/results/election',
+        url: rootURL + '/results/' + type,
         dataType: "json", // data type of response
-        success: plotVoteBreakdown
+        success: function(data) {
+            plotVoteBreakdown(data, type);
+        }
     });
 }
 
 /* Creates a pie chart for the vote break down of each position */
-function plotVoteBreakdown(data) {
+function plotVoteBreakdown(data, type) {
+    /* Set the id prefix */
     var idPrefix = 'pie_';
+    switch (type.toLowerCase()) {
+        case 'election':
+            idPrefix += 'elec_';
+            break;
+        case 'nomination':
+            idPrefix += 'nom_';
+            break;
+        default:
+            console.log('No matching type for: ' + type);
+            break;
+    }
 
     /* Create a separate pie chart for each position */
     $.each(data, function(position, value) {
         var results = value == null ? [] : (value instanceof Array ? value : [value]);
-        plotPieChart(getId(idPrefix, position), position, results);
+
+        if (results.length > 0)
+        {
+            plotPieChart(getId(idPrefix, position), position, results);
+        }
     });
 }
 
@@ -110,7 +129,7 @@ function plotPieChart(id, title, results) {
                     color: '#000000',
                     connectorColor: '#000000',
                     formatter: function() {
-                        return '<b>' + this.point.name +'</b><br />' + '<b>' + this.percentage +' %</b>';
+                        return '<b>' + this.point.name +'</b><br />' + '<b>' + this.percentage.toFixed(1) +' %</b>';
                     }
                 }
             }

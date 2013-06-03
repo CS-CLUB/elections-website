@@ -77,13 +77,22 @@
       </table>
     </div>
   </div>
-  <h2>Vote Breakdown</h2>
+  <h2>Election Vote Breakdown</h2>
   <div class="row">
-    <div id="pie_president" class="span6 chart"></div>
-    <div id="pie_vicepresident" class="span6 chart"></div>
+    <div id="pie_elec_president" class="span6 chart"></div>
+    <div id="pie_elec_vicepresident" class="span6 chart"></div>
   </div>
   <div class="row">
-    <div id="pie_coordinator" class="span6 chart"></div>
-    <div id="pie_treasurer" class="span6 chart"></div>
+    <div id="pie_elec_coordinator" class="span6 chart"></div>
+    <div id="pie_elec_treasurer" class="span6 chart"></div>
+  </div>
+  <h2>Nomination Vote Breakdown</h2>
+  <div class="row">
+    <div id="pie_nom_president" class="span6 chart"></div>
+    <div id="pie_nom_vicepresident" class="span6 chart"></div>
+  </div>
+  <div class="row">
+    <div id="pie_nom_coordinator" class="span6 chart"></div>
+    <div id="pie_nom_treasurer" class="span6 chart"></div>
   </div>
 </div>
