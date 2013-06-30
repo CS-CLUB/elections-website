@@ -65,14 +65,11 @@ function validate_username($username)
  */
 function validate_password($password)
 {
-	if (preg_match('/^[a-zA-Z0-9\!\$\%\^\&\*\(\)\_\?]{6,31}$/', $password))
+	if (preg_match('/^[a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\|\<\>\?]{6,31}$/', $password))
 	{
 		return TRUE;
 	}
-	else
-	{
-		return FALSE;
-	}
+	return FALSE;
 }
 
 /**
@@ -155,7 +152,6 @@ function validate_nominate_self($nominee)
 	{
 		return TRUE;
 	}
-	
 	return FALSE;
 }
 
