@@ -641,6 +641,8 @@ function get_incumbents($mysqli_elections)
 
 	$previous_year = (date('Y')-1);
 	$current_year = date('Y');
+	$first_name = "";
+	$last_name = "";
 	
 	$members_table = "members_" . $current_year;
 	
@@ -672,6 +674,8 @@ function get_incumbents($mysqli_elections)
 			/* close statement */
 			$stmt->close();
 		}
+		$first_name = "";
+		$last_name = "";
 	}
 
 	return $incumbents;
@@ -933,6 +937,31 @@ function is_nominee($mysqli_elections, $nominee, $position)
 		$stmt->close();
 	}
 	return $is_nominee;
+}
+
+/**
+ * Used to check if a given nominee (with their first, last and user name) is a nominee
+ * capable to be elected for the given position.
+ * TODO test and make sure it actually works
+ * @package dbinterface
+ * 
+ * @param mysqli $mysqli_elections The mysqli connection object for the ucsc elections DB
+ * @param Hash Table the members the user has voted for.
+ * @return boolean TRUE if the one of the members the user has voted for is an incumbent
+ */
+function is_incumbent($mysqli_elections, $nominations)
+{
+	$incumbents = get_incumbents($mysqli_elections);
+
+	foreach ($incumbents as $key => $value) 
+	{
+		if ($value[0] === $nominations[$key])
+		{
+			return TRUE;
+		}
+	}
+	
+	return FALSE;
 }
 
 /**
