@@ -167,11 +167,11 @@ function validate_nominate_self($nominee)
  */
 function validate_nomination_vote($mysqli_elections, $positions)
 {
-	//$has_voded = TRUE;
+	$count = 0;
+
 	foreach ($positions as $position => $nominee)
 	{
 		if (validate_nom_entry($nominee))
-				//&& validate_username($username))
 		{
 			if ((has_voted_position($mysqli_elections, $_SESSION['access_account'], $position, "nomination")
 					|| (!is_nominee($mysqli_elections, $nominee, $position)
@@ -184,7 +184,20 @@ function validate_nomination_vote($mysqli_elections, $positions)
 		{
 			return FALSE;
 		}
+
+		/* Count the number of positions the individual has nominated themselves for */
+		if ($nominee === $_SESSION['first_name'].' '.$_SESSION['last_name'])
+		{
+			$count++;
+		}
 	}
+
+	/* Individual cannot nominate themselves for more than 1 position */
+	if (count > 1)
+	{
+		return FALSE;
+	}
+	
 	return TRUE;
 }
 

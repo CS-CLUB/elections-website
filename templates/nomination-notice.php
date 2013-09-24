@@ -31,12 +31,15 @@
 	<h3 class="alert-heading">Nominate Yourself!</h3>
   <p>
   		If you would like to run in the election you must <strong>first nominate yourself</strong>
-  		for the position(s) that you would like to run for as others will not be able to vote for you
+  		for the position that you would like to run for as others will not be able to vote for you
   		unless you first nominate yourself. To nominate yourself simply leave the default option 
-  		(which is you) for each of the position you would like to run for.
+  		(which is you) for the position you would like to run for, <strong>you may only nominate
+      yourself for one position!</strong>
   </p>
   <p>
-  		Another thing to remember, <strong>nominating yourself for a positions uses up your vote</strong>, 
-  		so please only nominate yourself for positions you are interested in running for.
+  		Another thing to remember, <strong>nominating yourself for a position uses up your vote</strong>, 
+  		so please only nominate yourself for a position you are interested in running for, you can leave
+      any of the positions you don't want to vote for at this time blank and come back at any time to
+      submit your vote.
   </p>
 </div>

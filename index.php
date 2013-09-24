@@ -262,8 +262,9 @@ elseif ((verify_login_cookie($mysqli_accounts, $SESSION_KEY)
 
 	/* If nomination vote post data valid and its nomination period, record nomination vote */
 	if (validate_nomination_vote($mysqli_elections, $positions)
-		&& is_nomination($mysqli_elections))
+		&& is_nomination($mysqli_elections) && !is_incumbent($mysqli_elections, $positions))
 	{
+		
 		/* Get each position the user has nominated themselves for */
 		foreach ($positions as $position => $nominee)
 		{
