@@ -35,6 +35,12 @@
   		not been a member for <strong>at least one semester</strong>.
   </p>
   <p>
+      If you are having any issues logging in you can reset your password using the
+      <a target="_blank" href="https://cs-club.ca/reset">Password Reset Page</a>. If you
+      are still having issues resetting your password please contact the 
+      <a target="_blank" href="mailto:admin@cs-club.ca">Club Executives.</a>
+  </p>
+  <p>
   		If you are currently not a club member and would like more information about the Computer
   		Science Club then please click below to visit the Computer Science Club website. If you
   		are a member who has been registered for at least one semester and for some reason cannot
