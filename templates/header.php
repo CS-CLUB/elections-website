@@ -71,6 +71,9 @@
                     <input id="login_remember" class="login-checkbox" type="checkbox" name="login_remember" checked="checked" value="1" />
                     <label class="string optional" for="login_remember">Remember me</label>
                     <input id="login_button" class="btn btn-primary" class="login-button" type="submit" name="signin" value="Sign In" />
+                    <p>
+                      <a target="_blank" href="http://www.cs-club.ca/reset">Forgot/Reset Password</a>
+                    </p>
                   </form>
                 </div>
               </li>

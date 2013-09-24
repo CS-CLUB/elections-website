@@ -175,7 +175,7 @@ function validate_nomination_vote($mysqli_elections, $positions)
 		{
 			if ((has_voted_position($mysqli_elections, $_SESSION['access_account'], $position, "nomination")
 					|| (!is_nominee($mysqli_elections, $nominee, $position)
-						&& !validate_nominate_self($nominee))) && $nominee !== 'None')
+					&& !validate_nominate_self($nominee))) && $nominee !== 'None')
 			{
 				return FALSE;
 			}
@@ -193,7 +193,7 @@ function validate_nomination_vote($mysqli_elections, $positions)
 	}
 
 	/* Individual cannot nominate themselves for more than 1 position */
-	if (count > 1)
+	if ($count > 1)
 	{
 		return FALSE;
 	}
@@ -230,3 +230,17 @@ function validate_election_vote($mysqli_elections, $positions)
 	}
 	return TRUE;
 }
+
+function is_an_incumbent($incumbents, $first_name, $last_name)
+{
+	foreach($incumbents as $incumbent)
+	{
+		if ($incumbent[0] == $first_name . ' ' . $last_name)
+		{
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+
+?>

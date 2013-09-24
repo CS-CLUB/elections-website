@@ -56,6 +56,7 @@
  */
 require_once 'inc/db_interface.php';
 require_once 'inc/election_auth.php';
+require_once 'inc/validate.php';
 $mysqli_elections = new mysqli("localhost", $db_user, $db_pass, $db_elec_name);
 $pres_disabled='';
 $vice_disabled='';
@@ -103,7 +104,7 @@ if(isset($_SESSION['access_account']) && has_voted_pos($mysqli_elections, $_SESS
                     if ($pres_disabled === '')
                     {
                       echo '<option> ' . $NONE . ' </option>';
-                      if ($incumbents['President'][0] !== $_SESSION['first_name'].' '.$_SESSION['last_name'])
+                      if (!is_an_incumbent($incumbents, $_SESSION['first_name'], $_SESSION['last_name']))
                       {
                       	echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
                       }
@@ -129,7 +130,7 @@ if(isset($_SESSION['access_account']) && has_voted_pos($mysqli_elections, $_SESS
                     if ($vice_disabled === '')
                     {
                       echo '<option> ' . $NONE . ' </option>';
-                      if ($incumbents['Vice President'][0] !== $_SESSION['first_name'].' '.$_SESSION['last_name'])
+                      if (!is_an_incumbent($incumbents, $_SESSION['first_name'], $_SESSION['last_name']))
                       {
                       	echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
                       }
@@ -155,7 +156,7 @@ if(isset($_SESSION['access_account']) && has_voted_pos($mysqli_elections, $_SESS
                     if ($coor_disabled === '')
                     {
                       echo '<option> ' . $NONE . ' </option>';
-                      if ($incumbents['Coordinator'][0] !== $_SESSION['first_name'].' '.$_SESSION['last_name'])
+                      if (!is_an_incumbent($incumbents, $_SESSION['first_name'], $_SESSION['last_name']))
                       {
                       	echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
                       }
@@ -181,7 +182,7 @@ if(isset($_SESSION['access_account']) && has_voted_pos($mysqli_elections, $_SESS
                     if ($trea_disabled === '')
                     {
                       echo '<option> ' . $NONE . ' </option>';
-                      if ($incumbents['Treasurer'][0] !== $_SESSION['first_name'].' '.$_SESSION['last_name'])
+                      if (!is_an_incumbent($incumbents, $_SESSION['first_name'], $_SESSION['last_name']))
                       {
                       	echo '<option>' . $_SESSION['first_name'].' '.$_SESSION['last_name'] . '</option>';
                       }
