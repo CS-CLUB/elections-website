@@ -22,7 +22,14 @@
 
 /*
  * Default content to display when the nomination period is open, provides information
- * about the Computer Science Club and links to register/website
+ * about the Computer Science Club and links to register/website.
+ *
+ * DEPENDENCIES
+ * ------------
+ * 
+ * This template depends on the election_date.php file having been sourced in order
+ * to access the global variables for the election/nomination start and end dates.
+ *
  */
 ?>
 <div class="hero-unit">
