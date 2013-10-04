@@ -22,7 +22,14 @@
 
 /* 
  * Default content to display when the election period is closed, provides information
- * about the Computer Science Club and links to register/website
+ * about the Computer Science Club and links to register/website.
+ *
+ * DEPENDENCIES
+ * ------------
+ * 
+ * This template depends on the election_date.php file having been sourced in order
+ * to access the global variables for the election/nomination start and end dates.
+ *
  */
 ?>
 <div class="hero-unit">
@@ -31,13 +38,19 @@
   <p> 	
   		Thank you for visiting the Computer Science Club election website, but the election
   		period for the year is currently closed. The election nomination period for candidates
-  		starts at the beginning of each fall semester on <strong>September 1</strong>, with the 
-  		final election period for the executive positions taking place on the first day after 
-  		<strong>September 14th</strong> that lands on a weekday from 12:00am - 11:59pm.
+  		starts at the beginning of each fall semester on <strong>
+      <?php 
+        echo DateTime::createFromFormat('m-d-H-i', $nomination_start_date)->format('F j'); 
+      ?>
+      </strong> with the final election period for the executive positions taking place on the first weekday after 
+  		<strong>
+      <?php 
+        echo DateTime::createFromFormat('m-d-H-i', $nomination_end_date)->format('F j'); 
+      ?>
+      </strong> from <strong>12:00am - 11:59pm</strong>.
   </p>
   <p>
-  		Election participation is only open to registered club members who have been a member of
-  		the Computer Science Club for at least one semester. If you would like to find out more about
+  		Election participation is only open to registered club members. If you would like to find out more about
   		the Computer Science Club and how you can become a member, please click below to find out more.
   </p>
   <p>

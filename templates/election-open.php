@@ -35,9 +35,8 @@
   		you <strong>login today</strong> and vote in the election.
   </p>
   <p>
-  		Election participation is only open to registered club members who have been a member of
-  		the Computer Science Club for at least one semester. If you would like to find out more about
-  		the Computer Science Club and how you can become a member, please click below to find out more.
+  		Election participation is only open to registered club members. If you would like to find out more about 
+      the Computer Science Club and how you can become a member, please click below to find out more.
   </p>
   <p><a href="http://cs-club.ca" class="btn btn-primary btn-large">Learn more »</a></p>
 </div>

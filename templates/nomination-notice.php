@@ -32,9 +32,8 @@
   <p>
   		If you would like to run in the election you must <strong>first nominate yourself</strong>
   		for the position that you would like to run for as others will not be able to vote for you
-  		unless you first nominate yourself. To nominate yourself simply leave the default option 
-  		(which is you) for the position you would like to run for, <strong>you may only nominate
-      yourself for one position!</strong>
+  		unless you first nominate yourself. To nominate yourself simply vote for yourself for the 
+      position you would like to run for, <strong>you may only nominate yourself for one position!</strong>
   </p>
   <p>
   		Another thing to remember, <strong>nominating yourself for a position uses up your vote</strong>, 
