@@ -180,33 +180,33 @@ function verify_login($mysqli_accounts, $username, $password, $AES_KEY)
 	/* If username found, verify the password provided for that username */
 	if (strcasecmp($username, $user_match) === 0)
 	{
-        /* Get the date the user joined the club */
-        if ($stmt = $mysqli_accounts->prepare("SELECT join_date FROM ucsc_members WHERE username LIKE ?"))
-        {
-            /* bind parameters for markers */
-            $stmt->bind_param('s', $username);
+        // /* Get the date the user joined the club */
+        // if ($stmt = $mysqli_accounts->prepare("SELECT join_date FROM ucsc_members WHERE username LIKE ?"))
+        // {
+        //     /* bind parameters for markers */
+        //     $stmt->bind_param('s', $username);
     
-            /* execute query */
-            $stmt->execute();
+        //     /* execute query */
+        //     $stmt->execute();
     
-            /* bind result variables */
-            $stmt->bind_result($join_date);
+        //     /* bind result variables */
+        //     $stmt->bind_result($join_date);
     
-            /* fetch value */
-            $stmt->fetch();
+        //     /* fetch value */
+        //     $stmt->fetch();
     
-            /* close statement */
-            $stmt->close();
-        }
+        //     /* close statement */
+        //     $stmt->close();
+        // }
 
-        /* Verify that the user has been a member for at least 1 semester */
-        $join_date = date(strtotime($join_date));
-        $months = floor(($cur_date - $join_date) / 86400 / 30 );
+        // /* Verify that the user has been a member for at least 1 semester */
+        // $join_date = date(strtotime($join_date));
+        // $months = floor(($cur_date - $join_date) / 86400 / 30 );
 
-        if (intval($months) < 4)
-        {
-            return false;
-        }
+        // if (intval($months) < 4)
+        // {
+        //     return false;
+        // }
 
 	    if ($stmt = $mysqli_accounts->prepare("SELECT AES_DECRYPT(password, ?) FROM ucsc_members WHERE username LIKE ?"))
         {
@@ -233,7 +233,7 @@ function verify_login($mysqli_accounts, $username, $password, $AES_KEY)
         }
 	}
   
-  /* Invalid username or password or both */
+    /* Invalid username or password or both */
 	return false;
 }
 

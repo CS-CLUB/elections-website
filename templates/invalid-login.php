@@ -31,8 +31,7 @@
 	<br/>
   <p> 
   		The login information you provided is invalid! This may be due to the fact that you
-  		are not a registered club member, used the wrong password/username or that you have
-  		not been a member for <strong>at least one semester</strong>.
+  		are not a registered club member or used the wrong password/username.
   </p>
   <p>
       If you are having any issues logging in you can reset your password using the
