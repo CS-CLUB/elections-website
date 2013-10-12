@@ -40,6 +40,18 @@ require '../inc/election_auth.php';
 require '../inc/election_date.php';
 
 
+/* Simple function to check the database connection, terminate if failed */
+function check_db_connection()
+{
+	/* check connection */
+	if (mysqli_connect_errno()) {
+		System_Daemon::log(System_Daemon::LOG_INFO, date('Y-m-d H:i:s') . " Failed to connect to the database: " . 
+			mysqli_connect_error());
+		exit();
+	}
+}
+
+
 /* Arguments supported by Daemon, currently only option is to create init scripts */
 $runmode = array(
 		'help' => false,
@@ -102,18 +114,6 @@ System_Daemon::log(System_Daemon::LOG_INFO, date('Y-m-d H:i:s') . "Daemon: " .
 
 
 
-/* Connect to the databases */
-$mysqli_accounts = new mysqli("localhost", $db_user, $db_pass, $db_acc_name);
-$mysqli_elections = new mysqli("localhost", $db_user, $db_pass, $db_elec_name);
-
-/* check connection */
-if (mysqli_connect_errno()) {
-	System_Daemon::log(System_Daemon::LOG_INFO, date('Y-m-d H:i:s') . " Failed to connect to the database: " . 
-		mysqli_connect_error());
-	exit();
-}
-
-
 /** 
  * Run in the background infinitely and do the following election operations
  * 
@@ -135,6 +135,10 @@ while (true)
 	/* The start of the nomination period */
 	if (strcmp(date('m-d-H-i'), $nomination_start_date) === 0)
 	{
+		/* Connect to the databases */
+		$mysqli_elections = new mysqli("localhost", $db_user, $db_pass, $db_elec_name);
+		check_db_connection();
+
 		/* Create the tables for the start of a new election year */
 		new_election_tables($mysqli_elections);
 		
@@ -145,6 +149,10 @@ while (true)
 	/* End of the nomination period */
 	if (strcmp(date('m-d-H-i'), $nomination_end_date) === 0)
 	{
+		/* Connect to the databases */
+		$mysqli_elections = new mysqli("localhost", $db_user, $db_pass, $db_elec_name);
+		check_db_connection();
+
 		/* Close the nomination period and tally the votes to determine the candidates 
 		 * and then store the results in the DB 
 		 */
@@ -157,6 +165,10 @@ while (true)
 	/* First weekday after the nomination period ends start election period for 24-hours (12:00am - 11:59pm) */
 	if (strcmp(date('Y-m-d-H-i'), $election_start_date) === 0)
 	{
+		/* Connect to the databases */
+		$mysqli_elections = new mysqli("localhost", $db_user, $db_pass, $db_elec_name);
+		check_db_connection();
+
 		/* Initiate the final election, populate the table with the candidates and incumbents */
 		pop_election_table($mysqli_elections);
 		
@@ -167,6 +179,10 @@ while (true)
 	/* End of the 24 hour election period */
 	if (strcmp(date('Y-m-d-H-i'), $election_end_date) === 0)
 	{
+		/* Connect to the databases */
+		$mysqli_elections = new mysqli("localhost", $db_user, $db_pass, $db_elec_name);
+		check_db_connection();
+
 		/* Close the election period and tally the votes to determine the winners
 		 * of the election and then store the results in the DB
 		 */
