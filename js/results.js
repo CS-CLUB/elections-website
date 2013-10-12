@@ -111,8 +111,8 @@ function plotPieChart(id, title, results) {
         tooltip: {
             formatter: function() {
                 var s;
-                if (this.point.name) { // the pie chart
-                    s = this.point.name + ': <b>' + this.y + ' Votes</b>';
+                if (this.point.first_name) { // the pie chart
+                    s = this.point.first_name + ' ' + this.point.last_name + ': <b>' + this.y + ' Votes</b>';
                 } 
                 else {
                     s = this.x  + ': ' + this.y;
@@ -129,7 +129,9 @@ function plotPieChart(id, title, results) {
                     color: '#000000',
                     connectorColor: '#000000',
                     formatter: function() {
-                        return '<b>' + this.point.name +'</b><br />' + '<b>' + this.percentage.toFixed(1) +' %</b>';
+                        return  '<b>' + this.point.first_name + '</b><br />' + 
+                                '<b>' + this.point.last_name + '</b><br />' +
+                                '<b>' + this.percentage.toFixed(1) +' %</b>';
                     }
                 }
             }
@@ -151,15 +153,20 @@ function plotPieChart(id, title, results) {
         /* Add a cut-out in the pie chart for the first entry */
         if (first) {
             options.series[0].data.push({
-                name: candidate.name,
+                first_name: candidate.name.replace(/^(.*?)\s.*$/, '$1'), 
+                last_name: candidate.name.replace(/^.*?\s(.*)$/, '$1'), 
                 y: candidate.votes,
                 sliced: true,
                 selected: true
-            })
+            });
             first = false;
         } 
         else {
-            options.series[0].data.push([candidate.name, candidate.votes]);
+            options.series[0].data.push({
+                first_name: candidate.name.replace(/^(.*?)\s.*$/, '$1'), 
+                last_name: candidate.name.replace(/^.*?\s(.*)$/, '$1'),
+                y: candidate.votes
+            });
         }
     });
 
